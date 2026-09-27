@@ -23,6 +23,10 @@
 
 
 
+
+.rarity-badge{display:inline-flex;align-items:center;justify-content:center;margin-top:6px;padding:3px 7px;border:1px solid #5a4630;border-radius:999px;font:800 .61rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#d6c7af}
+.rarity-badge.uncommon{border-color:#506b4b;color:#b9d5b4}.rarity-badge.rare{border-color:#486781;color:#afcce3}.rarity-badge.epic{border-color:#70567f;color:#d1b5df}.rarity-badge.legendary{border-color:#a8833e;color:#ffe09a;box-shadow:0 0 12px rgba(194,155,87,.16)}.rarity-badge.mythic{border-color:#a94f43;color:#ffc1b3;box-shadow:0 0 14px rgba(169,79,67,.2)}
+
 /* Crownwheel procedural audio controls */
 .audio-menu{position:relative;font-family:system-ui,sans-serif}
 .audio-summary{list-style:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:rgba(32,24,16,.88);cursor:pointer;font-size:.9rem;user-select:none}
@@ -586,6 +590,301 @@
   const severity = [['Contained','The problem is serious but currently localised.',0,0,1],['Major','The crisis affects several important regions.',0,0,-1],['Existential','Failure could bring down the entire political order.',-1,0,-3]];
   const crises = cross(crisisBases,severity,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
 
+
+  // Crownwheel expanded weighted outcomes v5.
+  // Extra outcomes deliberately include mundane, unusual and jackpot-tier results.
+  const xmk = (name, desc, w=0, a=0, s=0, value=null, rarity='common', tags=[]) =>
+    Object.assign(mk(name, desc, w, a, s, value, tags), { rarity });
+
+  origins.push(
+    xmk('Great River Delta Kingdom','A many-mouthed river feeds rich black soil, immense fisheries and crowded market towns.',3,0,1,null,'uncommon'),
+    xmk('Mistvale Principality','A secluded valley of vineyards, misty ridges and old hill forts.',1,1,2,null,'common'),
+    xmk('Glacier Marches','Fortified settlements cling to the edge of an advancing ice sheet.',0,1,2,null,'uncommon'),
+    xmk('Coral Archipelago Confederacy','Hundreds of warm islands are tied together by reef pilots, pearls and sea lanes.',3,1,0,null,'uncommon'),
+    xmk('Moorland Kingdom','Heather uplands, peat valleys and lonely stone roads shape a stubborn realm.',0,0,2,null,'common'),
+    xmk('Alpine Crown','High valleys and snowbound passes are ruled from cliffside castles.',1,0,3,null,'uncommon'),
+    xmk('Salt Coast Dominion','Salt pans, tidal flats and fortified ports finance the state.',3,0,0,null,'uncommon'),
+    xmk('Crater Principality','A fertile ancient impact basin shelters an unusually dense realm.',2,1,1,null,'rare'),
+    xmk('Haunted Fen Marches','Causeways cross a drowned landscape where old battlefields refuse to stay quiet.',0,2,1,null,'rare'),
+    xmk('Ruined Imperial Heartland','A young realm occupies the roads, aqueducts and broken capitals of a fallen empire.',3,1,-1,null,'rare'),
+    xmk('Cavern Dominion','Cities descend through enormous natural caverns beneath a defensible surface realm.',2,2,2,null,'rare'),
+    xmk('Underrealm Kingdom','Most of the population lives below ground among subterranean rivers and crystal vaults.',2,3,2,null,'epic'),
+    xmk('Cloud-Peak Principality','Settlements span impossible high plateaus linked by ropeways and giant bridges.',1,2,3,null,'epic'),
+    xmk('Floating Isles Dominion','The realm occupies drifting islands suspended above the world by ancient magic.',3,5,2,null,'legendary'),
+    xmk('Worldroot Kingdom','Its cities are built among roots larger than mountains beneath a primeval world-tree.',3,6,3,null,'mythic')
+  );
+
+  scales.push(
+    xmk('Free City','One wealthy city and its immediate countryside.',2,0,1,1,'common'),
+    xmk('County','Two settled districts under a powerful count.',1,0,1,2,'common'),
+    xmk('Grand Duchy','Seven provinces gathered beneath a prestigious ducal crown.',3,0,2,7,'uncommon'),
+    xmk('Regional Hegemony','Eleven provinces dominate several smaller neighbours economically and militarily.',4,0,0,11,'uncommon'),
+    xmk('Imperial Confederation','Eighteen provinces retain broad autonomy beneath an imperial diet.',5,0,-1,18,'rare'),
+    xmk('Twin Kingdoms','Twenty-two provinces are joined under one dynasty but retain separate institutions.',5,0,-1,22,'rare'),
+    xmk('Vast Empire','Forty-eight provinces stretch across several climates and peoples.',9,0,-3,48,'epic'),
+    xmk('World Empire','Sixty provinces acknowledge one throne; governing them is a constant miracle of logistics.',12,0,-5,60,'legendary'),
+    xmk('Crown of a Hundred Provinces','One hundred provinces form a near-mythic superstate whose bureaucracy is a civilisation unto itself.',16,1,-7,100,'mythic')
+  );
+
+  governments.push(
+    xmk('Crowned Parliament','A hereditary monarch reigns beside an assertive elected assembly.',1,0,2,null,'common'),
+    xmk('Guild Federation','Craft and merchant guilds elect delegates to a federal council.',2,0,1,null,'common'),
+    xmk('Knightly Commonwealth','Landed warrior orders elect a marshal to govern in peace and war.',0,0,2,null,'uncommon'),
+    xmk('Matriarchal Clan League','Senior women of the great clans choose the high ruler and settle inheritance.',0,0,2,null,'uncommon'),
+    xmk('Pirate Principality','Sea captains recognise a prince only while plunder and trade remain profitable.',2,0,-1,null,'uncommon'),
+    xmk('Monastic Commonwealth','Abbots and lay communes share authority through layered councils.',0,1,2,null,'uncommon'),
+    xmk('Oracle Council','Major decisions require the assent of state-recognised seers.',0,3,0,null,'rare'),
+    xmk('Necromancer Synod','Licensed death-mages hold permanent seats in government.',1,5,-2,null,'rare'),
+    xmk('Dragon Throne','Political legitimacy depends on a living pact between the crown and an ancient dragon.',1,5,1,null,'epic'),
+    xmk('Living Saint Theocracy','A miracle-working saint personally heads both church and state.',0,5,3,null,'epic'),
+    xmk('Immortal Court','An undying circle has governed for centuries with terrifying institutional memory.',3,7,-2,null,'legendary'),
+    xmk('God-Crowned Imperium','The state is organised around a ruler whose divinity is visibly supernatural.',2,8,2,null,'mythic')
+  );
+
+  rulers.push(
+    xmk('Popular Peasant-King','A former common soldier unexpectedly commands genuine affection across class lines.',0,0,4,null,'uncommon'),
+    xmk('Returned Exile Queen','A dispossessed ruler has reclaimed the throne after years abroad.',1,0,1,null,'uncommon'),
+    xmk('Master Diplomat','The sovereign is famous for turning enemies into useful partners.',2,0,2,null,'uncommon'),
+    xmk('Architect-King','The ruler personally drives roads, fortresses and grand public works.',2,0,2,null,'uncommon'),
+    xmk('Blind Oracle Queen','The monarch is believed to receive accurate visions at a terrible personal cost.',0,3,1,null,'rare'),
+    xmk('Dragon-Blooded Sovereign','The ruler displays unmistakable draconic traits and extraordinary longevity.',0,5,0,null,'rare'),
+    xmk('Saint-King','Documented miracles surround the sovereign and reinforce extraordinary legitimacy.',0,4,4,null,'epic'),
+    xmk('Witch-Queen of the Black Court','A feared sorceress rules through oaths, curses and a loyal occult bureaucracy.',1,6,-2,null,'epic'),
+    xmk('Lich-King','The monarch died long ago but continues to rule through necromantic immortality.',1,8,-4,null,'legendary'),
+    xmk('Dragon Sovereign','A true ancient dragon openly occupies the throne rather than ruling through a mortal proxy.',2,10,-2,null,'legendary'),
+    xmk('Chosen of Fate','Impossible coincidences and fulfilled prophecies follow the ruler’s every decision.',2,8,5,null,'mythic')
+  );
+
+  populations.push(
+    xmk('Hamlet Realm','Only about 70,000 people live under the crown.',0,0,1,.07,'common'),
+    xmk('Provincial','About 1.1 million inhabitants.',0,0,0,1.1,'common'),
+    xmk('Thriving','About 2.7 million inhabitants.',1,0,0,2.7,'common'),
+    xmk('Metropolitan','About 5.4 million inhabitants.',1,0,0,5.4,'uncommon'),
+    xmk('Teeming','About 8.2 million inhabitants.',2,0,-1,8.2,'uncommon'),
+    xmk('Mega-Realm','About 16 million inhabitants.',3,0,-1,16,'rare'),
+    xmk('Titanic Population','About 32 million inhabitants support enormous cities and armies.',5,0,-2,32,'epic'),
+    xmk('World-City Network','About 50 million inhabitants occupy a chain of vast urban regions.',8,1,-3,50,'legendary'),
+    xmk('Mythic Multitude','Nearly 80 million souls live beneath one political order.',12,2,-5,80,'mythic')
+  );
+
+  cultures.push(
+    xmk('Tournament Culture','Prestige is won through jousts, melees and public feats of arms.',0,0,1,null,'common'),
+    xmk('Riverfolk Culture','Barges, flood festivals and water-rights shape everyday identity.',1,0,1,null,'common'),
+    xmk('Mountain Guild Culture','Mining brotherhoods and pass-wardens dominate civic life.',1,0,2,null,'common'),
+    xmk('Storykeeper Culture','Genealogy and oral epics carry law and history between generations.',0,1,1,null,'common'),
+    xmk('Duelist Culture','Personal disputes are often settled through highly regulated formal combat.',0,0,0,null,'uncommon'),
+    xmk('Siegecraft Culture','Engineering, masonry and fortress construction are sources of national pride.',2,0,1,null,'uncommon'),
+    xmk('Monster-Taming Culture','Dangerous beasts are captured, bred and integrated into work and warfare.',1,2,0,null,'rare'),
+    xmk('Runic Culture','Names, contracts and status are literally carved into magically significant inscriptions.',1,3,1,null,'rare'),
+    xmk('Dragon-Venerating Culture','Social rank is partly measured by proximity to draconic patrons and relics.',1,3,0,null,'rare'),
+    xmk('Dreambound Culture','Important marriages, journeys and offices traditionally require favourable shared dreams.',0,4,0,null,'epic'),
+    xmk('Deathless Culture','Ancestors remain physically present through accepted necromantic customs.',1,5,-1,null,'epic'),
+    xmk('Starborn Culture','Calendars, architecture and social roles all follow supernatural celestial cycles.',2,5,1,null,'epic')
+  );
+
+  faiths.push(
+    xmk('Moon Mother Communion','Lunar cycles govern fasting, fertility rites and sacred law.',0,1,1,null,'common'),
+    xmk('River Saints','Local miracle-workers are associated with bridges, springs and flood protection.',0,1,2,null,'common'),
+    xmk('Sacred Kingship Cult','Royal coronation is believed to renew the fertility of the land.',0,2,1,null,'uncommon'),
+    xmk('Forge Ancestors','Dead master-craftsmen are invoked at furnaces and workshops.',1,2,1,null,'uncommon'),
+    xmk('Phoenix Faith','Death and rebirth are celebrated through sacred fire and elaborate funerals.',0,3,2,null,'rare'),
+    xmk('Leviathan Worship','Coastal temples bargain with immense beings beneath the sea.',0,4,-1,null,'rare'),
+    xmk('Living Constellations','Priests claim the stars are conscious divine beings capable of intervention.',0,4,1,null,'rare'),
+    xmk('Church of the Last Door','Death is seen as a border that trained clergy may lawfully cross in either direction.',0,5,-1,null,'epic'),
+    xmk('Dragon Covenant','A real dragon receives worship and demonstrably answers prayers.',0,6,0,null,'epic'),
+    xmk('Visible Pantheon','The gods occasionally manifest physically at established holy sites.',0,8,3,null,'legendary'),
+    xmk('God Among Us','A verifiably divine being openly resides within the realm and shapes state religion.',0,10,4,null,'mythic')
+  );
+
+  economies.push(
+    xmk('River Toll Economy','Bridges, canals and river customs fund much of the crown.',2,0,0,null,'common'),
+    xmk('Horse-Breeding Economy','Stud farms, tack and cavalry remounts dominate exports.',2,0,0,null,'common'),
+    xmk('Pilgrimage Economy','Shrines, inns and relic markets draw wealth from distant visitors.',2,1,1,null,'common'),
+    xmk('Mercenary Economy','Professional soldiers are one of the realm’s major exports.',2,0,-1,null,'uncommon'),
+    xmk('Adventurer Economy','Ruins and monster-haunted frontiers sustain guides, outfitters and treasure markets.',2,1,0,null,'uncommon'),
+    xmk('Alchemical Manufacture','Dyes, medicines, acids and magical reagents are produced at scale.',3,2,0,null,'rare'),
+    xmk('Enchanted Steel Industry','State-regulated forges mass-produce low-grade magical arms and tools.',4,3,0,null,'rare'),
+    xmk('Monster Ranching','Domesticated magical beasts provide transport, materials and military mounts.',3,3,-1,null,'rare'),
+    xmk('Portal Toll Economy','A stable magical gate makes the realm a compulsory node in long-distance commerce.',5,4,1,null,'epic'),
+    xmk('Skyship Industry','Rare levitation craft support an extraordinarily valuable transport sector.',5,5,0,null,'epic'),
+    xmk('Transmutation Economy','Licensed mages can convert common materials into strategically valuable ones.',7,7,-2,null,'legendary'),
+    xmk('Wish Market','A tightly controlled supernatural institution can literally fulfil limited wishes for a price.',10,9,-3,null,'mythic')
+  );
+
+  resources.push(
+    xmk('Rich Hardwood Forests','Ship-grade hardwood is abundant and carefully managed.',2,0,1,null,'common'),
+    xmk('Exceptional Clay','Brick, tile and ceramics are exported across the region.',1,0,1,null,'common'),
+    xmk('Fine Wool','Prestigious textile production rests on unusually valuable sheep breeds.',2,0,0,null,'common'),
+    xmk('War Elephant Stock','The realm controls breeding grounds for trained elephants.',2,0,0,null,'uncommon'),
+    xmk('Giant Silk','Enormous magical spiders produce thread stronger than ordinary silk.',3,2,0,null,'rare'),
+    xmk('Mithril Vein','A rare light metal creates exceptional armour and tools.',4,3,1,null,'rare'),
+    xmk('Star-Iron Crater','Metal fallen from the heavens holds enchantment unusually well.',4,4,0,null,'rare'),
+    xmk('Orichalcum Reef','A strange golden alloy can be mined from dangerous coastal formations.',5,4,0,null,'epic'),
+    xmk('Adamantine Seam','A tiny deposit yields metal almost impossible to damage.',5,5,1,null,'epic'),
+    xmk('Dragon Egg Clutches','A secret breeding ground occasionally produces viable dragon eggs.',4,6,-1,null,'epic'),
+    xmk('Phoenix Feathers','A sacred rookery sheds feathers useful in healing and resurrection rites.',4,6,2,null,'epic'),
+    xmk('Worldtree Sap','Drops harvested over decades can empower major enchantments.',5,7,3,null,'legendary'),
+    xmk('Heartstone','A singular crystal beneath the capital radiates inexhaustible magical energy.',6,9,1,null,'legendary'),
+    xmk('Fallen Star Core','A buried celestial object provides an almost absurd concentration of arcane material.',8,11,-2,null,'mythic')
+  );
+
+  armySizes.push(
+    xmk('Household Retinue','About 900 full-time troops defend the ruler and capital.',0,0,1,900,'common'),
+    xmk('Regional Muster','About 16,000 troops can be assembled for a campaign.',0,0,0,16000,'common'),
+    xmk('Strong Royal Army','About 65,000 troops can be fielded without total mobilisation.',1,0,1,65000,'uncommon'),
+    xmk('Grand National Host','About 130,000 troops can be sustained for a major campaign.',2,0,0,130000,'rare'),
+    xmk('Imperial War Machine','About 260,000 troops can be mobilised across several theatres.',4,0,-1,260000,'rare'),
+    xmk('Half-Million Host','Roughly 500,000 troops answer a full imperial muster.',6,0,-3,500000,'epic'),
+    xmk('Million-Spear Muster','Nearly one million combatants can be called up in an existential war.',9,0,-5,950000,'legendary'),
+    xmk('Army Without Number','More than 1.5 million soldiers, auxiliaries and magical troops can theoretically be mobilised.',12,2,-7,1500000,'mythic')
+  );
+
+  doctrines.push(
+    xmk('Riverine Warfare','Barges, pontoon bridges and amphibious manoeuvre dominate campaign planning.',1,0,1,null,'common'),
+    xmk('Mountain Warfare','Small columns exploit passes, cliffs and fortified valleys.',0,0,2,null,'common'),
+    xmk('Counter-Cavalry Doctrine','Deep spear formations and fieldworks are designed to break mounted armies.',0,0,1,null,'common'),
+    xmk('Night Warfare','Training and signalling systems allow unusually effective operations after dark.',0,1,0,null,'uncommon'),
+    xmk('War Wagon Doctrine','Mobile wagon forts anchor infantry and missile troops.',1,0,1,null,'uncommon'),
+    xmk('Beast Cavalry','Large magical beasts replace or supplement conventional cavalry.',0,2,0,null,'rare'),
+    xmk('Mage Artillery','Long-range spellcasters are organised like siege batteries.',0,4,0,null,'rare'),
+    xmk('Golem Phalanx','Constructs form the immovable centre of major battle lines.',1,4,2,null,'rare'),
+    xmk('Portal Warfare','Armies exploit short-lived gates to bypass roads and fortifications.',2,5,-1,null,'epic'),
+    xmk('Undead Attrition','Disposable dead exhaust enemies through campaigns no living army could sustain.',0,5,-2,null,'epic'),
+    xmk('Dragon Shock Doctrine','True dragons are coordinated with ground forces for decisive breakthroughs.',0,7,-1,null,'legendary'),
+    xmk('Temporal Manoeuvre','Battle-mages manipulate brief windows of time to reposition formations impossibly quickly.',1,9,-2,null,'mythic')
+  );
+
+  elites.push(
+    xmk('Royal Cataphracts','Extremely heavy cavalry fight in layered armour with armoured horses.',0,0,1,null,'common'),
+    xmk('Highland Berserkers','Veteran shock infantry are famed for ferocious uphill assaults.',0,0,0,null,'common'),
+    xmk('Royal Assassins','A secret corps removes commanders and political threats before battle begins.',0,1,-1,null,'uncommon'),
+    xmk('Witch Hunters','Specialists are trained to break curses, hunt rogue mages and survive supernatural threats.',0,2,1,null,'uncommon'),
+    xmk('Mammoth Riders','Tower-bearing mammoths act as moving fortresses on open ground.',1,1,0,null,'rare'),
+    xmk('Golem Cohort','Heavy constructs can hold ground for days without sleep or food.',0,4,2,null,'rare'),
+    xmk('Vampire Guard','An aristocratic night guard combines supernatural speed with centuries of experience.',0,5,-2,null,'epic'),
+    xmk('Phoenix Knights','Sacred warriors can survive wounds that should be fatal and wield consecrated flame.',0,5,2,null,'epic'),
+    xmk('Storm Giant Auxiliaries','A handful of true giants serve as living siege engines.',0,6,-1,null,'epic'),
+    xmk('Royal Dragonflight','Several adult dragons and bonded riders form a permanent strategic reserve.',0,8,-1,null,'legendary'),
+    xmk('Angelic Host','Manifest celestial beings have sworn direct military service to the realm.',0,9,3,null,'legendary'),
+    xmk('Deathless Companions','The ruler’s original companions have fought together for centuries without ageing.',0,9,1,null,'mythic')
+  );
+
+  magicLevels.push(
+    xmk('Household Magic','About 18 recognised practitioners serve noble and wealthy households.',0,1,0,18,'common'),
+    xmk('Regional Colleges','About 900 recognised practitioners are concentrated in a few centres.',0,3,0,900,'uncommon'),
+    xmk('Arcane Bureaucracy','About 15,000 practitioners work openly across state and private institutions.',2,6,-1,15000,'rare'),
+    xmk('Mage Population','About 55,000 recognised practitioners make magic a visible part of everyday society.',3,8,-2,55000,'epic'),
+    xmk('Nation of Mages','Roughly 150,000 trained practitioners make mundane professions increasingly magical.',5,10,-3,150000,'legendary'),
+    xmk('Arcane Civilisation','More than 300,000 practitioners reshape transport, agriculture, warfare and architecture.',8,13,-5,300000,'mythic')
+  );
+
+  magicSchools.push(
+    xmk('Healing Arts','Restoration, surgery and disease-breaking magic dominate formal training.',0,2,2,null,'common'),
+    xmk('Wardcraft','Barriers, seals and counter-magic are the most respected arcane disciplines.',0,3,2,null,'uncommon'),
+    xmk('Beast Speech','Mages communicate with and influence animals and magical creatures.',0,3,1,null,'uncommon'),
+    xmk('Metal Magic','Magical smiths shape and enchant metal directly.',2,3,0,null,'uncommon'),
+    xmk('Soulcraft','Practitioners manipulate memory, identity and the metaphysical structure of souls.',0,5,-2,null,'rare'),
+    xmk('Portal Magic','Stable and temporary gateways bend distance.',1,5,-1,null,'rare'),
+    xmk('Gravity Magic','Rare specialists alter weight, falling and local gravity.',0,6,-1,null,'epic'),
+    xmk('Weather Dominion','Large circles can deliberately redirect storms and seasonal rainfall.',1,6,0,null,'epic'),
+    xmk('True Name Sorcery','Knowing the hidden name of a thing grants frightening authority over it.',0,7,-2,null,'epic'),
+    xmk('Reality Weaving','Elite mages can temporarily rewrite ordinary physical rules.',1,9,-3,null,'legendary'),
+    xmk('Wishcraft','A tiny school studies the dangerous art of turning spoken desire into reality.',1,11,-4,null,'mythic')
+  );
+
+  arcaneLaws.push(
+    xmk('Licensed Hedge Circles','Village practitioners may operate after registering with local magistrates.',0,1,1,null,'common'),
+    xmk('Court Patronage System','Great houses sponsor mages in return for service and political loyalty.',1,2,0,null,'common'),
+    xmk('Arcane Trade Guild','Magic is regulated primarily as a skilled commercial profession.',2,2,0,null,'uncommon'),
+    xmk('State Examination System','Anyone may enter magical office by passing brutally difficult public examinations.',1,3,2,null,'uncommon'),
+    xmk('Anti-Magic Constabulary','Special officers suppress illegal enchantment and dangerous magical creatures.',0,2,2,null,'uncommon'),
+    xmk('Crown Thaumaturgy Ministry','A permanent bureaucracy licenses spells, laboratories and magical infrastructure.',2,4,1,null,'rare'),
+    xmk('Necromantic Civil Service','The dead may legally serve the state under strict contractual law.',1,5,-1,null,'rare'),
+    xmk('Dragon-Taught Academies','A handful of ancient dragons personally supervise elite magical schools.',1,6,1,null,'epic'),
+    xmk('Sentient Archive','A living magical library decides who may study particular secrets.',1,7,0,null,'epic'),
+    xmk('Perfect Arcane Registry','Every legal spell, practitioner and enchanted object is tracked by a magically self-updating state record.',3,8,1,null,'legendary'),
+    xmk('Mage-King’s Absolute License','All magic in the realm ultimately flows through one supernatural sovereign authority.',2,10,-2,null,'mythic')
+  );
+
+  wonders.push(
+    xmk('Grand Canal of Kings','An ancient engineered waterway still enriches and supplies the heartland.',3,0,2,null,'common'),
+    xmk('Unbroken Great Wall','A colossal frontier wall has remained militarily useful for centuries.',1,0,3,null,'uncommon'),
+    xmk('Library of Every Tongue','An enormous archive contains texts from dozens of dead civilisations.',2,2,2,null,'uncommon'),
+    xmk('Bridge of Giants','A single impossible span crosses a canyon no ordinary engineers could bridge.',2,2,2,null,'uncommon'),
+    xmk('Healing Spring','A sacred source genuinely cures many injuries and diseases.',1,3,3,null,'rare'),
+    xmk('Whispering Throne','The royal seat offers fragments of advice from every ruler who previously sat upon it.',1,4,1,null,'rare'),
+    xmk('Mirror Road','A magical highway permits travellers to cross hundreds of miles in days.',3,4,1,null,'rare'),
+    xmk('Prisoned Demon','A bound fiend beneath the capital provides power while constantly seeking release.',2,6,-3,null,'epic'),
+    xmk('Time-Frozen City','One lost city is trapped in a repeating moment and can occasionally be entered.',1,7,-1,null,'epic'),
+    xmk('World Gate','An ancient portal can open routes to distant continents or stranger realms.',4,7,0,null,'epic'),
+    xmk('Mountain-Sized Golem','A dormant construct is visibly embedded in the landscape.',0,8,0,null,'legendary'),
+    xmk('Prisoned God','A divine being is chained beneath a holy complex and its power leaks into the realm.',2,10,-3,null,'legendary'),
+    xmk('Second Sun','A small artificial sun hangs permanently above one sacred valley.',4,10,4,null,'legendary'),
+    xmk('Clock of Ages','An ancient mechanism can alter a few minutes of history at catastrophic cost.',1,12,-3,null,'mythic'),
+    xmk('Wish Engine','A pre-human machine can reshape reality when supplied with impossible quantities of power.',5,14,-5,null,'mythic')
+  );
+
+  diplomacies.push(
+    xmk('Hostage Diplomacy','Elite hostages are exchanged to guarantee major treaties.',0,0,1,null,'common'),
+    xmk('Gift Diplomacy','Prestige goods and spectacular embassies are used to cultivate influence.',1,0,1,null,'common'),
+    xmk('Frontier Protector','The realm seeks weaker buffer states rather than direct annexation.',1,0,1,null,'uncommon'),
+    xmk('League Builder','Diplomats constantly organise multilateral coalitions and councils.',1,0,2,null,'uncommon'),
+    xmk('Scholar Exchange','Universities and learned embassies are major tools of soft power.',1,1,2,null,'uncommon'),
+    xmk('Mercenary Patron','Foreign rulers receive troops in exchange for political concessions.',2,0,-1,null,'uncommon'),
+    xmk('Arcane Patronage','The realm spreads influence by training and funding foreign mages.',2,3,0,null,'rare'),
+    xmk('Dragon Diplomacy','Treaties sometimes include dragons as independent signatories and guarantors.',1,4,0,null,'rare'),
+    xmk('Prophetic Diplomacy','Major foreign-policy choices are delayed until state seers agree on likely futures.',0,3,1,null,'rare'),
+    xmk('Portal Hegemony','Control of magical transit routes lets the realm reward friends and isolate enemies.',3,4,-1,null,'epic'),
+    xmk('World Congress Sponsor','The court has enough prestige to regularly convene rival great powers on neutral ground.',3,1,3,null,'epic')
+  );
+
+  fortifications.push(
+    xmk('Earthen Ringforts','Dense local earthworks provide cheap but effective regional defence.',0,0,1,2,'common'),
+    xmk('Layered Moat System','Major settlements use multiple wet and dry ditches around stone walls.',0,0,2,4,'common'),
+    xmk('Cliff Bastions','Fortresses are deliberately built into near-vertical terrain.',0,0,3,6,'uncommon'),
+    xmk('Subterranean Redoubts','Key garrisons can retreat into deep fortified tunnel networks.',0,1,3,7,'uncommon'),
+    xmk('Runed Walls','Important fortresses carry permanent wards against fire, siege magic and spirits.',0,3,4,8,'rare'),
+    xmk('Golem Gatehouses','Massive constructs act as both gate towers and mobile defenders.',0,4,4,9,'rare'),
+    xmk('Living Thornwall','A magically cultivated defensive forest can close roads and entangle armies.',0,4,4,10,'rare'),
+    xmk('Floating Citadels','Several fortresses can physically rise above besieging armies.',1,6,5,12,'epic'),
+    xmk('Invisible Frontier','Ancient wards obscure roads, passes and settlements from hostile travellers.',0,6,5,13,'epic'),
+    xmk('Worldshield','A legendary barrier network can protect entire provinces from ordinary invasion.',0,9,7,16,'legendary'),
+    xmk('Unbreachable Crownwall','The capital is enclosed by a supernatural defence never successfully penetrated in recorded history.',0,11,8,20,'mythic')
+  );
+
+  navies.push(
+    xmk('River Patrols','Light craft police rivers and move troops rapidly inland.',1,0,0,2,'common'),
+    xmk('Coastal Galley Force','A useful regional galley fleet protects ports and nearby sea lanes.',1,0,0,4,'common'),
+    xmk('Heavy Oared Fleet','Large war galleys can contest enclosed seas and support invasions.',2,0,0,6,'uncommon'),
+    xmk('Oceanic Sailing Fleet','Purpose-built sailing warships operate far beyond the coast.',3,0,0,8,'uncommon'),
+    xmk('Grand Armada','Dozens of major warships can support sustained overseas campaigns.',4,0,0,10,'rare'),
+    xmk('Fire-Ship Corps','Specialised vessels carry alchemical incendiaries and explosive weapons.',3,1,-1,9,'rare'),
+    xmk('Sea-Mage Flotilla','Dedicated weather and water mages accompany major naval squadrons.',3,3,0,10,'rare'),
+    xmk('Griffon Carrier Fleet','Large ships transport aerial cavalry for scouting and boarding actions.',3,3,0,11,'epic'),
+    xmk('Sea-Wyrm Riders','Tamed marine monsters serve as scouts, raiders and ship-killers.',2,5,-1,12,'epic'),
+    xmk('Ghost Fleet','Undead crews and spectral vessels can sail without wind, food or sleep.',3,6,-2,13,'epic'),
+    xmk('Leviathan Navy','Several colossal bound sea creatures function as living capital ships.',4,8,-2,16,'legendary'),
+    xmk('Sky-and-Sea Armada','Flying warships operate alongside a huge conventional fleet.',6,10,-2,20,'mythic')
+  );
+
+  crises.push(
+    xmk('Local Tax Riots','Several towns resist a new levy, but the wider realm remains calm.',-1,0,-1,null,'common'),
+    xmk('Bad Harvest','One poor growing season has driven up grain prices.',-1,0,-1,null,'common'),
+    xmk('Disputed Bishopric','Two rival clerics divide one important province.',0,1,-1,null,'common'),
+    xmk('Mercenary Mutiny','Unpaid soldiers have seized a fortified town.',-1,0,-2,null,'uncommon'),
+    xmk('Royal Scandal','A court scandal damages the prestige of the ruling house.',0,0,-2,null,'uncommon'),
+    xmk('Great Fire','A major city has recently suffered a devastating urban fire.',-2,0,-2,null,'uncommon'),
+    xmk('Dead Rising','Unquiet dead are appearing in several old battlefields and cemeteries.',-1,3,-2,null,'rare'),
+    xmk('Dragon Tribute Crisis','A powerful dragon is demanding annual treasure and noble hostages.',-2,3,-2,null,'rare'),
+    xmk('Portal Breach','Uncontrolled magical gates are opening unpredictably across one province.',-1,4,-3,null,'rare'),
+    xmk('Demon Incursion','A significant otherworldly force has established a foothold inside the realm.',-3,5,-4,null,'epic'),
+    xmk('Civil War','Two full rival governments claim sovereignty and command substantial armies.',-4,0,-5,null,'epic'),
+    xmk('Arcane Sundering','A magical disaster has permanently altered an entire region.',-3,6,-5,null,'epic'),
+    xmk('Perfect Succession','The old ruler died peacefully, the heir is universally accepted and the treasury is full.',2,0,4,null,'legendary'),
+    xmk('Miracle Harvest','Several impossible harvests have left granaries overflowing at the founding of the chronicle.',3,2,3,null,'legendary'),
+    xmk('Golden Generation','An unusual cluster of gifted generals, scholars, administrators and mages has reached maturity at once.',4,3,4,null,'mythic')
+  );
+
   const categories = [
     {key:'origin',name:'Realm Origin',prompt:'Where does this realm begin?',options:origins},
     {key:'scale',name:'Realm Scale',prompt:'How large is its domain?',options:scales},
@@ -608,6 +907,87 @@
     {key:'navy',name:'Naval Power',prompt:'What force can it project over water?',options:navies},
     {key:'crisis',name:'Founding Crisis',prompt:'What threatens the realm at the opening of the chronicle?',options:crises}
   ];
+
+
+  const RARITY_WEIGHTS = { common:100, uncommon:55, rare:20, epic:6, legendary:1.5, mythic:.35 };
+  const RARITY_LABELS = { common:'Common', uncommon:'Uncommon', rare:'Rare', epic:'Epic', legendary:'Legendary', mythic:'Mythic' };
+  const RARITY_COLORS = { rare:'#465f79', epic:'#65506f', legendary:'#9a7533', mythic:'#8b3d32' };
+
+  function optionRarity(cat, opt) {
+    if (opt.rarity) return opt.rarity;
+    const n = String(opt.name || '').toLowerCase();
+    const v = Number(opt.value);
+
+    if (cat.key === 'scale') return v >= 50 ? 'legendary' : v >= 32 ? 'epic' : v >= 20 ? 'rare' : v >= 12 ? 'uncommon' : 'common';
+    if (cat.key === 'population') return v >= 35 ? 'legendary' : v >= 18 ? 'epic' : v >= 9 ? 'rare' : v >= 4.5 ? 'uncommon' : 'common';
+    if (cat.key === 'army') return v >= 500000 ? 'legendary' : v >= 250000 ? 'epic' : v >= 100000 ? 'rare' : v >= 50000 ? 'uncommon' : 'common';
+    if (cat.key === 'magicLevel') return v >= 100000 ? 'legendary' : v >= 40000 ? 'epic' : v >= 10000 ? 'rare' : v >= 2000 ? 'uncommon' : 'common';
+    if (cat.key === 'navy') return v >= 16 ? 'legendary' : v >= 12 ? 'epic' : v >= 9 ? 'rare' : v >= 6 ? 'uncommon' : 'common';
+    if (cat.key === 'fortification') return v >= 16 ? 'legendary' : v >= 12 ? 'epic' : v >= 9 ? 'rare' : v >= 6 ? 'uncommon' : 'common';
+
+    const mythicWords = /wish|god among|god-crowned|reality weaving|clock of ages|arcane civilisation|chosen of fate|deathless companions/;
+    const legendaryWords = /immortal|lich|dragon sovereign|royal dragonflight|angelic|second sun|prisoned god|worldtree|heartstone|leviathan navy|visible pantheon|nation of mages|worldshield/;
+    const epicWords = /dragon|phoenix|void|titan|portal|vampire|storm giant|floating|world gate|time-frozen|demon|undead|necromantic|soulcraft|gravity|weather dominion/;
+    const rareWords = /mage|magic|arcane|oracle|griffon|golem|wyrm|mithril|star-iron|monster|witch|prophetic|runed|ghost|alchemy|alchemical/;
+
+    if (mythicWords.test(n)) return 'mythic';
+    if (legendaryWords.test(n)) return 'legendary';
+    if (epicWords.test(n)) return 'epic';
+    if (rareWords.test(n)) return 'rare';
+
+    if (cat.key === 'wonder') {
+      if (/active/.test(n)) return 'rare';
+      if (/unstable/.test(n)) return 'uncommon';
+      return 'uncommon';
+    }
+    if (cat.key === 'resource' && (opt.w||0)+(opt.a||0) >= 7) return 'epic';
+    if (cat.key === 'elite' && (opt.a||0) >= 4) return 'epic';
+    if (cat.key === 'magicSchool' && (opt.a||0) >= 5) return 'rare';
+    if (cat.key === 'ruler' && (opt.a||0) >= 4) return 'rare';
+    if (cat.key === 'government' && (opt.a||0) >= 3) return 'rare';
+    if (cat.key === 'crisis' && /no immediate crisis|untroubled|contained/.test(n)) return 'uncommon';
+    return 'common';
+  }
+
+  function optionWeight(cat, opt) {
+    return RARITY_WEIGHTS[optionRarity(cat,opt)] || RARITY_WEIGHTS.common;
+  }
+
+  function weightedLayout(cat) {
+    const weights = cat.options.map(opt => optionWeight(cat,opt));
+    const total = weights.reduce((a,b)=>a+b,0) || 1;
+    let cursor = 0;
+    return cat.options.map((opt,index) => {
+      const start = cursor / total * 360;
+      cursor += weights[index];
+      const end = cursor / total * 360;
+      return { opt, index, weight:weights[index], total, start, end, mid:(start+end)/2 };
+    });
+  }
+
+  function weightedChoice(cat) {
+    const layout = weightedLayout(cat);
+    let roll = Math.random() * layout[0].total;
+    for (const item of layout) {
+      roll -= item.weight;
+      if (roll <= 0) return item;
+    }
+    return layout[layout.length - 1];
+  }
+
+  function outcomeChance(cat,opt) {
+    const total = cat.options.reduce((sum,o)=>sum+optionWeight(cat,o),0) || 1;
+    return optionWeight(cat,opt) / total * 100;
+  }
+
+  function formatOutcomeChance(pct) {
+    if (pct < .01) return '<0.01%';
+    if (pct < .1) return pct.toFixed(2) + '%';
+    if (pct < 1) return pct.toFixed(1) + '%';
+    return pct.toFixed(1) + '%';
+  }
+
+  function weightedPick(cat) { return weightedChoice(cat).opt; }
 
   const realmNames = ['Valedorn','Cairnreach','Edrath','Thornmere','Avarra','Dunscar','Mornhallow','Veyr','Caldris','Ravenholt','Osthyr','Brannoch','Selvarin','Gloamreach','Kharad Vale','Everen','Drakenmark','Orinth','Velmora','Ashenford','Caer Veylan','Mordane','Talverin','Rimeholt','Aurelith','Duskryn','Halbrecht','Sablemarch','Merrowyn','Corvannis','Eldovar','Thyrhold','Vaelmoor','Rothmere','Asterfall','Kyradon','Nymbra','Stonewake','Varenth','Greyfen','Aldervane','Cindermere','Vhalor','Crownhollow','Redwater','Istraval','Dornwyck','Marrowfen','Sunspire','Wyrmrest'];
   const capitals = ['Highcourt','Greyspire','Saint Veyra','Kingsfall','Ironhaven','Rosewatch','Dawnkeep','Blackgate','Old Caer','Silvercross','Stormhold','Emberhall','Ravenwatch','Ashspire','Mooncourt','Westermark','Dreadfort','Starfall','Gildenhall','Whitebridge','Liongate','Harrowport','Velis','Oakenshield'];
@@ -839,28 +1219,31 @@
     $('#wheelCategory').textContent = cat.name;
     $('#wheelPrompt').textContent = cat.prompt;
     $('#wheelStep').textContent = `${state.draft.categoryIndex + 1} / ${categories.length}`;
-    $('#wheelPool').textContent = `${cat.options.length} possible outcomes`;
+    $('#wheelPool').textContent = `${cat.options.length} outcomes · weighted`;
     const group = $('#wheelGroup');
     group.innerHTML = '';
     const palette = ['#6e5638','#5a4932','#7a6342','#4e5d4a','#63506a','#745047','#465968','#806d48'];
-    const step = 360 / cat.options.length;
-    cat.options.forEach((opt, i) => {
+    const layout = weightedLayout(cat);
+    layout.forEach((item, i) => {
+      const {opt,start,end,mid} = item;
+      const rarity = optionRarity(cat,opt);
       const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d', arcPath(i * step, (i + 1) * step));
-      path.setAttribute('fill', palette[i % palette.length]);
-      path.setAttribute('stroke', '#18110c');
-      path.setAttribute('stroke-width', cat.options.length > 60 ? '.55' : '1');
+      path.setAttribute('d', arcPath(start, end));
+      path.setAttribute('fill', RARITY_COLORS[rarity] || palette[i % palette.length]);
+      path.setAttribute('stroke', rarity === 'mythic' || rarity === 'legendary' ? '#d4ad5b' : '#18110c');
+      path.setAttribute('stroke-width', rarity === 'mythic' ? '1.3' : (cat.options.length > 60 ? '.45' : '.8'));
       group.appendChild(path);
-      const displayEvery = Math.max(1, Math.ceil(cat.options.length / 18));
-      if (cat.options.length <= 20 || i % displayEvery === 0) {
-        const angle = ((i + .5) * step - 90) * Math.PI / 180;
+      const span=end-start;
+      const displayEvery = Math.max(1, Math.ceil(cat.options.length / 16));
+      if ((cat.options.length <= 20 || i % displayEvery === 0) && span > .7) {
+        const angle = (mid - 90) * Math.PI / 180;
         const text = document.createElementNS('http://www.w3.org/2000/svg','text');
         text.setAttribute('x', 260 + 154 * Math.cos(angle));
         text.setAttribute('y', 260 + 154 * Math.sin(angle));
         text.setAttribute('text-anchor','middle');
         text.setAttribute('dominant-baseline','middle');
         text.setAttribute('fill','#f0e6d2');
-        text.setAttribute('font-size',cat.options.length > 30 ? '8' : '9');
+        text.setAttribute('font-size',cat.options.length > 30 ? '7.5' : '9');
         text.setAttribute('font-family','system-ui, sans-serif');
         text.setAttribute('font-weight','800');
         text.textContent = cat.options.length > 20 ? String(i + 1) : (opt.name.length > 18 ? `${opt.name.slice(0,16)}…` : opt.name);
@@ -887,10 +1270,10 @@
       state.draft.categoryIndex = clamp(index, 0, categories.length - 1);
       renderWheel();
       const cat = currentCategory();
-      const selectedIndex = Math.floor(Math.random() * cat.options.length);
-      const selected = cat.options[selectedIndex];
-      const step = 360 / cat.options.length;
-      const desired = 360 - (selectedIndex + .5) * step;
+      const chosen = weightedChoice(cat);
+      const selectedIndex = chosen.index;
+      const selected = chosen.opt;
+      const desired = 360 - chosen.mid;
       wheelRotation += 1080 + ((desired - (wheelRotation % 360) + 360) % 360);
       const group = $('#wheelGroup');
       const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -900,7 +1283,8 @@
       requestAnimationFrame(() => { group.style.transform = `rotate(${wheelRotation}deg)`; });
       setTimeout(() => {
         state.draft.selections[cat.key] = selected;
-        $('#spinResult').innerHTML = `<strong>${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)} · 1 in ${cat.options.length} on this wheel.</span>`;
+        const rarity=optionRarity(cat,selected), pct=outcomeChance(cat,selected);
+        $('#spinResult').innerHTML = `<strong>${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)}</span><em class="rarity-badge ${rarity}">${RARITY_LABELS[rarity]} · ${formatOutcomeChance(pct)}</em>`;
         spinning = false;
         playWheelLand();
         renderDraft();
@@ -914,7 +1298,7 @@
   function randomiseRemaining() {
     playQuickForgeCue();
     for (const cat of categories) {
-      if (!state.draft.selections[cat.key]) state.draft.selections[cat.key] = pick(cat.options);
+      if (!state.draft.selections[cat.key]) state.draft.selections[cat.key] = weightedPick(cat);
     }
     state.draft.categoryIndex = categories.length - 1;
     $('#spinResult').innerHTML = `<strong>The realm is complete.</strong><span>All unresolved wheels have been rolled from their full outcome pools.</span>`;
@@ -926,7 +1310,7 @@
   function quickForge() {
     playQuickForgeCue();
     state.draft.selections = {};
-    categories.forEach(cat => { state.draft.selections[cat.key] = pick(cat.options); });
+    categories.forEach(cat => { state.draft.selections[cat.key] = weightedPick(cat); });
     state.draft.name = randomRealmName();
     state.draft.categoryIndex = categories.length - 1;
     $('#realmName').value = state.draft.name;
