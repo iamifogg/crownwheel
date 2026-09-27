@@ -1,4 +1,4 @@
-const CACHE = 'crownwheel-v3';
+const CACHE = 'crownwheel-v4';
 const ASSETS = [
   "./",
   "./index.html",
@@ -30,7 +30,7 @@ self.addEventListener('activate', event => {
     for (const client of clients) {
       try {
         const url = new URL(client.url);
-        url.searchParams.set('cw', 'v3');
+        url.searchParams.set('cw', 'v4');
         await client.navigate(url.href);
       } catch (_) {}
     }
