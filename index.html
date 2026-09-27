@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17120d">
+  <meta name="description" content="Crownwheel — a persistent medieval-fantasy nation wheel and world simulator.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Crownwheel</title>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="crest-mark" aria-hidden="true">♜</div>
+        <div>
+          <div class="brand">Crownwheel</div>
+          <div class="subtitle">Medieval Fantasy Nation Simulator</div>
+        </div>
+      </div>
+      <div class="status-row">
+        <span class="status-chip"><strong id="statusYear">1</strong> Year</span>
+        <span class="status-chip"><strong id="statusRealms">0</strong> Realms</span>
+        <span class="status-chip autosave"><span id="saveDot" class="save-dot"></span><span id="saveLabel">Autosaved</span></span>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section id="forgeView" class="view active" aria-labelledby="forgeTitle">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">The Founding Wheel</div>
+            <h1 id="forgeTitle">Forge a Realm</h1>
+            <p>Create nations one after another. Adding a realm keeps you here and immediately readies a fresh wheel.</p>
+          </div>
+          <button id="randomCompleteBtn" class="button ghost" type="button">Quick Forge</button>
+        </div>
+
+        <div id="forgeSuccess" class="success-banner hidden" role="status" aria-live="polite"></div>
+
+        <div class="forge-layout">
+          <article class="panel wheel-panel">
+            <div class="wheel-topline">
+              <div>
+                <div class="eyebrow" id="wheelCategory">Realm Origin</div>
+                <h2 id="wheelPrompt">Where does this realm begin?</h2>
+              </div>
+              <div class="wheel-progress">
+                <strong id="wheelStep">1 / 20</strong>
+                <span id="wheelPool">0 outcomes</span>
+              </div>
+            </div>
+
+            <div class="wheel-frame">
+              <div class="wheel-pointer" aria-hidden="true"></div>
+              <svg id="wheelSvg" viewBox="0 0 520 520" role="img" aria-label="Crownwheel random nation generator">
+                <g id="wheelGroup"></g>
+                <circle cx="260" cy="260" r="58" class="wheel-hub"></circle>
+                <text x="260" y="253" text-anchor="middle" class="hub-title">SPIN</text>
+                <text x="260" y="275" text-anchor="middle" class="hub-sub">THE CROWN</text>
+              </svg>
+            </div>
+
+            <div class="wheel-actions">
+              <button id="spinBtn" class="button primary large" type="button">Spin Wheel</button>
+              <button id="nextWheelBtn" class="button" type="button" disabled>Next Wheel</button>
+              <button id="spinRemainingBtn" class="button ghost" type="button">Spin All Remaining</button>
+            </div>
+
+            <div id="spinResult" class="spin-result" aria-live="polite">
+              <strong>The chroniclers are waiting.</strong>
+              <span>Turn the first wheel to begin the realm.</span>
+            </div>
+
+            <div id="categoryStrip" class="category-strip" aria-label="Generation categories"></div>
+          </article>
+
+          <aside class="panel dossier-panel">
+            <div class="dossier-header">
+              <div>
+                <div class="eyebrow">Founding Dossier</div>
+                <h2 id="draftNameTitle">Unnamed Realm</h2>
+              </div>
+              <span id="draftCompletion" class="completion-badge">0 / 20</span>
+            </div>
+
+            <label class="field-label" for="realmName">Realm name</label>
+            <div class="name-row">
+              <input id="realmName" type="text" maxlength="42" autocomplete="off" placeholder="Name the realm">
+              <button id="randomNameBtn" class="button" type="button">Random</button>
+            </div>
+
+            <p id="draftOverview" class="overview-copy">Its history has not yet been written.</p>
+
+            <div class="stat-grid" aria-label="Realm summary statistics">
+              <div class="stat"><span>Population</span><strong id="statPopulation">—</strong></div>
+              <div class="stat"><span>Provinces</span><strong id="statProvinces">—</strong></div>
+              <div class="stat"><span>Field Army</span><strong id="statArmy">—</strong></div>
+              <div class="stat"><span>Mages</span><strong id="statMages">—</strong></div>
+              <div class="stat"><span>Wealth</span><strong id="statWealth">—</strong></div>
+              <div class="stat"><span>Food</span><strong id="statFood">—</strong></div>
+              <div class="stat"><span>Stability</span><strong id="statStability">—</strong></div>
+              <div class="stat"><span>Arcana</span><strong id="statArcana">—</strong></div>
+            </div>
+
+            <div id="dossierSections" class="dossier-sections"></div>
+
+            <div class="dossier-actions">
+              <button id="addRealmBtn" class="button primary large full" type="button" disabled>Add Realm to World</button>
+              <button id="resetDraftBtn" class="button ghost full" type="button">Clear Draft</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="worldView" class="view" aria-labelledby="worldTitle">
+        <div class="section-heading world-heading">
+          <div>
+            <div class="eyebrow">The Living World</div>
+            <h1 id="worldTitle">World & Wars</h1>
+            <p>Advance the calendar, direct diplomacy and watch realms expand, fracture, recover and disappear.</p>
+          </div>
+          <button id="advanceYearBtn" class="button primary large" type="button">Advance One Year</button>
+        </div>
+
+        <div class="world-summary-grid">
+          <div class="summary-card"><span>Current Year</span><strong id="worldYear">1</strong></div>
+          <div class="summary-card"><span>Living Realms</span><strong id="livingCount">0</strong></div>
+          <div class="summary-card"><span>Active Wars</span><strong id="warCount">0</strong></div>
+          <div class="summary-card"><span>Known Alliances</span><strong id="allianceCount">0</strong></div>
+        </div>
+
+        <article class="panel diplomacy-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow">Royal Chancery</div>
+              <h2>Direct Action</h2>
+            </div>
+            <span class="minor-copy">Orders resolve immediately and are autosaved.</span>
+          </div>
+          <div class="diplomacy-grid">
+            <label>Acting realm<select id="actorSelect"></select></label>
+            <label>Target realm<select id="targetSelect"></select></label>
+            <label>Action<select id="actionSelect"></select></label>
+            <button id="resolveActionBtn" class="button primary" type="button">Issue Order</button>
+          </div>
+          <div id="actionPreview" class="action-preview">Select two different realms and an action.</div>
+        </article>
+
+        <div id="worldGrid" class="realm-grid"></div>
+      </section>
+
+      <section id="chronicleView" class="view" aria-labelledby="chronicleTitle">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Recorded History</div>
+            <h1 id="chronicleTitle">The Chronicle</h1>
+            <p>Every war, treaty, disaster, succession, magical breakthrough and collapse is recorded here.</p>
+          </div>
+          <div class="chronicle-actions">
+            <button id="exportBtn" class="button" type="button">Export Save</button>
+            <label class="button ghost file-button" for="importInput">Import Save</label>
+            <input id="importInput" class="visually-hidden" type="file" accept="application/json,.json">
+          </div>
+        </div>
+        <div class="chronicle-layout">
+          <article class="panel">
+            <div class="panel-heading">
+              <div><div class="eyebrow">World History</div><h2>Recent Events</h2></div>
+              <button id="clearWorldBtn" class="button danger" type="button">Erase World</button>
+            </div>
+            <div id="chronicleList" class="chronicle-list"></div>
+          </article>
+          <aside class="panel archive-panel">
+            <div class="eyebrow">Save & Install</div>
+            <h2>Permanent on this phone</h2>
+            <p>Crownwheel autosaves after every meaningful action. Once installed as an app, closing it or locking your phone will not erase the world.</p>
+            <div class="archive-points">
+              <div><span>✓</span><p><strong>Autosave</strong><br>World state persists in this browser/app.</p></div>
+              <div><span>✓</span><p><strong>Offline play</strong><br>The service worker caches the game after first load.</p></div>
+              <div><span>✓</span><p><strong>Backup files</strong><br>Export a JSON save before changing phones or clearing browser data.</p></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button data-view="forgeView" class="nav-button active" type="button"><span class="nav-icon">◉</span><span>Forge</span></button>
+      <button data-view="worldView" class="nav-button" type="button"><span class="nav-icon">♜</span><span>World</span></button>
+      <button data-view="chronicleView" class="nav-button" type="button"><span class="nav-icon">✦</span><span>Chronicle</span></button>
+    </nav>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app-loader.js" defer></script>
+</body>
+</html>
