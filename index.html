@@ -211,6 +211,16 @@
   border:2px solid #4b3218;
   box-shadow:0 3px 6px rgba(0,0,0,.32);
 }
+
+#wheelGroup .rarity-sector{
+  filter:saturate(.92) brightness(.98) drop-shadow(0 1px 0 rgba(255,235,190,.04));
+  transition:filter .18s ease,opacity .18s ease;
+  stroke-linejoin:round;
+}
+#wheelGroup .rarity-sector.selected-slice{
+  filter:saturate(1.2) brightness(1.16) drop-shadow(0 0 5px var(--landing-color));
+}
+
 .wheel-frame.wheel-land{
   animation:wheelLandFlash .48s ease-out;
 }
@@ -429,6 +439,12 @@
                     <stop offset="55%" stop-color="#c89a49"/>
                     <stop offset="100%" stop-color="#745024"/>
                   </linearGradient>
+                  <linearGradient id="segCommon" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#756047"/><stop offset="50%" stop-color="#5f4b35"/><stop offset="100%" stop-color="#493924"/></linearGradient>
+                  <linearGradient id="segUncommon" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#708a61"/><stop offset="50%" stop-color="#536d4b"/><stop offset="100%" stop-color="#3f563a"/></linearGradient>
+                  <linearGradient id="segRare" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6689a6"/><stop offset="50%" stop-color="#496b86"/><stop offset="100%" stop-color="#344e63"/></linearGradient>
+                  <linearGradient id="segEpic" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#836d91"/><stop offset="50%" stop-color="#685278"/><stop offset="100%" stop-color="#4d3b59"/></linearGradient>
+                  <linearGradient id="segLegendary" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c09a4e"/><stop offset="50%" stop-color="#92733a"/><stop offset="100%" stop-color="#6d5128"/></linearGradient>
+                  <linearGradient id="segMythic" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#b26054"/><stop offset="50%" stop-color="#88483f"/><stop offset="100%" stop-color="#60312d"/></linearGradient>
                   <filter id="wheelShadow" x="-30%" y="-30%" width="160%" height="160%">
                     <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#000" flood-opacity=".42"/>
                   </filter>
@@ -1146,6 +1162,135 @@
     xmk('Golden Generation','An unusual cluster of gifted generals, scholars, administrators and mages has reached maturity at once.',4,3,4,null,'mythic')
   );
 
+
+  // Non-common outcome expansion v8 — broadens the interesting middle of every wheel.
+  const addRarityExpansion = (target, rows) => target.push(...rows.map(r => xmk(...r)));
+
+  addRarityExpansion(origins, [
+    ['Canal Crownlands','A dense network of navigable canals ties fertile districts directly to the royal capital.',2,0,2,null,'uncommon'],
+    ['Pilgrim-Road Marches','Shrines, fortified inns and toll towns line a sacred road crossing the realm.',2,1,1,null,'uncommon'],
+    ['Shattered Crater Realm','Settlements ring an ancient crater rich in strange glass and buried ruins.',2,2,0,null,'rare'],
+    ['Moonlit Plateau Dominion','A high silver-grass plateau is bathed in supernatural moonlight for much of the year.',2,4,1,null,'epic']
+  ]);
+  addRarityExpansion(scales, [
+    ['Grand March','Thirteen strongly fortified provinces form a formidable frontier crown.',3,0,1,13,'uncommon'],
+    ['Grand Principality','Fifteen prosperous provinces acknowledge a single princely court.',4,0,1,15,'uncommon'],
+    ['Triple Kingdom','Twenty-four provinces belong to three historic crowns united under one sovereign.',6,0,-1,24,'rare'],
+    ['Imperial Commonwealth','Thirty-four provinces retain local institutions beneath a powerful common crown.',8,0,-2,34,'epic']
+  ]);
+  addRarityExpansion(governments, [
+    ['Regency Parliament','A crown-appointed regent governs alongside a powerful representative chamber.',1,0,2,null,'uncommon'],
+    ['Guild Crown','The monarch shares formal authority with chartered merchant and craft guilds.',2,0,1,null,'uncommon'],
+    ['Augur Senate','An aristocratic senate cannot enact major policy without sanctioned prophetic readings.',1,3,0,null,'rare'],
+    ['Phoenix Mandate','Rulers are selected through a sacred ordeal said to reveal the soul most fit to reign.',0,5,2,null,'epic']
+  ]);
+  addRarityExpansion(rulers, [
+    ['Veteran Queen','A battle-tested sovereign has spent decades balancing army, court and countryside.',1,0,2,null,'uncommon'],
+    ['Reformer King','The ruler has enough legitimacy to dismantle old abuses without immediate revolt.',2,0,2,null,'uncommon'],
+    ['Oathbound Giant Prince','A giant of noble blood rules under an ancient compact with the realm’s great houses.',0,3,1,null,'rare'],
+    ['Revenant Empress','The sovereign returned from death retaining memory, personality and political authority.',1,6,-1,null,'epic']
+  ]);
+  addRarityExpansion(populations, [
+    ['Prosperous','Approximately 4.2 million inhabitants support busy provincial markets.',1,0,0,4.2,'uncommon'],
+    ['Metropolitan','Approximately 7 million inhabitants cluster around several major cities.',2,0,0,7,'uncommon'],
+    ['Mass Population','Approximately 12.5 million inhabitants make manpower a major strategic advantage.',3,0,-1,12.5,'rare'],
+    ['Urban Colossus','Approximately 22 million inhabitants live in one of the densest realms in the known world.',5,0,-2,22,'epic']
+  ]);
+  addRarityExpansion(cultures, [
+    ['Heraldic Guild Culture','Guilds adopt colours, beasts and ceremonial badges once reserved for noble houses.',1,0,1,null,'uncommon'],
+    ['River Assembly Culture','Seasonal assemblies combine trade fairs, law courts and political negotiation.',1,0,2,null,'uncommon'],
+    ['Giant-Kin Culture','Ancient kinship with giants shapes architecture, feasting and ideals of leadership.',0,3,1,null,'rare'],
+    ['Phoenix Funerary Culture','The dead are cremated in elaborate rites centred on rebirth, memory and inherited duty.',0,4,2,null,'epic'],
+    ['Dragonblood High Culture','A small but influential class can demonstrate genuine draconic ancestry.',1,6,0,null,'legendary'],
+    ['Living-Memory Culture','Citizens share portions of memory through an ancient rite, creating a near-continuous cultural consciousness.',2,9,1,null,'mythic']
+  ]);
+  addRarityExpansion(faiths, [
+    ['Hearth Saints','Local saints associated with home, kinship and protection dominate ordinary devotion.',0,1,2,null,'uncommon'],
+    ['Crown Ancestors','Dead rulers are ritually consulted as protectors and judges of the reigning dynasty.',0,2,1,null,'uncommon'],
+    ['Oracle Choir','Temple choirs enter collective trance to deliver unusually reliable prophecies.',0,4,1,null,'rare'],
+    ['Phoenix Revelation','Sacred fire periodically manifests a speaking presence believed to be a divine messenger.',0,6,2,null,'epic']
+  ]);
+  addRarityExpansion(economies, [
+    ['Banking Houses','Long-distance credit, bills of exchange and royal lending enrich a sophisticated merchant class.',3,0,0,null,'uncommon'],
+    ['Canal Customs','The crown profits from locks, wharves and customs duties on an unusually dense waterway network.',3,0,1,null,'uncommon'],
+    ['Runesmith Economy','Workshops export durable enchanted tools, seals and weapons to foreign buyers.',4,3,0,null,'rare'],
+    ['Dragon Caravan Trade','Airborne caravans under draconic protection move tiny volumes of fantastically valuable cargo.',5,4,0,null,'epic']
+  ]);
+  addRarityExpansion(resources, [
+    ['Blue Salt','A prized mineral salt preserves food exceptionally well and commands premium prices.',2,0,1,null,'uncommon'],
+    ['Royal Horse Bloodlines','Centuries of selective breeding produce mounts prized by nobles across the world.',2,0,1,null,'uncommon'],
+    ['Moonstone Quarries','Pale stone harvested at night stores weak enchantments with unusual efficiency.',3,3,0,null,'rare'],
+    ['Basilisk Glass','Dangerous mineralised remains can be worked into lenses and armour with strange magical properties.',4,5,-1,null,'epic']
+  ]);
+  addRarityExpansion(armySizes, [
+    ['Full Crown Host','Approximately 38,000 soldiers can be fielded for a major war.',1,0,1,38000,'uncommon'],
+    ['Great Royal Host','Approximately 78,000 troops can campaign without exhausting the whole realm.',2,0,0,78000,'uncommon'],
+    ['Mass Levy Army','Approximately 165,000 troops can be assembled during a general mobilisation.',3,0,-1,165000,'rare'],
+    ['Colossal War Host','Approximately 360,000 soldiers can be sustained across multiple armies.',5,0,-2,360000,'epic']
+  ]);
+  addRarityExpansion(doctrines, [
+    ['Combined-Arms Doctrine','Infantry, cavalry, missiles and engineers train to support one another rather than fight as separate arms.',1,0,2,null,'uncommon'],
+    ['Defence-in-Depth','Successive fortified lines are designed to exhaust invaders before a decisive counterattack.',0,0,2,null,'uncommon'],
+    ['Griffon Reconnaissance','Aerial scouts give commanders an unusual understanding of enemy movement and terrain.',1,2,1,null,'rare'],
+    ['Runic Artillery','Siege crews fire magically inscribed ammunition designed to break walls, formations and wards.',1,4,0,null,'epic']
+  ]);
+  addRarityExpansion(elites, [
+    ['Royal Sapper Corps','Professional engineers can bridge rivers, undermine walls and build fieldworks at remarkable speed.',1,0,2,null,'uncommon'],
+    ['Black-Banner Lancers','A prestigious heavy-cavalry order specialises in disciplined shock charges.',0,0,1,null,'uncommon'],
+    ['Trollbreakers','Veterans carry specialised polearms, incendiaries and armour for fighting giant monsters.',0,2,1,null,'rare'],
+    ['Rune Knights','Elite warriors wear armour layered with permanent wards and strength-enhancing inscriptions.',0,4,2,null,'epic']
+  ]);
+  addRarityExpansion(magicLevels, [
+    ['Licensed Practitioners','Around 2,500 recognised mages operate under guild, temple or crown licences.',1,3,0,2500,'uncommon'],
+    ['Common Arcane Profession','Around 6,000 recognised practitioners make magical services available in most major towns.',1,4,0,6000,'uncommon'],
+    ['Mage Establishment','Around 20,000 recognised practitioners influence administration, war and commerce.',2,6,-1,20000,'rare'],
+    ['Arcane Mass Society','Around 80,000 trained practitioners make magic a normal feature of urban life.',4,9,-2,80000,'epic']
+  ]);
+  addRarityExpansion(magicSchools, [
+    ['Lightbinding','Practitioners shape illumination, heat and radiant wards.',0,3,1,null,'uncommon'],
+    ['Stone Shaping','Mages soften, fuse and sculpt stone for construction and defence.',1,3,1,null,'uncommon'],
+    ['Bloodline Sorcery','Power follows hereditary lines and can be strengthened through carefully arranged dynastic unions.',0,5,-1,null,'rare'],
+    ['Fatebinding','Rare practitioners alter probability through vows, sacrifices and meticulously worded conditions.',0,7,-2,null,'epic']
+  ]);
+  addRarityExpansion(arcaneLaws, [
+    ['Chartered Colleges','Regional magical colleges receive broad privileges in exchange for teaching and public service.',1,2,2,null,'uncommon'],
+    ['Shrine Licences','Temples certify village practitioners and investigate dangerous supernatural complaints.',0,2,2,null,'uncommon'],
+    ['High Spell Court','A specialist court can outlaw individual spells, seize enchanted property and try magical crimes.',1,4,1,null,'rare'],
+    ['Crown Ley Authority','The state directly controls major ley lines, ritual sites and magical infrastructure.',2,6,0,null,'epic']
+  ]);
+  addRarityExpansion(wonders, [
+    ['Grand Astronomical Observatory','A monumental observatory produces unusually accurate calendars, maps and celestial records.',2,1,2,null,'uncommon'],
+    ['Colossus Bridge','A bridge lined with monumental statues crosses a gulf thought impossible to span.',2,1,2,null,'uncommon'],
+    ['Oracle Bell','A vast temple bell occasionally sounds without being struck before events of great consequence.',0,4,1,null,'rare'],
+    ['Dragonforge','An ancient furnace can work metals at temperatures and magical pressures no ordinary forge can survive.',4,6,1,null,'epic']
+  ]);
+  addRarityExpansion(diplomacies, [
+    ['Consular Network','Permanent representatives in foreign cities protect merchants and gather intelligence.',2,0,1,null,'uncommon'],
+    ['Guarantee System','The crown publicly guarantees selected smaller neighbours against conquest.',1,0,2,null,'uncommon'],
+    ['Mage Embassy','Important embassies include sanctioned spellcasters for communication, verification and magical security.',1,3,1,null,'rare'],
+    ['Dragon Congress','The realm can persuade draconic powers to attend formal interstate negotiations.',1,5,1,null,'epic'],
+    ['Star-Pact League','A prestigious alliance system is bound by celestial oaths that visibly punish treachery.',2,7,2,null,'legendary'],
+    ['Treaty of Foreseen Paths','State seers and foreign counterparts negotiate from mutually witnessed visions of possible futures.',2,10,1,null,'mythic']
+  ]);
+  addRarityExpansion(fortifications, [
+    ['Concentric Curtain Walls','Key cities use multiple defensive rings so that breaching one wall does not end a siege.',0,0,3,5,'uncommon'],
+    ['Coastal Fortress Chain','Sea approaches are covered by mutually supporting forts, signal towers and protected anchorages.',1,0,3,7,'uncommon'],
+    ['Anti-Magic Bastions','Strategic fortresses incorporate grounding rods, ward-stones and protected ritual chambers.',0,3,4,10,'rare'],
+    ['Walking Fortress','A colossal enchanted stronghold can slowly relocate under its own power.',1,6,4,13,'epic']
+  ]);
+  addRarityExpansion(navies, [
+    ['Convoy Navy','Numerous escorts and patrol craft make merchant shipping unusually secure.',2,0,1,5,'uncommon'],
+    ['Bombard Fleet','Heavy ships mount specialised siege engines for attacking ports and coastal walls.',2,0,0,7,'uncommon'],
+    ['Griffon Escort Wings','Aerial cavalry operates from coastal bases and accompanies major fleets.',2,3,0,10,'rare'],
+    ['Enchanted Ironclads','A small number of magically reinforced warships can survive punishment that would destroy ordinary vessels.',3,5,1,13,'epic']
+  ]);
+  addRarityExpansion(crises, [
+    ['Contested Tolls','Merchants and local lords are resisting a new network of royal road and bridge tolls.',-1,0,-1,null,'uncommon'],
+    ['Border Pretender','A claimant with a plausible bloodline has gathered supporters just beyond the frontier.',-1,0,-2,null,'uncommon'],
+    ['Mage Strike','Licensed practitioners in several cities have collectively refused crown service until their privileges are restored.',-1,3,-2,null,'rare'],
+    ['Sleeping Titan','Excavation beneath a major province has disturbed something colossal that has begun to move.',-2,5,-4,null,'epic']
+  ]);
+
   const categories = [
     {key:'origin',name:'Realm Origin',prompt:'Where does this realm begin?',options:origins},
     {key:'scale',name:'Realm Scale',prompt:'How large is its domain?',options:scales},
@@ -1170,9 +1315,10 @@
   ];
 
 
-  const RARITY_WEIGHTS = { common:100, uncommon:55, rare:20, epic:6, legendary:1.5, mythic:.35 };
+  const RARITY_ORDER = ['common','uncommon','rare','epic','legendary','mythic'];
+  const RARITY_TIER_CHANCES = { common:58, uncommon:25, rare:11, epic:4, legendary:1.5, mythic:.5 };
   const RARITY_LABELS = { common:'Common', uncommon:'Uncommon', rare:'Rare', epic:'Epic', legendary:'Legendary', mythic:'Mythic' };
-  const RARITY_COLORS = { rare:'#465f79', epic:'#65506f', legendary:'#9a7533', mythic:'#8b3d32' };
+  const RARITY_COLORS = { common:'#756047', uncommon:'#58724f', rare:'#496b86', epic:'#685278', legendary:'#92733a', mythic:'#88483f' };
 
   function optionRarity(cat, opt) {
     if (opt.rarity) return opt.rarity;
@@ -1210,35 +1356,51 @@
     return 'common';
   }
 
-  function optionWeight(cat, opt) {
-    return RARITY_WEIGHTS[optionRarity(cat,opt)] || RARITY_WEIGHTS.common;
+
+  function rarityGroups(cat) {
+    const groups={};
+    RARITY_ORDER.forEach(r=>groups[r]=[]);
+    cat.options.forEach(opt=>groups[optionRarity(cat,opt)].push(opt));
+    return groups;
   }
 
-  function weightedLayout(cat) {
-    const weights = cat.options.map(opt => optionWeight(cat,opt));
-    const total = weights.reduce((a,b)=>a+b,0) || 1;
-    let cursor = 0;
-    return cat.options.map((opt,index) => {
-      const start = cursor / total * 360;
-      cursor += weights[index];
-      const end = cursor / total * 360;
-      return { opt, index, weight:weights[index], total, start, end, mid:(start+end)/2 };
+  function rarityLayout(cat) {
+    const groups=rarityGroups(cat);
+    const present=RARITY_ORDER.filter(r=>groups[r].length);
+    const tierTotal=present.reduce((sum,r)=>sum+RARITY_TIER_CHANCES[r],0) || 1;
+    let cursor=0;
+    return present.map(rarity=>{
+      const share=RARITY_TIER_CHANCES[rarity]/tierTotal;
+      const start=cursor*360;
+      cursor+=share;
+      const end=cursor*360;
+      return {rarity,start,end,mid:(start+end)/2,share,count:groups[rarity].length,options:groups[rarity]};
     });
   }
 
   function weightedChoice(cat) {
-    const layout = weightedLayout(cat);
-    let roll = Math.random() * layout[0].total;
-    for (const item of layout) {
-      roll -= item.weight;
-      if (roll <= 0) return item;
+    const layout=rarityLayout(cat);
+    let roll=Math.random();
+    let chosen=layout[layout.length-1];
+    for(const sector of layout){
+      roll-=sector.share;
+      if(roll<=0){chosen=sector;break;}
     }
-    return layout[layout.length - 1];
+    const opt=pick(chosen.options);
+    const index=cat.options.indexOf(opt);
+    const span=chosen.end-chosen.start;
+    const edge=Math.min(1.15,span*.12);
+    const landing=span>edge*2 ? rand(chosen.start+edge,chosen.end-edge) : chosen.mid;
+    return {opt,index,rarity:chosen.rarity,start:chosen.start,end:chosen.end,mid:landing,share:chosen.share};
   }
 
   function outcomeChance(cat,opt) {
-    const total = cat.options.reduce((sum,o)=>sum+optionWeight(cat,o),0) || 1;
-    return optionWeight(cat,opt) / total * 100;
+    const rarity=optionRarity(cat,opt);
+    const groups=rarityGroups(cat);
+    const present=RARITY_ORDER.filter(r=>groups[r].length);
+    const tierTotal=present.reduce((sum,r)=>sum+RARITY_TIER_CHANCES[r],0) || 1;
+    const tierPct=RARITY_TIER_CHANCES[rarity]/tierTotal*100;
+    return tierPct/Math.max(1,groups[rarity].length);
   }
 
   function formatOutcomeChance(pct) {
@@ -1470,62 +1632,78 @@
     const rad = (angle - 90) * Math.PI / 180;
     return {x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad)};
   }
-  function arcPath(start, end) {
-    const p1 = polar(260, 260, 226, end), p2 = polar(260, 260, 226, start);
-    return `M260 260 L${p1.x} ${p1.y} A226 226 0 ${end - start > 180 ? 1 : 0} 0 ${p2.x} ${p2.y} Z`;
+  function annularArcPath(start, end, inner = 79, outer = 198) {
+    const span=end-start;
+    const gap=Math.min(.7,span*.09);
+    const a=Math.min(end,start+gap*.5), b=Math.max(a+.08,end-gap*.5);
+    const o1=polar(260,260,outer,a), o2=polar(260,260,outer,b);
+    const i1=polar(260,260,inner,b), i2=polar(260,260,inner,a);
+    const large=b-a>180?1:0;
+    return `M${o1.x} ${o1.y} A${outer} ${outer} 0 ${large} 1 ${o2.x} ${o2.y} L${i1.x} ${i1.y} A${inner} ${inner} 0 ${large} 0 ${i2.x} ${i2.y} Z`;
   }
 
   function renderWheel() {
-    const cat = currentCategory();
-    $('#wheelCategory').textContent = cat.name;
-    $('#wheelPrompt').textContent = cat.prompt;
-    $('#wheelStep').textContent = `${state.draft.categoryIndex + 1} / ${categories.length}`;
-    $('#wheelPool').textContent = `${cat.options.length} outcomes · weighted`;
-    const group = $('#wheelGroup');
-    group.innerHTML = '';
-    const palette = ['#665139','#5a4631','#70583a','#4e5b49','#5f4f63','#6b4b43','#465768','#756441'];
-    const rarityPalettes = {
-      common:['#66513a','#58452f','#70583b'],
-      uncommon:['#4d6547','#58724f','#455d41'],
-      rare:['#3f5d76','#496b86','#38546b'],
-      epic:['#584765','#685278','#4f3f5d'],
-      legendary:['#7a6030','#92733a','#6c542a'],
-      mythic:['#713c36','#88483f','#63342f']
-    };
-    const selectedName=state.draft.selections[cat.key]?.name || null;
-    const layout = weightedLayout(cat);
-    layout.forEach((item, i) => {
-      const {opt,start,end,mid} = item;
-      const rarity = optionRarity(cat,opt);
-      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      path.setAttribute('d', arcPath(start, end));
-      const tones=rarityPalettes[rarity] || palette;
-      path.setAttribute('fill', tones[i % tones.length]);
-      path.setAttribute('stroke', rarity === 'mythic' || rarity === 'legendary' ? '#c89b4d' : '#1a110b');
-      path.setAttribute('stroke-width', rarity === 'mythic' ? '1.25' : (cat.options.length > 60 ? '.42' : '.72'));
-      path.setAttribute('class', 'wheel-slice' + (selectedName === opt.name ? ' selected-slice' : ''));
+    const cat=currentCategory();
+    const layout=rarityLayout(cat);
+    const commonShare=layout.find(x=>x.rarity==='common')?.share || 0;
+    $('#wheelCategory').textContent=cat.name;
+    $('#wheelPrompt').textContent=cat.prompt;
+    $('#wheelStep').textContent=`${state.draft.categoryIndex + 1} / ${categories.length}`;
+    $('#wheelPool').textContent=`${cat.options.length} outcomes · ${Math.round((1-commonShare)*100)}% non-common`;
+
+    const group=$('#wheelGroup');
+    group.innerHTML='';
+    const selected=state.draft.selections[cat.key];
+    const selectedRarity=selected?optionRarity(cat,selected):null;
+    const fills={common:'url(#segCommon)',uncommon:'url(#segUncommon)',rare:'url(#segRare)',epic:'url(#segEpic)',legendary:'url(#segLegendary)',mythic:'url(#segMythic)'};
+
+    layout.forEach(sector=>{
+      const {rarity,start,end,mid,share,count}=sector;
+      const path=document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d',annularArcPath(start,end));
+      path.setAttribute('fill',fills[rarity]);
+      path.setAttribute('stroke',rarity==='legendary'||rarity==='mythic'?'#d6ad5d':'#26190e');
+      path.setAttribute('stroke-width',rarity==='mythic'?'1.6':'1.05');
+      path.setAttribute('class','wheel-slice rarity-sector'+(selectedRarity===rarity?' selected-slice':''));
       path.dataset.rarity=rarity;
       group.appendChild(path);
+
       const span=end-start;
-      const displayEvery = Math.max(1, Math.ceil(cat.options.length / 16));
-      if ((cat.options.length <= 20 || i % displayEvery === 0) && span > .7) {
-        const angle = (mid - 90) * Math.PI / 180;
-        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-        text.setAttribute('x', 260 + 154 * Math.cos(angle));
-        text.setAttribute('y', 260 + 154 * Math.sin(angle));
+      if(span>=11){
+        const angle=(mid-90)*Math.PI/180;
+        const radius=140;
+        const text=document.createElementNS('http://www.w3.org/2000/svg','text');
+        text.setAttribute('x',260+radius*Math.cos(angle));
+        text.setAttribute('y',260+radius*Math.sin(angle));
         text.setAttribute('text-anchor','middle');
         text.setAttribute('dominant-baseline','middle');
-        text.setAttribute('fill','#f0e6d2');
-        text.setAttribute('font-size',cat.options.length > 30 ? '7.5' : '9');
+        text.setAttribute('fill',rarity==='common'?'#eadfc9':'#fff2cf');
+        text.setAttribute('font-size',span>45?'10':'8.5');
         text.setAttribute('font-family','system-ui, sans-serif');
-        text.setAttribute('font-weight','800');
-        text.textContent = cat.options.length > 20 ? String(i + 1) : (opt.name.length > 18 ? `${opt.name.slice(0,16)}…` : opt.name);
+        text.setAttribute('font-weight','900');
+        text.setAttribute('letter-spacing','.7');
+        text.textContent=`${RARITY_LABELS[rarity].toUpperCase()} ${(share*100).toFixed(share<.1?1:0)}%`;
         group.appendChild(text);
+
+        if(span>=28){
+          const sub=document.createElementNS('http://www.w3.org/2000/svg','text');
+          sub.setAttribute('x',260+(radius+18)*Math.cos(angle));
+          sub.setAttribute('y',260+(radius+18)*Math.sin(angle));
+          sub.setAttribute('text-anchor','middle');
+          sub.setAttribute('dominant-baseline','middle');
+          sub.setAttribute('fill','#d1c0a4');
+          sub.setAttribute('font-size','6.5');
+          sub.setAttribute('font-family','system-ui, sans-serif');
+          sub.setAttribute('font-weight','700');
+          sub.textContent=`${count} possible`;
+          group.appendChild(sub);
+        }
       }
     });
-    group.style.transformOrigin = '260px 260px';
-    group.style.transform = `rotate(${wheelRotation}deg)`;
-    $('#nextWheelBtn').disabled = !state.draft.selections[cat.key] || state.draft.categoryIndex >= categories.length - 1;
+
+    group.style.transformOrigin='260px 260px';
+    group.style.transform=`rotate(${wheelRotation}deg)`;
+    $('#nextWheelBtn').disabled=!state.draft.selections[cat.key] || state.draft.categoryIndex>=categories.length-1;
     renderCategoryStrip();
   }
 
