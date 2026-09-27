@@ -22,6 +22,24 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.toast{transition:none!important}#wheelGroup{transition:none!important}}
 
 
+
+/* Crownwheel procedural audio controls */
+.audio-menu{position:relative;font-family:system-ui,sans-serif}
+.audio-summary{list-style:none;width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:999px;background:rgba(32,24,16,.88);cursor:pointer;font-size:.9rem;user-select:none}
+.audio-summary::-webkit-details-marker{display:none}
+.audio-menu[open] .audio-summary{border-color:#8b6a3e;background:#322519}
+.audio-popover{position:absolute;right:0;top:calc(100% + 9px);z-index:80;width:230px;padding:12px;border:1px solid #60482d;border-radius:13px;background:#18120d;box-shadow:0 15px 35px rgba(0,0,0,.45)}
+.audio-popover-title{font-weight:800;color:var(--gold2);margin-bottom:9px}
+.audio-toggle-row,.audio-volume-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;color:var(--muted);font-size:.78rem;padding:7px 0}
+.audio-toggle-row input{width:20px;height:20px;accent-color:var(--gold)}
+.audio-volume-row{grid-template-columns:64px 1fr}
+.audio-volume-row input{width:100%;accent-color:var(--gold)}
+.audio-note{border-top:1px solid #3d2e21;margin-top:5px;padding-top:8px;color:var(--faint);font-size:.66rem;line-height:1.35}
+@media (max-width:760px){
+  .audio-summary{width:31px;height:31px;font-size:.82rem}
+  .audio-popover{position:fixed;right:10px;top:64px;width:min(240px,calc(100vw - 20px))}
+}
+
 /* Crownwheel mobile-first pass v2 */
 @media (max-width: 760px), (pointer: coarse) and (max-width: 1100px) {
   html{font-size:17px;width:100%;overflow-x:hidden}
@@ -149,6 +167,15 @@
         <span class="status-chip"><strong id="statusYear">1</strong> Year</span>
         <span class="status-chip"><strong id="statusRealms">0</strong> Realms</span>
         <span class="status-chip autosave"><span id="saveDot" class="save-dot"></span><span id="saveLabel">Autosaved</span></span>
+        <details class="audio-menu">
+          <summary id="audioSummary" class="audio-summary" aria-label="Audio settings" title="Audio settings">🔊</summary>
+          <div class="audio-popover">
+            <div class="audio-popover-title">Audio</div>
+            <label class="audio-toggle-row"><span>Sound effects</span><input id="soundEnabled" type="checkbox" checked></label>
+            <label class="audio-volume-row" for="volumeSlider"><span>Volume</span><input id="volumeSlider" type="range" min="0" max="1" step="0.05" value="0.55"></label>
+            <div class="audio-note">Wheel, realm, diplomacy and turn feedback.</div>
+          </div>
+        </details>
       </div>
     </header>
 
@@ -647,6 +674,131 @@
     toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
   }
 
+
+  // Procedural sound design: no external audio files required.
+  const AUDIO_PREF_KEY = 'crownwheel.audio.v1';
+  let audioCtx = null;
+  let masterGain = null;
+  let audioPrefs = { enabled: true, volume: 0.55 };
+
+  function loadAudioPrefs() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(AUDIO_PREF_KEY) || 'null');
+      if (saved && typeof saved === 'object') {
+        if (typeof saved.enabled === 'boolean') audioPrefs.enabled = saved.enabled;
+        if (Number.isFinite(Number(saved.volume))) audioPrefs.volume = clamp(Number(saved.volume), 0, 1);
+      }
+    } catch (_) {}
+  }
+
+  function saveAudioPrefs() {
+    try { localStorage.setItem(AUDIO_PREF_KEY, JSON.stringify(audioPrefs)); } catch (_) {}
+    updateAudioUI();
+  }
+
+  function ensureAudio() {
+    if (!audioPrefs.enabled) return null;
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return null;
+    if (!audioCtx) {
+      audioCtx = new Ctx();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = audioPrefs.volume;
+      masterGain.connect(audioCtx.destination);
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume().catch(()=>{});
+    if (masterGain) masterGain.gain.setTargetAtTime(audioPrefs.volume, audioCtx.currentTime, 0.01);
+    return audioCtx;
+  }
+
+  function tone(freq, delay=0, duration=.045, gain=.05, type='triangle', slideTo=null) {
+    const ctx = ensureAudio();
+    if (!ctx || !masterGain) return;
+    const now = ctx.currentTime + Math.max(0, delay);
+    const osc = ctx.createOscillator();
+    const amp = ctx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(Math.max(40,freq), now);
+    if (slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(40,slideTo), now + duration);
+    amp.gain.setValueAtTime(0.0001, now);
+    amp.gain.exponentialRampToValueAtTime(Math.max(.0002,gain), now + .004);
+    amp.gain.exponentialRampToValueAtTime(.0001, now + duration);
+    osc.connect(amp); amp.connect(masterGain);
+    osc.start(now); osc.stop(now + duration + .02);
+  }
+
+  function noiseBurst(delay=0, duration=.04, gain=.025, cutoff=1800) {
+    const ctx = ensureAudio();
+    if (!ctx || !masterGain) return;
+    const length=Math.max(1,Math.floor(ctx.sampleRate*duration));
+    const buffer=ctx.createBuffer(1,length,ctx.sampleRate);
+    const data=buffer.getChannelData(0);
+    for(let i=0;i<length;i++) data[i]=(Math.random()*2-1)*(1-i/length);
+    const src=ctx.createBufferSource(), filter=ctx.createBiquadFilter(), amp=ctx.createGain();
+    src.buffer=buffer; filter.type='bandpass'; filter.frequency.value=cutoff; filter.Q.value=.8; amp.gain.value=gain;
+    src.connect(filter); filter.connect(amp); amp.connect(masterGain);
+    const when=ctx.currentTime+Math.max(0,delay); src.start(when);
+  }
+
+  function playUIClick() {
+    tone(420,0,.026,.022,'square',300);
+    noiseBurst(0,.018,.008,2400);
+  }
+
+  function playWheelSpin(duration=1.55) {
+    if (!ensureAudio()) return;
+    let t=.025, gap=.036, i=0;
+    while(t < duration-.08 && i < 34){
+      const strength=Math.min(1,.55+i*.018);
+      tone(760+(i%3)*85,t,.018,.028*strength,'square',510);
+      noiseBurst(t,.014,.009*strength,2600);
+      t+=gap;
+      gap*=1.075;
+      i++;
+    }
+  }
+
+  function playWheelLand() {
+    tone(155,0,.11,.09,'triangle',92);
+    noiseBurst(0,.065,.04,900);
+    tone(660,.055,.12,.035,'sine',520);
+  }
+
+  function playQuickForgeCue() {
+    [330,440,550,660].forEach((f,i)=>tone(f,i*.055,.07,.025,'triangle',f*1.03));
+  }
+
+  function playRealmFanfare() {
+    [[294,0],[392,.11],[494,.22],[587,.34],[784,.47]].forEach(([f,t],i)=>tone(f,t,.24,i===4?.075:.045,i===4?'sine':'triangle',f*1.015));
+    tone(147,.02,.52,.045,'triangle',110);
+  }
+
+  function playYearCue() {
+    tone(196,0,.3,.055,'sine',150);
+    tone(392,.08,.42,.04,'triangle',330);
+    tone(523,.25,.28,.035,'sine',440);
+  }
+
+  function playDiplomacyCue() {
+    tone(260,0,.055,.05,'triangle',190);
+    noiseBurst(.012,.045,.025,1100);
+    tone(390,.075,.09,.025,'sine',360);
+  }
+
+  function playHostileCue() {
+    tone(120,0,.22,.08,'sawtooth',72);
+    noiseBurst(.01,.12,.045,600);
+    tone(180,.14,.13,.035,'square',105);
+  }
+
+  function updateAudioUI() {
+    const enabled=$('#soundEnabled'), volume=$('#volumeSlider'), summary=$('#audioSummary');
+    if(enabled) enabled.checked=audioPrefs.enabled;
+    if(volume) volume.value=String(audioPrefs.volume);
+    if(summary) summary.textContent=audioPrefs.enabled && audioPrefs.volume>0 ? '🔊' : '🔇';
+    if(masterGain && audioCtx) masterGain.gain.setTargetAtTime(audioPrefs.enabled?audioPrefs.volume:0,audioCtx.currentTime,.02);
+  }
+
   function currentCategory() { return categories[clamp(state.draft.categoryIndex || 0, 0, categories.length - 1)]; }
   function randomRealmName() { return pick(realmNames); }
   function randomCapital() { return pick(capitals); }
@@ -742,12 +894,15 @@
       wheelRotation += 1080 + ((desired - (wheelRotation % 360) + 360) % 360);
       const group = $('#wheelGroup');
       const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      if (animate && !reduce) playWheelSpin(1.55);
+      else playUIClick();
       group.style.transition = (!animate || reduce) ? 'none' : 'transform 1.55s cubic-bezier(.12,.78,.18,1)';
       requestAnimationFrame(() => { group.style.transform = `rotate(${wheelRotation}deg)`; });
       setTimeout(() => {
         state.draft.selections[cat.key] = selected;
         $('#spinResult').innerHTML = `<strong>${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)} · 1 in ${cat.options.length} on this wheel.</span>`;
         spinning = false;
+        playWheelLand();
         renderDraft();
         renderWheel();
         saveState();
@@ -757,6 +912,7 @@
   }
 
   function randomiseRemaining() {
+    playQuickForgeCue();
     for (const cat of categories) {
       if (!state.draft.selections[cat.key]) state.draft.selections[cat.key] = pick(cat.options);
     }
@@ -768,6 +924,7 @@
   }
 
   function quickForge() {
+    playQuickForgeCue();
     state.draft.selections = {};
     categories.forEach(cat => { state.draft.selections[cat.key] = pick(cat.options); });
     state.draft.name = randomRealmName();
@@ -841,6 +998,7 @@
     if (!completeDraft()) return;
     const realm = createRealmFromDraft();
     state.realms.push(realm);
+    playRealmFanfare();
     addChronicle(`${realm.name}, ruled from ${realm.capital} by ${realm.rulerName} of ${realm.dynasty}, is recognised as a sovereign realm.`, 'founding', [realm]);
     saveState();
     const success = $('#forgeSuccess');
@@ -955,6 +1113,8 @@
       }
       case 'ceasefire': resolveCeasefire(a,b); break;
     }
+    if (['declareWar','raid','sabotage','embargo','tribute'].includes(action)) playHostileCue();
+    else playDiplomacyCue();
     saveState(); renderAll(); showToast('Order resolved and autosaved.');
   }
 
@@ -1171,6 +1331,7 @@
   function advanceYear() {
     const alive = livingRealms(); if (!alive.length) return showToast('Forge at least one realm first.');
     state.year++;
+    playYearCue();
     alive.forEach(annualBaseline);
     uniqueWars().slice().forEach(campaignBattle);
     const updated=livingRealms();
@@ -1271,6 +1432,15 @@
   }
 
   function bindEvents() {
+    const soundEnabled=$('#soundEnabled'), volumeSlider=$('#volumeSlider');
+    if(soundEnabled) soundEnabled.addEventListener('change',e=>{audioPrefs.enabled=!!e.target.checked;saveAudioPrefs();if(audioPrefs.enabled){ensureAudio();playUIClick();}});
+    if(volumeSlider) volumeSlider.addEventListener('input',e=>{audioPrefs.volume=clamp(Number(e.target.value),0,1);saveAudioPrefs();ensureAudio();});
+    document.addEventListener('pointerdown',e=>{
+      const control=e.target.closest('button,.audio-summary,.file-button');
+      if(!control) return;
+      if(['spinBtn','addRealmBtn','advanceYearBtn','resolveActionBtn'].includes(control.id)) { ensureAudio(); return; }
+      playUIClick();
+    },{passive:true});
     $('#spinBtn').addEventListener('click',()=>spinCategory());
     $('#nextWheelBtn').addEventListener('click',()=>{if(state.draft.categoryIndex<categories.length-1){state.draft.categoryIndex++;renderWheel();$('#spinResult').innerHTML=`<strong>${escapeHtml(currentCategory().name)}</strong><span>${escapeHtml(currentCategory().prompt)}</span>`;saveState();}});
     $('#spinRemainingBtn').addEventListener('click',randomiseRemaining);
@@ -1289,6 +1459,8 @@
   }
 
   function init() {
+    loadAudioPrefs();
+    updateAudioUI();
     if(!state.draft.name)state.draft.name=randomRealmName();
     $('#realmName').value=state.draft.name;
     renderActionOptions();bindEvents();renderAll();switchView(state.ui.activeView||'forgeView');
