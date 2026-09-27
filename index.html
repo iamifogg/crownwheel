@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#17120d">
   <meta name="description" content="Crownwheel — a persistent medieval-fantasy nation wheel and world simulator.">
+  <meta name="crownwheel-build" content="mobile-v3">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon.svg">
   <link rel="apple-touch-icon" href="./icons/icon.svg">
@@ -1291,7 +1292,7 @@
     if(!state.draft.name)state.draft.name=randomRealmName();
     $('#realmName').value=state.draft.name;
     renderActionOptions();bindEvents();renderAll();switchView(state.ui.activeView||'forgeView');
-    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(err=>console.warn('Service worker registration failed',err)));}
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'}).then(reg=>reg.update()).catch(err=>console.warn('Service worker registration failed',err)));}
   }
 
   init();
