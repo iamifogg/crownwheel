@@ -106,6 +106,133 @@
   .audio-popover{position:fixed;right:10px;top:64px;width:min(240px,calc(100vw - 20px))}
 }
 
+
+/* Crownwheel wheel artefact redesign v7 */
+.wheel-frame{
+  --landing-color:#d0a65a;
+  position:relative;
+  isolation:isolate;
+  max-width:520px;
+  margin:8px auto 12px;
+  border-radius:50%;
+  padding:2px;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(238,201,126,.08),transparent 53%),
+    radial-gradient(circle,#21170f 0%,#100b08 73%,#080604 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(213,170,87,.12),
+    inset 0 12px 34px rgba(255,221,151,.035),
+    0 20px 40px rgba(0,0,0,.26);
+}
+.wheel-frame::after{
+  content:"";
+  position:absolute;
+  inset:4.2%;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:3;
+  box-shadow:
+    inset 0 0 22px rgba(0,0,0,.32),
+    inset 0 0 0 1px rgba(246,217,155,.08);
+}
+.wheel-aura{
+  position:absolute;
+  inset:11%;
+  z-index:-1;
+  border-radius:50%;
+  opacity:.3;
+  filter:blur(22px);
+  background:radial-gradient(circle,var(--landing-color),transparent 66%);
+  transition:opacity .2s ease;
+}
+#wheelSvg{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:auto;
+  display:block;
+  overflow:visible;
+  filter:drop-shadow(0 12px 15px rgba(0,0,0,.24));
+}
+#wheelGroup{transform-origin:260px 260px;will-change:transform}
+#wheelGroup .wheel-slice{
+  filter:saturate(.94) brightness(.98);
+  transition:filter .18s ease,opacity .18s ease;
+}
+#wheelGroup .wheel-slice.selected-slice{
+  filter:saturate(1.18) brightness(1.16) drop-shadow(0 0 3px rgba(255,224,158,.52));
+}
+.wheel-rivets circle{
+  fill:url(#wheelBronze);
+  stroke:#4b3218;
+  stroke-width:2;
+}
+.hub-crown,.hub-crown-base{fill:url(#hubGold);stroke:#5d3d1d;stroke-width:1.2}
+.hub-gem{fill:#8d2f26;stroke:#f0ce81;stroke-width:1.2}
+.hub-title{
+  fill:#f4dca3;
+  font:800 12px system-ui,sans-serif;
+  letter-spacing:.14em;
+}
+.hub-sub{
+  fill:#d7b96f;
+  font:800 9px system-ui,sans-serif;
+  letter-spacing:.25em;
+}
+.wheel-pointer{
+  position:absolute;
+  left:50%;
+  top:-7px;
+  z-index:8;
+  width:34px;
+  height:59px;
+  transform:translateX(-50%);
+  transform-origin:50% 0;
+  filter:drop-shadow(0 6px 5px rgba(0,0,0,.38));
+}
+.wheel-pointer::before{
+  content:"";
+  position:absolute;
+  left:2px;right:2px;top:9px;bottom:0;
+  clip-path:polygon(50% 100%,0 4%,18% 0,50% 13%,82% 0,100% 4%);
+  background:linear-gradient(90deg,#755027 0%,#d6aa58 40%,#f0d38e 52%,#b47e39 72%,#61411f 100%);
+  box-shadow:inset 0 0 0 1px rgba(50,31,12,.7);
+}
+.pointer-rivet{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  top:0;
+  transform:translateX(-50%);
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f6dfa5 0,#c49346 48%,#67451f 100%);
+  border:2px solid #4b3218;
+  box-shadow:0 3px 6px rgba(0,0,0,.32);
+}
+.wheel-frame.wheel-land{
+  animation:wheelLandFlash .48s ease-out;
+}
+.wheel-frame.wheel-land .wheel-aura{
+  animation:wheelAuraPulse .58s ease-out;
+}
+@keyframes wheelLandFlash{
+  0%{filter:brightness(1)}
+  26%{filter:brightness(1.13)}
+  100%{filter:brightness(1)}
+}
+@keyframes wheelAuraPulse{
+  0%{opacity:.18;transform:scale(.92)}
+  36%{opacity:.52;transform:scale(1.03)}
+  100%{opacity:.3;transform:scale(1)}
+}
+@media(max-width:760px){
+  .wheel-frame{width:min(96vw,470px);margin:4px auto 9px}
+  .wheel-pointer{top:-5px;width:31px;height:54px}
+  .pointer-rivet{width:18px;height:18px}
+}
+
 /* Crownwheel mobile-first pass v2 */
 @media (max-width: 760px), (pointer: coarse) and (max-width: 1100px) {
   html{font-size:17px;width:100%;overflow-x:hidden}
@@ -272,12 +399,76 @@
             </div>
 
             <div class="wheel-frame">
-              <div class="wheel-pointer" aria-hidden="true"></div>
+              <div class="wheel-aura" aria-hidden="true"></div>
+              <div class="wheel-pointer" aria-hidden="true"><span class="pointer-rivet"></span></div>
               <svg id="wheelSvg" viewBox="0 0 520 520" role="img" aria-label="Crownwheel random nation generator">
+                <defs>
+                  <radialGradient id="wheelBackdrop" cx="50%" cy="42%" r="72%">
+                    <stop offset="0%" stop-color="#493622"/>
+                    <stop offset="58%" stop-color="#24190f"/>
+                    <stop offset="100%" stop-color="#0d0906"/>
+                  </radialGradient>
+                  <radialGradient id="wheelBronze" cx="38%" cy="30%" r="78%">
+                    <stop offset="0%" stop-color="#f0cf87"/>
+                    <stop offset="28%" stop-color="#c99b4d"/>
+                    <stop offset="66%" stop-color="#8b632e"/>
+                    <stop offset="100%" stop-color="#4a3217"/>
+                  </radialGradient>
+                  <radialGradient id="wheelOak" cx="42%" cy="35%" r="72%">
+                    <stop offset="0%" stop-color="#6a4729"/>
+                    <stop offset="55%" stop-color="#3b2818"/>
+                    <stop offset="100%" stop-color="#21160e"/>
+                  </radialGradient>
+                  <radialGradient id="hubWax" cx="38%" cy="30%" r="75%">
+                    <stop offset="0%" stop-color="#9a4130"/>
+                    <stop offset="55%" stop-color="#6e281f"/>
+                    <stop offset="100%" stop-color="#32110e"/>
+                  </radialGradient>
+                  <linearGradient id="hubGold" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#f4d994"/>
+                    <stop offset="55%" stop-color="#c89a49"/>
+                    <stop offset="100%" stop-color="#745024"/>
+                  </linearGradient>
+                  <filter id="wheelShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#000" flood-opacity=".42"/>
+                  </filter>
+                  <filter id="hubGlow" x="-40%" y="-40%" width="180%" height="180%">
+                    <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#d6aa59" flood-opacity=".32"/>
+                  </filter>
+                </defs>
+
+                <circle cx="260" cy="266" r="235" fill="#050403" opacity=".42"></circle>
+                <circle cx="260" cy="260" r="235" fill="url(#wheelBackdrop)" stroke="#181008" stroke-width="3" filter="url(#wheelShadow)"></circle>
+                <circle cx="260" cy="260" r="227" fill="none" stroke="url(#wheelOak)" stroke-width="19"></circle>
+
                 <g id="wheelGroup"></g>
-                <circle cx="260" cy="260" r="58" class="wheel-hub"></circle>
-                <text x="260" y="253" text-anchor="middle" class="hub-title">SPIN</text>
-                <text x="260" y="275" text-anchor="middle" class="hub-sub">THE CROWN</text>
+
+                <circle cx="260" cy="260" r="226" fill="none" stroke="#22170d" stroke-width="6"></circle>
+                <circle cx="260" cy="260" r="217" fill="none" stroke="url(#wheelBronze)" stroke-width="13"></circle>
+                <circle cx="260" cy="260" r="207" fill="none" stroke="#3c2917" stroke-width="2"></circle>
+                <circle cx="260" cy="260" r="198" fill="none" stroke="#b78a43" stroke-width="1.5" stroke-dasharray="2 8" opacity=".52"></circle>
+
+                <g class="wheel-rivets" aria-hidden="true">
+                  <circle cx="260" cy="42" r="6"></circle>
+                  <circle cx="414" cy="106" r="6"></circle>
+                  <circle cx="478" cy="260" r="6"></circle>
+                  <circle cx="414" cy="414" r="6"></circle>
+                  <circle cx="260" cy="478" r="6"></circle>
+                  <circle cx="106" cy="414" r="6"></circle>
+                  <circle cx="42" cy="260" r="6"></circle>
+                  <circle cx="106" cy="106" r="6"></circle>
+                </g>
+
+                <g class="hub-wrap" filter="url(#hubGlow)">
+                  <circle cx="260" cy="260" r="72" fill="#1b120c" stroke="#4f351d" stroke-width="5"></circle>
+                  <circle cx="260" cy="260" r="63" fill="url(#hubWax)" stroke="url(#wheelBronze)" stroke-width="5"></circle>
+                  <circle cx="260" cy="260" r="51" fill="none" stroke="#edcf87" stroke-width="1.5" opacity=".48"></circle>
+                  <path class="hub-crown" d="M226 244 L238 218 L254 235 L270 216 L285 235 L299 219 L294 253 L226 253 Z"></path>
+                  <path class="hub-crown-base" d="M231 258 H291 L286 269 H236 Z"></path>
+                  <circle cx="260" cy="239" r="4" class="hub-gem"></circle>
+                </g>
+                <text x="260" y="289" text-anchor="middle" class="hub-title">SPIN THE</text>
+                <text x="260" y="307" text-anchor="middle" class="hub-sub">CROWN</text>
               </svg>
             </div>
 
@@ -1292,16 +1483,28 @@
     $('#wheelPool').textContent = `${cat.options.length} outcomes · weighted`;
     const group = $('#wheelGroup');
     group.innerHTML = '';
-    const palette = ['#6e5638','#5a4932','#7a6342','#4e5d4a','#63506a','#745047','#465968','#806d48'];
+    const palette = ['#665139','#5a4631','#70583a','#4e5b49','#5f4f63','#6b4b43','#465768','#756441'];
+    const rarityPalettes = {
+      common:['#66513a','#58452f','#70583b'],
+      uncommon:['#4d6547','#58724f','#455d41'],
+      rare:['#3f5d76','#496b86','#38546b'],
+      epic:['#584765','#685278','#4f3f5d'],
+      legendary:['#7a6030','#92733a','#6c542a'],
+      mythic:['#713c36','#88483f','#63342f']
+    };
+    const selectedName=state.draft.selections[cat.key]?.name || null;
     const layout = weightedLayout(cat);
     layout.forEach((item, i) => {
       const {opt,start,end,mid} = item;
       const rarity = optionRarity(cat,opt);
       const path = document.createElementNS('http://www.w3.org/2000/svg','path');
       path.setAttribute('d', arcPath(start, end));
-      path.setAttribute('fill', RARITY_COLORS[rarity] || palette[i % palette.length]);
-      path.setAttribute('stroke', rarity === 'mythic' || rarity === 'legendary' ? '#d4ad5b' : '#18110c');
-      path.setAttribute('stroke-width', rarity === 'mythic' ? '1.3' : (cat.options.length > 60 ? '.45' : '.8'));
+      const tones=rarityPalettes[rarity] || palette;
+      path.setAttribute('fill', tones[i % tones.length]);
+      path.setAttribute('stroke', rarity === 'mythic' || rarity === 'legendary' ? '#c89b4d' : '#1a110b');
+      path.setAttribute('stroke-width', rarity === 'mythic' ? '1.25' : (cat.options.length > 60 ? '.42' : '.72'));
+      path.setAttribute('class', 'wheel-slice' + (selectedName === opt.name ? ' selected-slice' : ''));
+      path.dataset.rarity=rarity;
       group.appendChild(path);
       const span=end-start;
       const displayEvery = Math.max(1, Math.ceil(cat.options.length / 16));
@@ -1335,6 +1538,26 @@
     }).join('');
   }
 
+  function playWheelLandingVisual(rarity='common') {
+    const frame=$('.wheel-frame'), pointer=$('.wheel-pointer');
+    if(frame){
+      const colors={common:'#c7bba8',uncommon:'#8fbd78',rare:'#79afe1',epic:'#b48ad9',legendary:'#e0b95f',mythic:'#df7869'};
+      frame.style.setProperty('--landing-color',colors[rarity]||colors.common);
+      frame.classList.remove('wheel-land');
+      void frame.offsetWidth;
+      frame.classList.add('wheel-land');
+      setTimeout(()=>frame.classList.remove('wheel-land'),620);
+    }
+    if(pointer && pointer.animate){
+      pointer.animate([
+        {transform:'translateX(-50%) rotate(0deg)'},
+        {transform:'translateX(-50%) rotate(-5deg)'},
+        {transform:'translateX(-50%) rotate(3deg)'},
+        {transform:'translateX(-50%) rotate(0deg)'}
+      ],{duration:230,easing:'cubic-bezier(.2,.8,.25,1)'});
+    }
+  }
+
   function spinCategory(index = state.draft.categoryIndex, animate = true) {
     return new Promise(resolve => {
       if (spinning) return resolve(null);
@@ -1359,6 +1582,7 @@
         $('#spinResult').innerHTML = `<strong class="spin-result-name rarity-${rarity}">${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)}</span><em class="rarity-chip rarity-${rarity}">${RARITY_LABELS[rarity]} · ${formatOutcomeChance(pct)}</em>`;
         spinning = false;
         playWheelLand();
+        playWheelLandingVisual(rarity);
         renderDraft();
         renderWheel();
         saveState();
