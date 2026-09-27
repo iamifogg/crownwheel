@@ -8,7 +8,19 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon.svg">
   <link rel="apple-touch-icon" href="./icons/icon.svg">
-  <link rel="stylesheet" href="./styles.css">
+  <style>
+:root{
+  --bg:#120f0b;--bg2:#19130e;--panel:#201810;--panel2:#2a2016;--panel3:#342719;
+  --ink:#f0e6d2;--muted:#b9aa92;--faint:#7f725f;--line:#4b3a29;--gold:#c29b57;--gold2:#e0bd77;
+  --red:#a65a4c;--green:#6f916a;--blue:#6d879c;--shadow:0 12px 30px rgba(0,0,0,.24);
+}
+*{box-sizing:border-box}html{background:var(--bg);color-scheme:dark}body{margin:0;background:radial-gradient(circle at top,#21170f 0,var(--bg) 38%,#0f0d0a 100%);color:var(--ink);font-family:Georgia,'Times New Roman',serif;min-height:100vh}button,input,select{font:inherit}button{touch-action:manipulation}.app-shell{max-width:1180px;margin:0 auto;min-height:100vh;padding-bottom:86px}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 18px 12px;position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(18,15,11,.98),rgba(18,15,11,.88));backdrop-filter:blur(12px);border-bottom:1px solid rgba(194,155,87,.12)}.brand-wrap{display:flex;align-items:center;gap:10px;min-width:0}.crest-mark{width:44px;height:44px;border:1px solid var(--line);background:linear-gradient(145deg,var(--panel3),var(--panel));display:grid;place-items:center;border-radius:12px;color:var(--gold2);font-size:22px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02)}.brand{font-size:1.25rem;font-weight:800;letter-spacing:.02em}.subtitle{font-family:system-ui,sans-serif;color:var(--muted);font-size:.76rem;margin-top:2px}.status-row{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.status-chip{font-family:system-ui,sans-serif;font-size:.72rem;color:var(--muted);padding:7px 9px;border:1px solid var(--line);background:rgba(32,24,16,.84);border-radius:999px;white-space:nowrap}.status-chip strong{color:var(--ink)}.autosave{display:flex;align-items:center;gap:6px}.save-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(111,145,106,.12)}.save-dot.busy{background:var(--gold)}.main-content{padding:18px}.view{display:none}.view.active{display:block}.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:16px}.section-heading h1{font-size:clamp(1.65rem,3vw,2.35rem);margin:2px 0 4px;line-height:1.05}.section-heading p{margin:0;color:var(--muted);max-width:720px;font-family:system-ui,sans-serif;font-size:.9rem;line-height:1.45}.eyebrow{font-family:system-ui,sans-serif;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;color:var(--gold2);font-weight:800}.panel{background:linear-gradient(160deg,rgba(42,32,22,.96),rgba(30,23,16,.98));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.forge-layout{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(340px,.98fr);gap:16px;align-items:start}.wheel-panel,.dossier-panel,.diplomacy-panel,.chronicle-layout>.panel{padding:16px}.wheel-topline,.dossier-header,.panel-heading{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.wheel-topline h2,.panel-heading h2,.archive-panel h2{margin:3px 0 0;font-size:1.06rem}.wheel-progress{text-align:right;font-family:system-ui,sans-serif}.wheel-progress strong{display:block;font-size:.88rem}.wheel-progress span{display:block;color:var(--muted);font-size:.72rem;margin-top:3px}.wheel-frame{max-width:500px;margin:4px auto 0;position:relative;padding:8px}.wheel-frame::before{content:"";position:absolute;inset:4.5%;border-radius:50%;border:1px solid rgba(224,189,119,.25);pointer-events:none}.wheel-pointer{position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:5;width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:0;border-bottom:30px solid var(--gold2);filter:drop-shadow(0 4px 3px rgba(0,0,0,.55))}#wheelSvg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 18px rgba(0,0,0,.28))}.wheel-hub{fill:#17110c;stroke:#a9844e;stroke-width:5}.hub-title{fill:var(--ink);font:800 17px system-ui,sans-serif;letter-spacing:.1em}.hub-sub{fill:var(--muted);font:700 9px system-ui,sans-serif;letter-spacing:.08em}.wheel-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}.button{min-height:44px;border:1px solid var(--line);border-radius:11px;background:linear-gradient(180deg,#302419,#251b13);color:var(--ink);padding:9px 13px;font-family:system-ui,sans-serif;font-size:.86rem;font-weight:800;cursor:pointer}.button:hover{border-color:#765a37}.button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold2);outline-offset:2px}.button.primary{border-color:#a17c43;background:linear-gradient(180deg,#806130,#5f4523);color:#fff7e8}.button.ghost{background:#1b1510}.button.danger{border-color:#78463e;background:#3a211e;color:#f5d5d0}.button:disabled{opacity:.42;cursor:not-allowed}.button.large{min-height:49px;padding-inline:16px}.button.full{width:100%}.spin-result{margin-top:12px;min-height:74px;border:1px solid var(--line);border-radius:13px;padding:11px 12px;text-align:center;background:#18120d}.spin-result strong{display:block;color:var(--gold2);font-size:1.04rem}.spin-result span{display:block;color:var(--muted);font-family:system-ui,sans-serif;font-size:.82rem;line-height:1.38;margin-top:4px}.category-strip{display:flex;gap:5px;overflow-x:auto;padding:12px 2px 2px;scrollbar-width:thin}.category-pill{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:5px 8px;background:#1d1610;font:700 .66rem system-ui,sans-serif;color:var(--faint)}.category-pill.done{border-color:#7d693f;color:var(--ink)}.category-pill.current{background:#4b3720;color:#fff2d5;border-color:#a17c43}.completion-badge{font:800 .74rem system-ui,sans-serif;color:var(--muted);padding:6px 8px;border:1px solid var(--line);border-radius:999px}.field-label{display:block;color:var(--muted);font:700 .72rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;margin:14px 0 6px}.name-row{display:grid;grid-template-columns:1fr auto;gap:8px}.name-row input,.diplomacy-grid select{width:100%;min-height:46px;border:1px solid var(--line);background:#17120d;color:var(--ink);border-radius:10px;padding:9px 11px;font-family:system-ui,sans-serif;font-size:1rem}.overview-copy{color:var(--muted);font-family:system-ui,sans-serif;font-size:.84rem;line-height:1.45;margin:12px 0}.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.stat{background:#19130e;border:1px solid #433325;border-radius:11px;padding:9px 6px;text-align:center}.stat span{display:block;color:var(--faint);font:700 .61rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em}.stat strong{display:block;margin-top:3px;font:800 .96rem system-ui,sans-serif}.dossier-sections{margin-top:12px}.dossier-section{border-top:1px solid #423224;padding-top:9px;margin-top:9px}.dossier-section h3{margin:0 0 7px;color:var(--gold2);font:800 .69rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.1em}.dossier-row{display:grid;grid-template-columns:116px 1fr;gap:8px;padding:3px 0;font-family:system-ui,sans-serif;font-size:.79rem}.dossier-row span{color:var(--faint)}.dossier-row strong{font-weight:700;line-height:1.3}.dossier-actions{display:grid;gap:7px;margin-top:14px}.success-banner{margin-bottom:14px;border:1px solid #4e714d;background:#172017;border-radius:13px;padding:11px 13px;color:#d9ecd6;font-family:system-ui,sans-serif;font-size:.86rem}.hidden{display:none!important}.world-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:14px}.summary-card{padding:12px 13px;border:1px solid var(--line);background:#1c1510;border-radius:13px}.summary-card span{display:block;color:var(--faint);font:700 .66rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em}.summary-card strong{display:block;margin-top:3px;font-size:1.28rem}.diplomacy-panel{margin-bottom:14px}.minor-copy{color:var(--muted);font:400 .76rem system-ui,sans-serif}.diplomacy-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr auto;gap:8px;align-items:end;margin-top:12px}.diplomacy-grid label{color:var(--muted);font:700 .68rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em}.diplomacy-grid select{display:block;margin-top:5px}.action-preview{margin-top:9px;padding:9px 10px;background:#18120d;border:1px solid #403126;border-radius:10px;color:var(--muted);font:400 .8rem system-ui,sans-serif;line-height:1.4}.realm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.realm-card{padding:14px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(160deg,#261c13,#1c1510);box-shadow:0 8px 18px rgba(0,0,0,.14)}.realm-card.crisis{border-color:#765047}.realm-card.fallen{opacity:.6}.realm-head{display:flex;justify-content:space-between;gap:10px}.realm-name{font-size:1.08rem;font-weight:800}.realm-meta{font:400 .74rem system-ui,sans-serif;color:var(--muted);margin-top:2px}.realm-rank{font:800 .68rem system-ui,sans-serif;color:var(--gold2);border:1px solid #5e482d;border-radius:999px;padding:5px 7px;height:max-content}.realm-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:10px}.realm-stat{background:#16110d;border-radius:8px;padding:6px 4px;text-align:center}.realm-stat span{display:block;color:var(--faint);font:700 .58rem system-ui,sans-serif;text-transform:uppercase}.realm-stat strong{display:block;font:800 .78rem system-ui,sans-serif;margin-top:2px}.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.tag{font:700 .65rem system-ui,sans-serif;border:1px solid #4a392a;border-radius:999px;padding:4px 6px;color:#cbbca6;background:#1a140f}.tag.war{border-color:#77443b;color:#e6b2a9}.tag.ally{border-color:#466347;color:#c1dec0}.realm-details{margin-top:9px;padding-top:8px;border-top:1px solid #3b2d22;font:400 .76rem system-ui,sans-serif;color:var(--muted);line-height:1.42}.chronicle-actions{display:flex;gap:7px;flex-wrap:wrap}.file-button{display:inline-flex;align-items:center;justify-content:center}.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.chronicle-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:14px}.chronicle-list{margin-top:10px}.chronicle-entry{display:grid;grid-template-columns:72px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid #3e3024}.chronicle-entry:last-child{border-bottom:0}.chronicle-year{font:800 .7rem system-ui,sans-serif;color:var(--gold2);text-transform:uppercase}.chronicle-text{font:400 .82rem system-ui,sans-serif;color:#d7cbb8;line-height:1.42}.chronicle-type{display:inline-block;margin-top:5px;font:700 .6rem system-ui,sans-serif;color:var(--faint);text-transform:uppercase;letter-spacing:.08em}.archive-panel p{font:400 .83rem system-ui,sans-serif;color:var(--muted);line-height:1.5}.archive-points{display:grid;gap:11px;margin-top:14px}.archive-points>div{display:grid;grid-template-columns:25px 1fr;gap:8px}.archive-points span{width:24px;height:24px;border:1px solid #536d50;border-radius:50%;display:grid;place-items:center;color:#a4c59f;font:800 .75rem system-ui,sans-serif}.archive-points p{margin:0}.empty-state{grid-column:1/-1;padding:28px 14px;border:1px dashed #4b3a29;border-radius:14px;text-align:center;color:var(--muted);font:400 .86rem system-ui,sans-serif}.bottom-nav{position:fixed;z-index:50;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,1180px);height:72px;padding:7px max(10px,env(safe-area-inset-left)) max(7px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:rgba(18,15,11,.97);backdrop-filter:blur(16px);border-top:1px solid #392c21}.nav-button{border:0;background:transparent;color:var(--muted);border-radius:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:700 .69rem system-ui,sans-serif;min-height:50px}.nav-button.active{background:#2b2117;color:#ffe9bc}.nav-icon{font-size:1.05rem}.toast{position:fixed;left:50%;bottom:82px;transform:translate(-50%,18px);z-index:80;max-width:calc(100% - 28px);background:#261d14;border:1px solid #6c5333;color:#f3e6cf;border-radius:12px;padding:10px 13px;box-shadow:var(--shadow);font:700 .8rem system-ui,sans-serif;opacity:0;pointer-events:none;transition:.22s ease}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:860px){.forge-layout,.chronicle-layout{grid-template-columns:1fr}.dossier-panel{order:2}.diplomacy-grid{grid-template-columns:1fr 1fr}.diplomacy-grid .button{grid-column:1/-1}.realm-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.topbar{align-items:flex-start;padding:12px}.subtitle{display:none}.status-row{gap:5px}.status-chip{font-size:.66rem;padding:6px 7px}.main-content{padding:12px}.section-heading{align-items:flex-start}.section-heading .button{flex:0 0 auto}.forge-layout{gap:11px}.wheel-panel,.dossier-panel,.diplomacy-panel,.chronicle-layout>.panel{padding:12px}.wheel-topline h2{font-size:.98rem}.wheel-frame{padding:3px}.wheel-actions{display:grid;grid-template-columns:1fr 1fr}.wheel-actions .primary{grid-column:1/-1}.stat-grid{grid-template-columns:repeat(4,1fr);gap:5px}.stat{padding:7px 3px}.stat span{font-size:.56rem}.stat strong{font-size:.83rem}.dossier-row{grid-template-columns:101px 1fr;font-size:.75rem}.world-summary-grid{grid-template-columns:repeat(2,1fr)}.diplomacy-grid{grid-template-columns:1fr}.diplomacy-grid .button{grid-column:auto}.realm-stats{grid-template-columns:repeat(5,1fr)}.chronicle-entry{grid-template-columns:58px 1fr}.section-heading.world-heading{display:block}.section-heading.world-heading .button{margin-top:10px;width:100%}}
+@media(max-width:390px){.brand{font-size:1.08rem}.crest-mark{width:39px;height:39px}.status-chip.autosave{display:none}.section-heading h1{font-size:1.55rem}.stat-grid{grid-template-columns:repeat(2,1fr)}.wheel-actions{grid-template-columns:1fr}.wheel-actions .primary{grid-column:auto}.name-row{grid-template-columns:1fr}.world-summary-grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.toast{transition:none!important}#wheelGroup{transition:none!important}}
+
+</style>
   <title>Crownwheel</title>
 </head>
 <body>
@@ -195,6 +207,985 @@
     </nav>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="./app-loader.js" defer></script>
+  <script>
+(() => {
+  'use strict';
+
+  const STORAGE_KEY = 'crownwheel.save.v1';
+  const VERSION = 1;
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+  const chance = p => Math.random() < p;
+  const rand = (min, max) => Math.random() * (max - min) + min;
+  const int = (min, max) => Math.floor(rand(min, max + 1));
+  const uid = () => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 9)}`;
+  const pairKey = (a, b) => [a, b].sort().join('::');
+  const fmt = n => Math.max(0, Math.round(n)).toLocaleString();
+  const fmtPop = n => `${Math.max(0.01, n).toFixed(n < 1 ? 2 : 1)}m`;
+
+  const mk = (name, desc, w = 0, a = 0, s = 0, value = null, tags = []) => ({ name, desc, w, a, s, value, tags });
+  const cross = (A, B, fn) => A.flatMap((x, i) => B.map((y, j) => fn(x, y, i, j)));
+
+  const regionBases = [
+    ['River', 'broad rivers, floodplains and busy barge routes', 2, 0, 1], ['Mountain', 'high passes, mines and natural fortresses', 1, 0, 2],
+    ['Forest', 'deep woodland, timber and hidden roads', 1, 1, 1], ['Island', 'harbours, fleets and maritime isolation', 2, 0, 1],
+    ['Steppe', 'open grasslands and long-distance mobility', 1, 0, 0], ['Desert', 'oases, caravan roads and harsh frontiers', 1, 0, 0],
+    ['Highland', 'broken hills and fiercely local communities', 0, 0, 1], ['Marsh', 'wetlands, causeways and defensible approaches', 0, 1, 2],
+    ['Coastal', 'ports, fisheries and exposed shorelines', 2, 0, 0], ['Heartland', 'old cities, dense settlement and sacred sites', 2, 0, 1],
+    ['Tundra', 'frozen marches and sparse but hardy settlements', 0, 0, 1], ['Volcanic', 'black soil, mineral wealth and dangerous peaks', 2, 1, -1],
+    ['Jungle', 'vast rivers, dense growth and hidden ruins', 1, 2, 0], ['Archipelago', 'scattered islands bound together by ships', 2, 0, 0],
+    ['Canyon', 'deep ravines and cliff settlements', 1, 0, 2], ['Lake', 'great inland waters and fertile shores', 2, 0, 1],
+    ['Badlands', 'eroded uplands and difficult dry country', 0, 0, 0], ['Savanna', 'broad warm plains and seasonal migrations', 1, 0, 0],
+    ['Fjord', 'narrow sea inlets, cliffs and sheltered anchorages', 1, 0, 1], ['Prairie', 'fertile open country with few natural barriers', 2, 0, 0]
+  ];
+  const stateForms = [
+    ['Kingdom', 'an old crowned state', 0, 0, 1], ['Marches', 'a fortified frontier realm', 0, 0, 1],
+    ['Dominion', 'a centralised and ambitious state', 1, 0, -1], ['Confederacy', 'a union of semi-independent regions', 0, 0, 0],
+    ['Principality', 'a dynastic realm centred on a prestigious court', 1, 0, 1]
+  ];
+  const origins = cross(regionBases, stateForms, (g, f) => mk(`${g[0]} ${f[0]}`, `A ${f[1]} shaped by ${g[1]}.`, g[2] + f[2], g[3] + f[3], g[4] + f[4], null, [g[0].toLowerCase()]));
+
+  const scales = [
+    mk('Barony', 'A single fortified district.', 0, 0, 2, 1), mk('Petty Principality', 'Two closely linked provinces.', 0, 0, 2, 2),
+    mk('Petty Realm', 'Three provinces.', 0, 0, 1, 3), mk('Minor Duchy', 'Four provinces and several towns.', 1, 0, 1, 4),
+    mk('Small Kingdom', 'Five provinces.', 1, 0, 1, 5), mk('Border Kingdom', 'Six contested provinces.', 1, 0, 0, 6),
+    mk('Compact Kingdom', 'Seven tightly governed provinces.', 2, 0, 1, 7), mk('Kingdom', 'Eight provinces.', 2, 0, 1, 8),
+    mk('Established Kingdom', 'Nine provinces with several major cities.', 2, 0, 1, 9), mk('Large Kingdom', 'Ten provinces.', 3, 0, 0, 10),
+    mk('Great Kingdom', 'Twelve provinces.', 3, 0, 0, 12), mk('Composite Crown', 'Fourteen provinces under several historic titles.', 3, 0, -1, 14),
+    mk('Minor Empire', 'Sixteen provinces.', 4, 0, -1, 16), mk('Empire', 'Twenty provinces.', 5, 0, -1, 20),
+    mk('Great Empire', 'Twenty-five provinces and multiple subject peoples.', 6, 0, -2, 25), mk('Continental Empire', 'Thirty provinces.', 7, 0, -2, 30),
+    mk('Sprawling Empire', 'Thirty-six provinces with difficult communications.', 7, 0, -3, 36), mk('Fragmented Imperial Realm', 'Forty provinces held by fragile loyalties.', 8, 0, -4, 40)
+  ];
+
+  const governmentBases = [
+    ['Feudal Monarchy', 'a hereditary sovereign ruling through landed vassals', 0, 0, 1], ['Absolute Monarchy', 'a crown dominating law and administration', 1, 0, 0],
+    ['Elective Monarchy', 'great lords choosing each new ruler', 0, 0, 0], ['Merchant Republic', 'wealthy houses governing through councils and contracts', 2, 0, 0],
+    ['Civic Republic', 'citizens and magistrates dominating public life', 1, 0, 1], ['Theocracy', 'priesthood and temporal authority entwined', 0, 1, 1],
+    ['Mage Oligarchy', 'arcane families monopolising high office', 1, 3, -1], ['Clan Confederacy', 'autonomous clans united beneath a high chief', 0, 0, 1],
+    ['Imperial Bureaucracy', 'appointed governors answering to a central court', 2, 0, 0], ['Sacred Kingship', 'the ruler treated as divinely ordained', 0, 1, 1],
+    ['Military Directorate', 'senior commanders dominating government', 0, 0, -1], ['Free Cities League', 'semi-independent cities cooperating on defence and trade', 2, 0, 0],
+    ['Noble Republic', 'landed aristocrats governing without a monarch', 1, 0, 0], ['Dual Monarchy', 'two crowns sharing institutions and foreign policy', 1, 0, -1],
+    ['Palatine Order', 'a hereditary military order governing the realm', 0, 1, 0], ['Tribunal State', 'judges and legal colleges dominating authority', 1, 0, 1],
+    ['Popular Assembly', 'free households sending delegates to a national assembly', 0, 0, 1], ['City-State Hegemony', 'one metropolis dominating dependent territories', 2, 0, -1]
+  ];
+  const governmentTones = [
+    ['Traditional', 'Its institutions are old and ritualised.', 0, 0, 1], ['Centralised', 'Power is unusually concentrated at the centre.', 1, 0, 0],
+    ['Factional', 'Several blocs constantly compete for influence.', 0, 0, -2], ['Reforming', 'Recent rulers are actively changing old institutions.', 1, 0, 0]
+  ];
+  const governments = cross(governmentBases, governmentTones, (g, t) => mk(`${t[0]} ${g[0]}`, `${g[1]}. ${t[1]}`, g[2] + t[2], g[3] + t[3], g[4] + t[4]));
+
+  const rulerBases = [
+    ['Ancient Dynasty', 'A bloodline with centuries of precedent.', 0, 0, 2], ['New Conqueror', 'A victorious warlord recently seized power.', 0, 0, -1],
+    ['Child Monarch', 'A young ruler depends on regents.', 0, 0, -2], ['Scholar Sovereign', 'The ruler prizes administration and learning.', 1, 1, 1],
+    ['Warrior Sovereign', 'The court prizes military achievement.', 0, 0, 0], ['Sorcerer Monarch', 'The ruler personally commands formidable magic.', 0, 3, -1],
+    ['Council of Houses', 'Several dynasties share supreme authority.', 1, 0, 0], ['Prophet-King', 'Religion and charisma sustain the throne.', 0, 1, 1],
+    ['Usurper', 'The ruler holds power without universal legitimacy.', 0, 0, -3], ['Immortal Regent', 'The same mysterious figure has ruled for generations.', 0, 4, -2],
+    ['Widowed Queen', 'A seasoned consort now rules in her own right.', 0, 0, 1], ['Soldier-Emperor', 'An army commander rose through victory and acclaim.', 0, 0, 0],
+    ['Merchant Prince', 'The ruler built power through immense private wealth.', 2, 0, 0], ['Priestess-Queen', 'Royal and sacred office are united.', 0, 2, 1],
+    ['Twin Monarchs', 'Two siblings share the throne.', 0, 0, 0], ['Foreign Dynasty', 'The ruling house came from beyond the realm.', 1, 0, -1],
+    ['Hidden Sovereign', 'The public rarely sees the actual ruler.', 0, 1, -1], ['Elected High King', 'Regional rulers periodically choose a paramount king.', 0, 0, 0],
+    ['Council Regent', 'A collegial regency acts in the name of the crown.', 0, 0, 0], ['Oracle Queen', 'A ruler claims legitimacy through repeated fulfilled prophecy.', 0, 2, 0]
+  ];
+  const legitimacy = [
+    ['Beloved', 'The ruler enjoys broad popular affection.', 0, 0, 2], ['Feared', 'Obedience rests heavily on intimidation.', 0, 0, -1],
+    ['Contested', 'Major factions dispute the ruler’s claim.', 0, 0, -2], ['Venerated', 'Ceremony and myth place the ruler above ordinary politics.', 0, 1, 2]
+  ];
+  const rulers = cross(rulerBases, legitimacy, (a, b) => mk(`${b[0]} ${a[0]}`, `${a[1]} ${b[1]}`, a[2] + b[2], a[3] + b[3], a[4] + b[4]));
+
+  const populationData = [[.12,'Tiny'],[.2,'Very Sparse'],[.32,'Sparse'],[.5,'Thinly Settled'],[.7,'Small'],[.95,'Growing'],[1.2,'Modest'],[1.5,'Moderate'],[1.9,'Established'],[2.4,'Busy'],[3,'Large'],[3.8,'Dense'],[4.8,'Very Large'],[6,'Crowded'],[7.5,'Great'],[9,'Vast'],[11,'Immense'],[14,'Enormous'],[18,'Imperial'],[25,'Colossal']];
+  const populations = populationData.map((x, i) => mk(x[1], `Approximately ${x[0]} million inhabitants live under the realm's authority.`, i > 11 ? 1 : 0, 0, i > 16 ? -1 : 0, x[0]));
+
+  const cultureBases = [
+    ['Chivalric','oaths, heraldry and personal honour',0,0,1],['Mercantile','contracts, guilds and profitable risk',2,0,0],['Ascetic','discipline, restraint and sacred duty',0,1,1],
+    ['Scholarly','libraries, universities and formal debate',1,2,0],['Militarist','service in war as a source of status',0,0,0],['Courtly','etiquette, patronage and dynastic politics',1,0,0],
+    ['Seafaring','navigation, fishing and distant voyages',1,0,0],['Nomadic','kinship, herds and seasonal mobility',0,0,0],['Ancestor-Bound','lineage, tombs and inherited obligation',0,1,1],
+    ['Cosmopolitan','mixed peoples and imported traditions',2,1,0],['Pastoral','land, livestock and village custom',0,0,1],['Artisan','craft mastery and guild reputation',1,0,1],
+    ['Stoic','endurance, duty and emotional restraint',0,0,1],['Festal','public celebration, music and spectacle',1,0,1],['Legalist','formal law, precedent and contracts',1,0,1],
+    ['Mystical','visions, omens and spiritual experience',0,2,0],['Heroic','epic poetry, feats of arms and personal glory',0,0,0],['Hospitality-Bound','guest-right and reciprocal obligation',0,0,1]
+  ];
+  const cultureForms = [['Aristocratic','Elite households dominate cultural fashion.',0,0,0],['Communal','Village and neighbourhood institutions remain strong.',0,0,1],['Urban','Cities set the cultural tone for the whole realm.',1,0,0],['Frontier','Hardship and self-reliance shape social expectations.',0,0,0]];
+  const cultures = cross(cultureBases, cultureForms, (a,b) => mk(`${b[0]} ${a[0]}`, `Society prizes ${a[1]}. ${b[1]}`, a[2]+b[2], a[3]+b[3], a[4]+b[4]));
+
+  const faithBases = [
+    ['Solar Church','light, law and revelation',0,1,1],['Old Gods','local gods, sacred groves and seasonal rites',0,1,0],['Ancestor Cult','the honoured dead as continuing members of society',0,2,0],
+    ['Twin Faith','opposing divine principles in eternal balance',0,1,0],['Saintly Communion','holy exemplars, relics and intercession',0,1,1],['Dragon Cult','dragons as divine or semi-divine beings',0,2,-1],
+    ['Mystery Temples','secret rites guarded by initiates',0,2,0],['Open Pantheon','many gods with overlapping cults',1,1,0],['God-King Worship','the ruler as a focus of public ritual',0,1,1],
+    ['Death Church','mortality, funerary law and spirits',0,3,-1],['Star Faith','celestial movements as signs of divine order',0,2,0],['Sea Gods','storms, tides and maritime offerings',0,1,0],
+    ['Forge Faith','craft, fire and sacred labour',1,1,0],['Earth Mother','fertility, harvest and cycles of life',0,1,1],['War Pantheon','heroic gods of battle and conquest',0,1,-1],
+    ['Philosophic Creed','ethical schools rather than personal gods',1,0,1],['Dream Religion','prophecy and sacred sleep',0,2,0],['Void Heresy','divinity found beyond ordinary reality',0,4,-2]
+  ];
+  const faithForms = [['Orthodox','A central hierarchy enforces doctrine.',0,0,1],['Syncretic','Local practices freely blend with official belief.',1,0,0],['Militant','Armed religious orders wield major influence.',0,1,-1],['Mystic','Contemplatives and visionaries outrank bureaucratic priests.',0,1,0]];
+  const faiths = cross(faithBases, faithForms, (a,b)=>mk(`${b[0]} ${a[0]}`, `Belief centres on ${a[1]}. ${b[1]}`, a[2]+b[2], a[3]+b[3], a[4]+b[4]));
+
+  const economyBases = [
+    ['Grain Agriculture','grain, mills and land rents',1,0,0],['Pastoral Agriculture','livestock, wool and hides',1,0,0],['Mining','metals, stone and deep workings',2,0,0],
+    ['Maritime Trade','shipping, ports and overseas exchange',3,0,0],['Guild Manufacture','textiles, armour, tools and luxury crafts',2,0,0],['Caravan Trade','overland trade routes and market towns',2,0,0],
+    ['Tribute','payments extracted from subject territories',3,0,-1],['Temple Estates','religious landholding and credit networks',1,1,0],['Raiding','plunder and war finance',0,0,-1],
+    ['Arcane Industry','enchanted goods and magical services',2,2,0],['Fishing','fisheries, salt and coastal markets',1,0,0],['Forestry','timber, pitch, resin and hunting rights',1,0,0],
+    ['Wine & Luxury Crops','high-value estates and merchant export',2,0,0],['River Commerce','barges, tolls and inland ports',2,0,0],['State Workshops','crown-controlled foundries and manufactories',2,0,0],
+    ['Mixed Production','several sectors of comparable importance',1,0,1],['Banking','credit houses and state finance',3,0,0],['Pilgrimage Economy','religious travellers, shrines and hospitality',2,1,0]
+  ];
+  const economyForms = [['Local','Most production serves domestic markets.',0,0,1],['Export-Led','Foreign buyers strongly shape production.',2,0,0],['State-Directed','The crown closely manages key industries.',1,0,0],['Guild-Dominated','Powerful associations regulate labour and prices.',1,0,0]];
+  const economies = cross(economyBases,economyForms,(a,b)=>mk(`${b[0]} ${a[0]}`,`The economy depends heavily on ${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],null,[a[0].toLowerCase()]));
+
+  const resourceBases = [
+    ['Iron','armour, weapons and tools',1,0,0],['Silver','coinage and foreign purchasing power',3,0,0],['Gold','royal revenue and elite patronage',4,0,0],['Copper','coinage, bronze and craft production',2,0,0],
+    ['Tin','bronze production and valuable export',2,0,0],['Salt','food preservation and strategic taxation',2,0,0],['Warhorses','exceptional cavalry remounts',1,0,0],['Ancient Timber','ships, fortifications and siege engines',1,0,0],
+    ['Magecrystal','storage and amplification of magical energy',2,3,0],['Dragonbone','ritual objects and elite armour',2,2,0],['Black Lotus','medicine, poison and alchemy',2,2,-1],['Sacred Amber','wards, relics and ceremonial objects',1,2,1],
+    ['Deepwater Harbours','major naval basing and maritime commerce',2,0,0],['Coal','high-temperature industry and urban fuel',2,0,0],['Obsidian','blades, ritual goods and luxury export',1,1,0],['Marble','monumental architecture and prestige',1,0,1],
+    ['Silk','luxury textiles and court fashion',3,0,0],['Spices','high-value long-distance commerce',3,0,0],['Medicinal Herbs','healing, alchemy and export medicines',2,1,1],['Pearls','luxury wealth and royal monopolies',3,0,0],
+    ['Whalebone','crafting, oil and maritime industries',2,0,0],['Phoenix Ash','rare resurrection and fire rituals',1,4,-1],['Moonstone','divination and illusion magic',2,3,0],['Leviathan Oil','alchemy, lighting and naval industry',2,2,-1],
+    ['Star Metal','rare celestial ore of extraordinary quality',2,4,0],['Glowmoss','luminescent cave growth useful to alchemists',1,2,0]
+  ];
+  const abundance = [['Limited','Deposits are valuable but carefully rationed.',0,0,0],['Rich','The resource is abundant enough to shape national strategy.',1,0,0],['Legendary','The realm controls deposits unmatched elsewhere.',2,1,0]];
+  const resources = cross(resourceBases,abundance,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
+
+  const armySizes = [[1800,'Royal Guard Only'],[3000,'Tiny Standing Army'],[5000,'Compact Professional Host'],[8000,'Small Professional Army'],[12000,'Small Army'],[18000,'Developing Army'],[24000,'Moderate Army'],[32000,'Established Army'],[42000,'Large Army'],[55000,'Very Large Army'],[70000,'Great Army'],[90000,'Great Host'],[115000,'Mass Army'],[145000,'Grand Host'],[180000,'Mass Levy'],[220000,'Nation in Arms'],[275000,'Imperial Muster'],[340000,'Great Imperial Host'],[425000,'Continental Muster'],[550000,'Colossal War Host']].map((x,i)=>mk(x[1],`${x[0].toLocaleString()} troops can be put into the field.`,0,0,i>13?-1:0,x[0]));
+
+  const doctrineBases = [
+    ['Heavy Cavalry','armoured shock charges and decisive mounted action',0,0,0],['Shieldwall','disciplined infantry holding dense defensive lines',0,0,1],['Pike & Bow','missile attrition protected by long spear formations',0,0,0],
+    ['Horse Archer','mobility, skirmishing and encirclement',0,0,0],['Siege Mastery','engineering, sapping and systematic fortress reduction',1,0,0],['Deep Defence','castles, prepared positions and trading space for time',0,0,2],
+    ['Raiding','fast columns disrupting supply and settlements',1,0,-1],['Combined Arms','close coordination of infantry, cavalry and missiles',1,0,1],['Holy War','morale driven by religious conviction',0,1,0],
+    ['Arcane Warfare','battle magic integrated directly into formations',0,3,0],['Mass Infantry','overwhelming numbers of foot soldiers',0,0,0],['Professional Infantry','drill, discipline and reliable manoeuvre',0,0,1],
+    ['Ambush Warfare','concealment, terrain and surprise attacks',0,1,0],['Naval Projection','fleets transporting and supplying armies along coasts',1,0,0],['Fortress Warfare','dense fortification networks and garrison armies',0,0,2],
+    ['Monster Warfare','war beasts and monstrous auxiliaries breaking enemy lines',0,2,-1],['Gunpowder Precursors','bombards, rockets and experimental explosive weapons',2,0,-1],['Scorched Earth','denying food, shelter and infrastructure to invaders',0,0,-1],
+    ['Skirmish Doctrine','light troops avoiding decisive battle until conditions favour them',0,0,0],['River Warfare','barges, bridges and river crossings treated as strategic weapons',1,0,0]
+  ];
+  const doctrineTones = [['Aggressive','Commanders seek initiative and rapid decisions.',0,0,-1],['Methodical','Operations emphasise logistics and preparation.',1,0,1],['Flexible','Officers are expected to adapt doctrine to circumstance.',1,0,0],['Attritional','Victory is pursued through endurance and replacement.',0,0,0]];
+  const doctrines = cross(doctrineBases,doctrineTones,(a,b)=>mk(`${b[0]} ${a[0]}`,`The army specialises in ${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],null,[a[0].toLowerCase()]));
+
+  const eliteBases = [
+    ['Household Knights','the finest armoured cavalry in royal service',0,0,0],['Black Guard','professional heavy infantry sworn directly to the crown',0,0,0],['Longbow Brotherhoods','veteran marksmen trained from youth',0,0,0],
+    ['Griffon Lancers','aerial cavalry mounted on trained griffons',0,2,0],['Ogre Auxiliaries','enormous mercenary shock infantry',0,1,-1],['Rune Guard','veterans equipped with enchanted armour and weapons',0,2,0],
+    ['Temple Paladins','consecrated warriors resistant to fear and corruption',0,2,1],['Night Rangers','scouts, assassins and deep-country irregulars',0,1,0],['Bone Legion','disciplined undead soldiers requiring no food or rest',0,3,-1],
+    ['Dragon Knights','riders bonded to lesser dragons',0,4,-1],['Royal Pikemen','elite defensive infantry guarding the ruler and banners',0,0,1],['Lion Guard','prestigious heavy infantry recruited from noble families',0,0,1],
+    ['War Elephant Corps','armoured beasts carrying towers and missile troops',0,0,-1],['Phoenix Guard','mystic soldiers associated with sacred fire',0,3,1],['Giantbreakers','specialists trained to kill monsters and giants',0,1,0],
+    ['Silver Companies','highly paid professional mercenary formations',1,0,0],['Dread Riders','fearsome cavalry mounted on unnatural beasts',0,2,-1],['Sea Wardens','marines and naval infantry skilled in boarding warfare',1,0,0],
+    ['Spellbow Corps','archers whose ammunition is magically enhanced',0,2,0],['Royal Sappers','engineers, miners and siege specialists of exceptional quality',1,0,0],['Witch Hunters','specialists trained to neutralise hostile magic',0,1,0],
+    ['Ash Legion','veterans hardened by volcanic and fire warfare',0,1,0]
+  ];
+  const eliteTones = [['Veteran','Long service has made the formation exceptionally reliable.',0,0,1],['Famed','Its reputation alone affects enemy morale.',0,0,0],['Secretive','Its training and true capabilities are closely guarded.',0,1,0]];
+  const elites = cross(eliteBases,eliteTones,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
+
+  const magicLevels = [[0,'Absent'],[2,'Folkloric'],[6,'Almost None'],[12,'Vanishingly Rare'],[25,'Rare'],[55,'Very Uncommon'],[110,'Uncommon'],[220,'Limited'],[400,'Recognised'],[700,'Established'],[1200,'Institutional'],[2200,'Common'],[4000,'Widespread'],[7000,'Highly Magical'],[12000,'Saturated'],[22000,'Arcane Society'],[40000,'Magic-Dominated'],[75000,'Mythic Saturation']].map((x,i)=>mk(x[1],x[0]?`Roughly ${x[0].toLocaleString()} recognised magical practitioners operate in the realm.`:'No openly recognised spellcasters exist.',0,Math.floor(i/3),i>14?-2:0,x[0]));
+
+  const magicBases = [
+    ['Elementalism','fire, storm, earth and water shaped directly',0,3,0],['Necromancy','death, souls and corpses manipulated as resources',0,4,-1],['Divine Miracles','power mediated through gods, saints and vows',0,3,1],
+    ['Druidism','land, beasts and weather governed by ancient covenants',0,3,1],['Runecraft','durable enchantments carved into objects and places',1,3,0],['Blood Magic','life and sacrifice exchanged for immense power',0,5,-2],
+    ['Illusion','perception, memory and deception weaponised',0,3,0],['Witchcraft','curses, charms and bargains beyond formal schools',0,3,-1],['Astromancy','stars and celestial cycles used to read possibility',1,4,0],
+    ['Void Sorcery','forbidden forces bending distance and matter',0,6,-3],['Alchemy','transmutation, reagents and crafted magical substances',2,2,0],['Spirit Binding','spirits compelled into service or negotiation',0,4,-1],
+    ['Dream Magic','sleep, prophecy and the unconscious manipulated',0,3,0],['Chronomancy','small portions of time altered at immense difficulty',0,6,-2],['Geomancy','landforms, ley lines and foundations reshaped',1,4,0],
+    ['Stormcalling','wind, lightning and weather weaponised',0,4,-1],['Fleshcraft','living bodies altered through magical art',0,5,-2],['Shadowcraft','darkness, concealment and passage between shadows',0,4,-1],
+    ['Sigilcraft','temporary magical symbols used in wards and traps',0,3,0],['Beast Speech','communication, binding and transformation involving animals',0,3,0]
+  ];
+  const magicTones = [['Academic','Formal theory and written study dominate the tradition.',1,0,0],['Ritual','Large ceremonies and prepared workings are preferred.',0,1,0],['Battle','The tradition is heavily adapted to warfare.',0,2,-1],['Mystic','Personal revelation and intuition matter more than theory.',0,1,0]];
+  const magicSchools = cross(magicBases,magicTones,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],null,[a[0].toLowerCase()]));
+
+  const arcaneBases = [
+    ['Royal College','licensed mages in crown service',1,2,1],['Independent Guilds','competing magical associations selling expertise',2,1,0],['Temple Orders','religious institutions controlling magical training',0,2,1],
+    ['Noble Bloodlines','a few families monopolising magical education',0,2,-1],['Village Tradition','local practitioners passing down oral knowledge',0,1,0],['Mage Senate','powerful spellcasters recognised as a political estate',1,3,-1],
+    ['Military Corps','trained mages serving primarily in the armed forces',0,3,0],['Secret Covenants','hidden organisations exercising real magical authority',0,3,-2],['University Faculties','magic studied alongside law, medicine and philosophy',1,2,1],
+    ['Wandering Orders','itinerant teachers and sworn magical fraternities',0,2,0],['Royal Inquisition','state officials policing dangerous supernatural activity',0,1,1],['Free Academies','privately funded schools competing for students',1,2,0],
+    ['Monastic Schools','isolated communities training disciplined practitioners',0,2,1],['Court Sorcerers','small circles of elite mages serving great houses',1,2,0],['Provincial Colleges','regional institutions licensed by the crown',1,2,1],
+    ['No Institution','magical training is entirely informal and fragmented',0,1,-1],['Guild Temples','religious and professional regulation combined',1,2,0],['Hermit Masters','rare experts teaching only chosen apprentices',0,2,0]
+  ];
+  const arcanePolicies = [['Licensed','Practice requires formal permission.',0,0,1],['Restricted','Only approved forms of magic are tolerated.',0,-1,1],['Privileged','Recognised practitioners enjoy exceptional legal status.',1,1,-1],['Unregulated','Authorities make little attempt to control magical practice.',1,1,-2]];
+  const arcaneLaws = cross(arcaneBases,arcanePolicies,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
+
+  const wonderBases = [
+    ['Sleeping Dragon','an ancient dragon sleeping beneath the realm',0,4,-1],['Worldtree','a colossal magical tree enriching the surrounding land',2,3,2],['Gate of the Dead','a controlled breach into the realm of spirits',0,5,-2],
+    ['Sky Citadel','a fortress suspended permanently above the capital',1,4,1],['Prophetic Archive','centuries of recorded visions and fulfilled prophecies',1,3,2],['Titan Forge','an ancient foundry able to make impossible weapons',2,3,0],
+    ['Saint’s Tomb','a pilgrimage centre associated with genuine miracles',1,2,3],['Leviathan Pact','an ancient sea monster bound by treaty to the crown',1,3,-1],['Crown of Command','a relic that unnaturally strengthens authority',0,3,-2],    ['Sunken Library','a flooded ruin preserving knowledge from a lost age',1,3,0],['Moon Gate','a portal that opens only under particular lunar phases',1,4,-1],['Colossus','a dormant stone giant embedded in the landscape',0,4,0],
+    ['Eternal Flame','a sacred fire that has never gone out',1,2,2],['Mirror Lake','waters that occasionally show distant or future events',1,3,1],['Black Pyramid','an ancient structure of unknown and dangerous purpose',0,5,-2],
+    ['Star Observatory','a pre-imperial complex able to predict celestial phenomena',1,3,1],['Golden Labyrinth','a vast underground complex filled with relics and dangers',2,3,-1],['Whispering Mountain','a peak believed to answer questions in dreams',0,3,0],
+    ['Phoenix Roost','a sacred nesting ground of immortal firebirds',1,4,1],['Fallen God','the petrified remains of a divine being',0,6,-3],['Crystal Cathedral','a natural cavern that amplifies ritual magic',1,4,0],
+    ['Clockwork Oracle','an ancient machine issuing cryptic predictions',1,4,-1]
+  ];
+  const wonderStates = [['Dormant','Its powers are mostly inactive or poorly understood.',0,-1,1],['Active','Its powers are regularly exploited by the realm.',1,1,0],['Unstable','Its benefits are great, but dangerous side effects are common.',1,2,-2]];
+  const wonders = cross(wonderBases,wonderStates,(a,b)=>mk(`${b[0]} ${a[0]}`,`The realm possesses ${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],null,[a[0].toLowerCase()]));
+
+  const diplomacyBases = [
+    ['Isolationist','foreign contact is deliberately limited',0,0,0],['Commercial','trade and treaties are preferred to conquest',2,0,1],['Expansionist','the court openly seeks new territory',1,0,-1],
+    ['Dynastic','marriage and inheritance are preferred weapons',1,0,1],['Missionary','foreign policy follows religious ambition',0,1,-1],['Defensive','alliances primarily deter invasion',0,0,1],
+    ['Tributary','weaker neighbours are expected to acknowledge supremacy',1,0,-1],['Opportunist','treaties last only while advantageous',1,0,-2],['Mediator','prestige is gained by settling disputes',1,0,2],
+    ['Vengeful','historical grievances dominate diplomacy',0,0,-2],['Imperial','neighbours are viewed as potential subjects',1,0,-1],['Balance-of-Power','the realm prevents any neighbour becoming dominant',1,0,0],
+    ['Pilgrimage','religious and cultural ties shape foreign relations',0,1,1],['Mercenary','soldiers and military contracts are major diplomatic tools',1,0,0],['Colonial','the court seeks distant holdings and ports',2,0,-1],
+    ['Non-Aligned','formal entanglements are avoided where possible',0,0,1],['Crusading','foreign policy is framed as a sacred struggle',0,1,-1],['Scholarly','embassies emphasise knowledge exchange and cultural prestige',1,1,1]
+  ];
+  const diplomacyMethods = [['Marriage-Led','Royal marriages are used whenever possible.',0,0,1],['Treaty-Led','Formal written agreements dominate relations.',1,0,1],['Coercive','Threats and demonstrations of force are common.',0,0,-1],['Secretive','Spies and private negotiations shape major decisions.',1,0,-1]];
+  const diplomacies = cross(diplomacyBases,diplomacyMethods,(a,b)=>mk(`${b[0]} ${a[0]}`,`Foreign policy is ${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
+
+  const fortBases = [
+    ['Open Country','few permanent fortifications outside major towns',1,0,-1],['Castle Network','stone castles controlling roads and crossings',0,0,2],['Walled Cities','major urban centres protected by strong walls',1,0,2],
+    ['Frontier Keeps','small forts spaced across exposed borders',0,0,1],['Mountain Citadels','fortresses dominating high passes and valleys',0,0,3],['River Forts','bridges and river crossings heavily defended',1,0,2],
+    ['Star Fort Precursors','low angular walls designed against artillery',1,0,2],['Magical Wards','physical fortifications reinforced by permanent spells',0,3,2],['Living Ramparts','hedges, roots and shaped earth forming defensive belts',0,2,2],
+    ['Underground Redoubts','tunnels and buried strongholds offering fallback positions',0,1,2]
+  ];
+  const fortLevels = [['Neglected','Many works are underfunded or crumbling.',0,0,-1],['Maintained','Fortifications are kept in reliable condition.',0,0,1],['Formidable','The realm invests heavily in siege resistance.',-1,0,2],['Legendary','Its defensive works are famous across the world.',-1,1,3]];
+  const fortifications = cross(fortBases,fortLevels,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],null,[a[0].toLowerCase()]));
+
+  const navyBases = [
+    ['No Navy','The realm maintains almost no dedicated warships.',0,0,0,0],['River Flotilla','Shallow-draft vessels patrol rivers and lakes.',1,0,0,1],['Coastal Patrol','Small warships protect nearby shipping.',1,0,0,2],
+    ['Merchant Marine','Commercial shipping can be pressed into military service.',2,0,0,2],['Galley Fleet','Oared warships dominate sheltered seas.',1,0,0,3],['Sailing Fleet','Large sailing vessels support long-distance operations.',2,0,0,4],
+    ['Privateer Fleet','Licensed raiders supplement official naval forces.',2,0,-1,3],['Royal Armada','A powerful permanent fleet serves the crown.',3,0,1,5],['Arcane Fleet','Enchanted vessels and magical navigation transform naval warfare.',2,3,0,5],
+    ['Leviathan Riders','Rare crews fight alongside tamed sea monsters.',1,4,-1,5]
+  ];
+  const navyTones = [['Small','Numbers are limited but serviceable.',0,0,0],['Professional','Crews train year-round.',0,0,1],['Numerous','The realm can put many hulls to sea.',1,0,0],['Elite','Ship quality and crews are exceptional.',1,1,1]];
+  const navies = cross(navyBases,navyTones,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]} ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4],a[5]));
+
+  const crisisBases = [
+    ['Succession Dispute','several claimants contest the future of the crown',0,0,-2],['Famine','food reserves are dangerously low',-1,0,-2],['Border War','a neighbour occupies disputed land',-1,0,-1],
+    ['Mage Rebellion','arcane factions reject central authority',0,2,-3],['Peasant Revolt','taxation and obligations have become intolerable',-1,0,-2],['Religious Schism','priests and nobles support rival doctrines',0,1,-2],
+    ['Monster Incursion','settlements vanish along an exposed frontier',-1,1,-2],['Empty Treasury','the state is heavily indebted',-3,0,-1],['Plague','disease continues to spread through towns and villages',-2,0,-3],
+    ['Noble Conspiracy','leading houses secretly coordinate against the ruler',0,0,-2],['Pirate Crisis','shipping is being strangled by organised raiders',-1,0,-1],['Slave Revolt','large estates and mines face organised rebellion',-1,0,-2],
+    ['Arcane Catastrophe','a magical accident has devastated part of the realm',-1,2,-3],['Dragon Attack','a great dragon has begun demanding tribute',-2,2,-2],['Invasion','a foreign army has already crossed the frontier',-2,0,-2],
+    ['Heretical Movement','a rapidly growing new faith challenges established authority',0,1,-1],['Currency Collapse','coinage and state credit are failing',-3,0,-2],['Drought','harvests and river traffic are declining',-2,0,-2],
+    ['Bandit Kingdoms','large districts have effectively fallen outside royal control',-1,0,-2],['No Immediate Crisis','the realm begins in unusual peace and confidence',1,0,2]
+  ];
+  const severity = [['Contained','The problem is serious but currently localised.',0,0,1],['Major','The crisis affects several important regions.',0,0,-1],['Existential','Failure could bring down the entire political order.',-1,0,-3]];
+  const crises = cross(crisisBases,severity,(a,b)=>mk(`${b[0]} ${a[0]}`,`${a[1]}. ${b[1]}`,a[2]+b[2],a[3]+b[3],a[4]+b[4]));
+
+  const categories = [
+    {key:'origin',name:'Realm Origin',prompt:'Where does this realm begin?',options:origins},
+    {key:'scale',name:'Realm Scale',prompt:'How large is its domain?',options:scales},
+    {key:'government',name:'Government',prompt:'Who holds lawful power?',options:governments},
+    {key:'ruler',name:'Ruling House',prompt:'What kind of ruler sits at its centre?',options:rulers},
+    {key:'population',name:'Population',prompt:'How many souls owe allegiance to the realm?',options:populations},
+    {key:'culture',name:'Dominant Culture',prompt:'What does society value most?',options:cultures},
+    {key:'faith',name:'Faith',prompt:'What do the people believe?',options:faiths},
+    {key:'economy',name:'Economy',prompt:'What sustains the crown?',options:economies},
+    {key:'resource',name:'Strategic Resource',prompt:'What rare asset does the realm control?',options:resources},
+    {key:'army',name:'Army Size',prompt:'How much force can the crown field?',options:armySizes},
+    {key:'doctrine',name:'Military Doctrine',prompt:'How does the army expect to win?',options:doctrines},
+    {key:'elite',name:'Elite Formation',prompt:'Who are the army’s most feared soldiers?',options:elites},
+    {key:'magicLevel',name:'Magic Prevalence',prompt:'How common is supernatural power?',options:magicLevels},
+    {key:'magicSchool',name:'Dominant Magic',prompt:'Which tradition has the greatest influence?',options:magicSchools},
+    {key:'arcaneLaw',name:'Arcane Institution',prompt:'Who controls the use of magic?',options:arcaneLaws},
+    {key:'wonder',name:'Great Wonder',prompt:'What singular asset changes the realm’s place in the world?',options:wonders},
+    {key:'diplomacy',name:'Foreign Policy',prompt:'How does the realm treat its neighbours?',options:diplomacies},
+    {key:'fortification',name:'Fortifications',prompt:'How difficult is the realm to invade?',options:fortifications},
+    {key:'navy',name:'Naval Power',prompt:'What force can it project over water?',options:navies},
+    {key:'crisis',name:'Founding Crisis',prompt:'What threatens the realm at the opening of the chronicle?',options:crises}
+  ];
+
+  const realmNames = ['Valedorn','Cairnreach','Edrath','Thornmere','Avarra','Dunscar','Mornhallow','Veyr','Caldris','Ravenholt','Osthyr','Brannoch','Selvarin','Gloamreach','Kharad Vale','Everen','Drakenmark','Orinth','Velmora','Ashenford','Caer Veylan','Mordane','Talverin','Rimeholt','Aurelith','Duskryn','Halbrecht','Sablemarch','Merrowyn','Corvannis','Eldovar','Thyrhold','Vaelmoor','Rothmere','Asterfall','Kyradon','Nymbra','Stonewake','Varenth','Greyfen','Aldervane','Cindermere','Vhalor','Crownhollow','Redwater','Istraval','Dornwyck','Marrowfen','Sunspire','Wyrmrest'];
+  const capitals = ['Highcourt','Greyspire','Saint Veyra','Kingsfall','Ironhaven','Rosewatch','Dawnkeep','Blackgate','Old Caer','Silvercross','Stormhold','Emberhall','Ravenwatch','Ashspire','Mooncourt','Westermark','Dreadfort','Starfall','Gildenhall','Whitebridge','Liongate','Harrowport','Velis','Oakenshield'];
+  const dynasties = ['House Veyr','House Corven','House Albrecht','House Serat','House Morcant','House Halwyn','House Drax','House Vale','House Oris','House Redwyn','House Cael','House Thorn'];
+
+  const defaultState = () => ({
+    version: VERSION,
+    year: 1,
+    realms: [],
+    wars: [],
+    treaties: { alliances: [], trade: [], nonAggression: [], marriages: [], magicPacts: [], embargoes: [] },
+    chronicle: [],
+    draft: { name: '', selections: {}, categoryIndex: 0 },
+    ui: { activeView: 'forgeView' }
+  });
+
+  let state = loadState();
+  let wheelRotation = 0;
+  let spinning = false;
+  let toastTimer = null;
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      if (!parsed || parsed.version !== VERSION) return defaultState();
+      parsed.draft ||= {name:'', selections:{}, categoryIndex:0};
+      parsed.draft.selections ||= {};
+      parsed.ui ||= {activeView:'forgeView'};
+      parsed.treaties ||= {alliances:[],trade:[],nonAggression:[],marriages:[],magicPacts:[],embargoes:[]};
+      parsed.wars ||= [];
+      parsed.chronicle ||= [];
+      parsed.realms ||= [];
+      return parsed;
+    } catch (e) {
+      console.warn('Could not load save', e);
+      return defaultState();
+    }
+  }
+
+  function saveState() {
+    const dot = $('#saveDot');
+    const label = $('#saveLabel');
+    if (dot) dot.classList.add('busy');
+    if (label) label.textContent = 'Saving…';
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      setTimeout(() => {
+        if (dot) dot.classList.remove('busy');
+        if (label) label.textContent = 'Autosaved';
+      }, 140);
+    } catch (e) {
+      console.error('Save failed', e);
+      if (label) label.textContent = 'Save failed';
+    }
+  }
+
+  function showToast(message) {
+    const t = $('#toast');
+    t.textContent = message;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  function currentCategory() { return categories[clamp(state.draft.categoryIndex || 0, 0, categories.length - 1)]; }
+  function randomRealmName() { return pick(realmNames); }
+  function randomCapital() { return pick(capitals); }
+  function randomDynasty() { return pick(dynasties); }
+  function livingRealms() { return state.realms.filter(r => r.alive !== false); }
+  function realmById(id) { return state.realms.find(r => String(r.id) === String(id)); }
+  function hasPair(list, a, b) { return list.includes(pairKey(a, b)); }
+  function addPair(list, a, b) { const k = pairKey(a, b); if (!list.includes(k)) list.push(k); }
+  function removePair(list, a, b) { const k = pairKey(a, b); const i = list.indexOf(k); if (i >= 0) list.splice(i, 1); }
+
+  function calcDraftStats() {
+    const s = state.draft.selections;
+    let wealth = 6, arcana = 0, stability = 5;
+    Object.values(s).forEach(v => { wealth += v.w || 0; arcana += v.a || 0; stability += v.s || 0; });
+    const population = s.population?.value || 0;
+    const provinces = s.scale?.value || 0;
+    const army = s.army?.value || 0;
+    const mages = s.magicLevel?.value ?? 0;
+    const navy = s.navy?.value || 0;
+    const fortification = Math.max(0, (s.fortification?.s || 0) + 2);
+    const food = clamp(5 + (s.origin?.w || 0) + (s.economy?.name.includes('Grain') ? 3 : 0) + (s.crisis?.name.includes('Famine') ? -4 : 0), 1, 12);
+    return { population, provinces, army, mages, wealth: clamp(wealth, 1, 24), food, stability: clamp(stability, 1, 10), arcana: Math.max(0, arcana), navy, fortification };
+  }
+
+  function completeDraft() { return categories.every(c => state.draft.selections[c.key]) && state.draft.name.trim().length > 0; }
+
+  function polar(cx, cy, radius, angle) {
+    const rad = (angle - 90) * Math.PI / 180;
+    return {x: cx + radius * Math.cos(rad), y: cy + radius * Math.sin(rad)};
+  }
+  function arcPath(start, end) {
+    const p1 = polar(260, 260, 226, end), p2 = polar(260, 260, 226, start);
+    return `M260 260 L${p1.x} ${p1.y} A226 226 0 ${end - start > 180 ? 1 : 0} 0 ${p2.x} ${p2.y} Z`;
+  }
+
+  function renderWheel() {
+    const cat = currentCategory();
+    $('#wheelCategory').textContent = cat.name;
+    $('#wheelPrompt').textContent = cat.prompt;
+    $('#wheelStep').textContent = `${state.draft.categoryIndex + 1} / ${categories.length}`;
+    $('#wheelPool').textContent = `${cat.options.length} possible outcomes`;
+    const group = $('#wheelGroup');
+    group.innerHTML = '';
+    const palette = ['#6e5638','#5a4932','#7a6342','#4e5d4a','#63506a','#745047','#465968','#806d48'];
+    const step = 360 / cat.options.length;
+    cat.options.forEach((opt, i) => {
+      const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      path.setAttribute('d', arcPath(i * step, (i + 1) * step));
+      path.setAttribute('fill', palette[i % palette.length]);
+      path.setAttribute('stroke', '#18110c');
+      path.setAttribute('stroke-width', cat.options.length > 60 ? '.55' : '1');
+      group.appendChild(path);
+      const displayEvery = Math.max(1, Math.ceil(cat.options.length / 18));
+      if (cat.options.length <= 20 || i % displayEvery === 0) {
+        const angle = ((i + .5) * step - 90) * Math.PI / 180;
+        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+        text.setAttribute('x', 260 + 154 * Math.cos(angle));
+        text.setAttribute('y', 260 + 154 * Math.sin(angle));
+        text.setAttribute('text-anchor','middle');
+        text.setAttribute('dominant-baseline','middle');
+        text.setAttribute('fill','#f0e6d2');
+        text.setAttribute('font-size',cat.options.length > 30 ? '8' : '9');
+        text.setAttribute('font-family','system-ui, sans-serif');
+        text.setAttribute('font-weight','800');
+        text.textContent = cat.options.length > 20 ? String(i + 1) : (opt.name.length > 18 ? `${opt.name.slice(0,16)}…` : opt.name);
+        group.appendChild(text);
+      }
+    });
+    group.style.transformOrigin = '260px 260px';
+    group.style.transform = `rotate(${wheelRotation}deg)`;
+    $('#nextWheelBtn').disabled = !state.draft.selections[cat.key] || state.draft.categoryIndex >= categories.length - 1;
+    renderCategoryStrip();
+  }
+
+  function renderCategoryStrip() {
+    $('#categoryStrip').innerHTML = categories.map((c,i) => {
+      const cls = [state.draft.selections[c.key] ? 'done' : '', i === state.draft.categoryIndex ? 'current' : ''].filter(Boolean).join(' ');
+      return `<span class="category-pill ${cls}">${i+1}. ${escapeHtml(c.name)} · ${c.options.length}</span>`;
+    }).join('');
+  }
+
+  function spinCategory(index = state.draft.categoryIndex, animate = true) {
+    return new Promise(resolve => {
+      if (spinning) return resolve(null);
+      spinning = true;
+      state.draft.categoryIndex = clamp(index, 0, categories.length - 1);
+      renderWheel();
+      const cat = currentCategory();
+      const selectedIndex = Math.floor(Math.random() * cat.options.length);
+      const selected = cat.options[selectedIndex];
+      const step = 360 / cat.options.length;
+      const desired = 360 - (selectedIndex + .5) * step;
+      wheelRotation += 1080 + ((desired - (wheelRotation % 360) + 360) % 360);
+      const group = $('#wheelGroup');
+      const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      group.style.transition = (!animate || reduce) ? 'none' : 'transform 1.55s cubic-bezier(.12,.78,.18,1)';
+      requestAnimationFrame(() => { group.style.transform = `rotate(${wheelRotation}deg)`; });
+      setTimeout(() => {
+        state.draft.selections[cat.key] = selected;
+        $('#spinResult').innerHTML = `<strong>${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)} · 1 in ${cat.options.length} on this wheel.</span>`;
+        spinning = false;
+        renderDraft();
+        renderWheel();
+        saveState();
+        resolve(selected);
+      }, (!animate || reduce) ? 20 : 1580);
+    });
+  }
+
+  function randomiseRemaining() {
+    for (const cat of categories) {
+      if (!state.draft.selections[cat.key]) state.draft.selections[cat.key] = pick(cat.options);
+    }
+    state.draft.categoryIndex = categories.length - 1;
+    $('#spinResult').innerHTML = `<strong>The realm is complete.</strong><span>All unresolved wheels have been rolled from their full outcome pools.</span>`;
+    renderDraft();
+    renderWheel();
+    saveState();
+  }
+
+  function quickForge() {
+    state.draft.selections = {};
+    categories.forEach(cat => { state.draft.selections[cat.key] = pick(cat.options); });
+    state.draft.name = randomRealmName();
+    state.draft.categoryIndex = categories.length - 1;
+    $('#realmName').value = state.draft.name;
+    $('#spinResult').innerHTML = `<strong>${escapeHtml(state.draft.name)} has been quick-forged.</strong><span>Every founding wheel has been resolved. Review it or add it immediately.</span>`;
+    renderDraft(); renderWheel(); saveState();
+  }
+
+  function renderDraft() {
+    const s = state.draft.selections;
+    const stats = calcDraftStats();
+    const name = state.draft.name.trim() || 'Unnamed Realm';
+    $('#draftNameTitle').textContent = name;
+    const completed = categories.filter(c => s[c.key]).length;
+    $('#draftCompletion').textContent = `${completed} / ${categories.length}`;
+    $('#statPopulation').textContent = stats.population ? fmtPop(stats.population) : '—';
+    $('#statProvinces').textContent = stats.provinces || '—';
+    $('#statArmy').textContent = stats.army ? fmt(stats.army) : '—';
+    $('#statMages').textContent = s.magicLevel ? fmt(stats.mages) : '—';
+    $('#statWealth').textContent = `${stats.wealth}/24`;
+    $('#statFood').textContent = `${stats.food}/12`;
+    $('#statStability').textContent = `${stats.stability}/10`;
+    $('#statArcana').textContent = stats.arcana;
+    $('#draftOverview').textContent = s.origin && s.government ? `${name} is a ${s.scale?.name?.toLowerCase() || 'realm'} rooted in ${s.origin.name.toLowerCase()}, governed through ${s.government.name.toLowerCase()}. Its military favours ${s.doctrine?.name?.toLowerCase() || 'an undecided doctrine'}, while ${s.magicSchool?.name?.toLowerCase() || 'no dominant magical school'} shapes its supernatural life.` : 'Its history has not yet been written.';
+    const groups = [
+      ['Land & Crown',['origin','scale','government','ruler']], ['People & Faith',['population','culture','faith']],
+      ['Wealth & Resources',['economy','resource']], ['Armed Forces',['army','doctrine','elite','fortification','navy']],
+      ['Magic',['magicLevel','magicSchool','arcaneLaw','wonder']], ['Foreign Affairs',['diplomacy','crisis']]
+    ];
+    $('#dossierSections').innerHTML = groups.map(([title, keys]) => `<div class="dossier-section"><h3>${title}</h3>${keys.map(key => {
+      const c = categories.find(x => x.key === key), v = s[key];
+      return `<div class="dossier-row"><span>${escapeHtml(c.name)}</span><strong>${v ? escapeHtml(v.name) : '—'}</strong></div>`;
+    }).join('')}</div>`).join('');
+    $('#addRealmBtn').disabled = !completeDraft();
+  }
+
+  function resetDraft({newName = true, announce = false} = {}) {
+    state.draft = {name: newName ? randomRealmName() : '', selections: {}, categoryIndex: 0};
+    wheelRotation = 0;
+    $('#realmName').value = state.draft.name;
+    $('#spinResult').innerHTML = `<strong>The chroniclers are waiting.</strong><span>Turn the first wheel to begin the next realm.</span>`;
+    $('#forgeSuccess').classList.add('hidden');
+    renderDraft(); renderWheel(); saveState();
+    if (announce) showToast('Fresh founding wheel ready.');
+  }
+
+  function createRealmFromDraft() {
+    const x = calcDraftStats();
+    const s = JSON.parse(JSON.stringify(state.draft.selections));
+    const name = state.draft.name.trim();
+    return {
+      id: uid(), name, capital: randomCapital(), dynasty: randomDynasty(), alive: true,
+      foundedYear: state.year, selections: s,
+      population: x.population, provinces: x.provinces, army: x.army, mages: x.mages,
+      wealth: x.wealth, food: x.food, stability: x.stability, arcana: x.arcana,
+      navy: x.navy, fortification: x.fortification,
+      prestige: clamp(3 + Math.floor((x.wealth + x.stability + x.arcana) / 5), 1, 20),
+      rulerAge: int(18, 68), rulerName: generateRulerName(), vassalOf: null,
+      history: [], reforms: [], scars: []
+    };
+  }
+
+  function generateRulerName() {
+    const first = ['Aldric','Maera','Corvin','Elayne','Roderic','Ysara','Hadrian','Veyla','Orren','Seren','Garran','Mirelle','Cael','Thalia','Beren','Rhea','Lucan','Nerys','Darian','Ilyra','Torren','Sabine'];
+    const numeral = chance(.3) ? ` ${pick(['II','III','IV','V'])}` : '';
+    return `${pick(first)}${numeral}`;
+  }
+
+  function addRealm() {
+    if (!completeDraft()) return;
+    const realm = createRealmFromDraft();
+    state.realms.push(realm);
+    addChronicle(`${realm.name}, ruled from ${realm.capital} by ${realm.rulerName} of ${realm.dynasty}, is recognised as a sovereign realm.`, 'founding', [realm]);
+    saveState();
+    const success = $('#forgeSuccess');
+    success.textContent = `${realm.name} added to the world. The founding wheel has been reset for the next realm.`;
+    success.classList.remove('hidden');
+    resetDraft({newName:true});
+    success.textContent = `${realm.name} added to the world. A fresh realm is ready to forge.`;
+    success.classList.remove('hidden');
+    renderGlobalStatus();
+    showToast(`${realm.name} added. Forge another realm immediately.`);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function addChronicle(text, type = 'event', realms = []) {
+    const entry = {id:uid(), year:state.year, type, text, realmIds:realms.map(r=>r.id)};
+    state.chronicle.unshift(entry);
+    realms.forEach(r => { r.history ||= []; r.history.unshift(entry.id); });
+  }
+
+  function relationCount(list) { return Math.floor(list.length); }
+  function uniqueWars() { return state.wars.filter(w => !w.ended); }
+
+  const actionDefinitions = [
+    ['declareWar','Declare War','Begin a persistent war. Each subsequent year can produce battles, sieges, casualties and territorial change.'],
+    ['raid','Launch Raid','A single hostile expedition for wealth and prestige; it can fail and does not automatically create a formal war.'],
+    ['alliance','Propose Alliance','Attempt to create a defensive and diplomatic alliance. Compatible policy and prestige improve acceptance.'],
+    ['trade','Offer Trade Pact','Both realms gain recurring economic benefits while the pact survives.'],
+    ['nonAggression','Non-Aggression Pact','Mutually pledge not to attack. Useful before trade or magical cooperation.'],
+    ['marriage','Royal Marriage','Bind courts dynastically, improving stability and making future hostility less likely.'],
+    ['aid','Send Aid','Transfer wealth and food to improve relations and stabilise the target.'],
+    ['espionage','Send Spies','Attempt to steal wealth or uncover weakness. Discovery can badly damage relations.'],
+    ['sabotage','Sabotage','Covertly damage an opponent’s military, economy or magical infrastructure. High risk.'],
+    ['embargo','Impose Embargo','Damage trade with the target while sacrificing some of your own commerce.'],
+    ['magicPact','Arcane Exchange','Share magical expertise. Both realms can gain mages or arcane power.'],
+    ['tribute','Demand Tribute','Use military and prestige superiority to force a payment. Refusal may create war.'],
+    ['vassalOffer','Offer Vassalage','A weaker realm voluntarily accepts protection in exchange for reduced independence.'],
+    ['borderTreaty','Settle Border','Exchange claims and improve stability; can end a low-intensity territorial dispute.'],
+    ['ceasefire','Seek Ceasefire','Attempt to end an active war without further territorial exchange.']
+  ];
+
+  function renderActionOptions() {
+    $('#actionSelect').innerHTML = actionDefinitions.map(a => `<option value="${a[0]}">${a[1]}</option>`).join('');
+    updateActionPreview();
+  }
+
+  function actionDef(id) { return actionDefinitions.find(a => a[0] === id); }
+  function diplomacyScore(a, b) {
+    let score = 0;
+    if (hasPair(state.treaties.alliances,a.id,b.id)) score += 5;
+    if (hasPair(state.treaties.trade,a.id,b.id)) score += 3;
+    if (hasPair(state.treaties.nonAggression,a.id,b.id)) score += 2;
+    if (hasPair(state.treaties.marriages,a.id,b.id)) score += 3;
+    if (hasPair(state.treaties.magicPacts,a.id,b.id)) score += 2;
+    if (hasPair(state.treaties.embargoes,a.id,b.id)) score -= 4;
+    if (state.wars.some(w => !w.ended && pairKey(w.a,w.b) === pairKey(a.id,b.id))) score -= 8;
+    if (a.selections.diplomacy?.name.includes('Commercial')) score += 1;
+    if (b.selections.diplomacy?.name.includes('Commercial')) score += 1;
+    if (a.selections.diplomacy?.name.includes('Vengeful') || b.selections.diplomacy?.name.includes('Vengeful')) score -= 1;
+    return score;
+  }
+
+  function resolveDirectAction() {
+    const a = realmById($('#actorSelect').value), b = realmById($('#targetSelect').value);
+    const action = $('#actionSelect').value;
+    if (!a || !b || a.id === b.id) return showToast('Choose two different living realms.');
+    const rel = diplomacyScore(a,b);
+    switch(action) {
+      case 'declareWar': declareWar(a,b,'royal decree'); break;      case 'raid': resolveRaid(a,b); break;
+      case 'alliance': {
+        if (hasPair(state.treaties.alliances,a.id,b.id)) return showToast('Those realms are already allied.');
+        const accepted = rand(-2,5) + rel + a.prestige/5 >= 2;
+        if (accepted) { addPair(state.treaties.alliances,a.id,b.id); removePair(state.treaties.embargoes,a.id,b.id); a.stability=clamp(a.stability+1,1,10); b.stability=clamp(b.stability+1,1,10); addChronicle(`${a.name} and ${b.name} conclude a formal alliance after successful negotiations.`,'diplomacy',[a,b]); }
+        else addChronicle(`${b.name} rejects an alliance proposed by ${a.name}; the rebuff becomes a subject of court gossip.`,'diplomacy',[a,b]);
+        break;
+      }
+      case 'trade': {
+        if (!hasPair(state.treaties.trade,a.id,b.id)) addPair(state.treaties.trade,a.id,b.id);
+        a.wealth=clamp(a.wealth+1,1,30); b.wealth=clamp(b.wealth+1,1,30); addChronicle(`${a.name} and ${b.name} sign a trade compact, opening markets and reducing tariffs.`,'economy',[a,b]); break;
+      }
+      case 'nonAggression': {
+        if (uniqueWars().some(w=>pairKey(w.a,w.b)===pairKey(a.id,b.id))) return showToast('End the war before signing a non-aggression pact.');
+        if (rand(-2,5)+rel >= 0) { addPair(state.treaties.nonAggression,a.id,b.id); addChronicle(`${a.name} and ${b.name} pledge not to wage war on one another.`,'diplomacy',[a,b]); }
+        else addChronicle(`${b.name} refuses ${a.name}'s proposed non-aggression pact.`,'diplomacy',[a,b]);
+        break;
+      }
+      case 'marriage': {
+        const accepted = rand(-1,5)+rel+(a.prestige+b.prestige)/10>=2;
+        if (accepted) { addPair(state.treaties.marriages,a.id,b.id); a.stability=clamp(a.stability+1,1,10); b.stability=clamp(b.stability+1,1,10); addChronicle(`A dynastic marriage binds the ruling houses of ${a.name} and ${b.name}.`,'dynasty',[a,b]); }
+        else addChronicle(`${b.name} declines a proposed dynastic marriage with ${a.name}.`,'dynasty',[a,b]);
+        break;
+      }
+      case 'aid': {
+        if (a.wealth <= 1) return showToast(`${a.name} cannot afford significant aid.`);
+        a.wealth--; b.wealth=clamp(b.wealth+1,1,30); b.food=clamp(b.food+1,0,14); b.stability=clamp(b.stability+1,1,10); addChronicle(`${a.name} sends grain, coin and advisers to ${b.name}, strengthening the recipient government.`,'diplomacy',[a,b]); break;
+      }
+      case 'espionage': resolveEspionage(a,b,false); break;
+      case 'sabotage': resolveEspionage(a,b,true); break;
+      case 'embargo': {
+        addPair(state.treaties.embargoes,a.id,b.id); removePair(state.treaties.trade,a.id,b.id); a.wealth=clamp(a.wealth-1,1,30); b.wealth=clamp(b.wealth-2,1,30); addChronicle(`${a.name} imposes an embargo on ${b.name}; merchants on both sides protest the disruption.`,'economy',[a,b]); break;
+      }
+      case 'magicPact': {
+        const accepted = a.arcana+b.arcana+rel+rand(-4,5) > 4;
+        if (accepted) { addPair(state.treaties.magicPacts,a.id,b.id); a.arcana++; b.arcana++; a.mages=Math.round(a.mages*1.05+5); b.mages=Math.round(b.mages*1.05+5); addChronicle(`Mages from ${a.name} and ${b.name} establish a formal arcane exchange.`,'magic',[a,b]); }
+        else addChronicle(`${b.name} refuses ${a.name}'s proposed arcane exchange, citing security concerns.`,'magic',[a,b]);
+        break;
+      }
+      case 'tribute': resolveTributeDemand(a,b); break;
+      case 'vassalOffer': resolveVassalOffer(a,b); break;
+      case 'borderTreaty': {
+        if (uniqueWars().some(w=>pairKey(w.a,w.b)===pairKey(a.id,b.id))) return showToast('A border treaty cannot be signed while the realms are at war.');
+        a.stability=clamp(a.stability+1,1,10);b.stability=clamp(b.stability+1,1,10);addPair(state.treaties.nonAggression,a.id,b.id);addChronicle(`${a.name} and ${b.name} formally survey and recognise their frontier, ending years of minor disputes.`,'diplomacy',[a,b]);break;
+      }
+      case 'ceasefire': resolveCeasefire(a,b); break;
+    }
+    saveState(); renderAll(); showToast('Order resolved and autosaved.');
+  }
+
+  function resolveRaid(a,b) {
+    const atk = militaryPower(a,true) + rand(-4,4), def = militaryPower(b,false) + rand(-4,4);
+    if (atk > def) {
+      const booty = Math.min(2, Math.max(1,b.wealth-1)); a.wealth=clamp(a.wealth+booty,1,30); b.wealth=clamp(b.wealth-booty,1,30); b.stability=clamp(b.stability-1,1,10);
+      const lossA=Math.round(a.army*rand(.01,.05)),lossB=Math.round(b.army*rand(.02,.08));a.army=Math.max(0,a.army-lossA);b.army=Math.max(0,b.army-lossB);
+      addChronicle(`${a.name} launches a successful raid into ${b.name}, carrying away wealth after sharp fighting. ${fmt(lossA)} raiders and ${fmt(lossB)} defenders are lost.`,'war',[a,b]);
+    } else {
+      const lossA=Math.round(a.army*rand(.03,.09)),lossB=Math.round(b.army*rand(.01,.04));a.army=Math.max(0,a.army-lossA);b.army=Math.max(0,b.army-lossB);a.prestige=clamp(a.prestige-1,0,30);
+      addChronicle(`${b.name} defeats a raid from ${a.name}. The attackers lose ${fmt(lossA)} troops and retreat with little to show for the expedition.`,'war',[a,b]);
+    }
+  }
+
+  function resolveEspionage(a,b,sabotage) {
+    const attack = a.wealth + a.arcana*.4 + rand(-5,5), defence = b.stability + b.arcana*.3 + rand(-3,6);
+    if (attack > defence) {
+      if (sabotage) {
+        const damageType=pick(['army','wealth','arcana']);
+        if(damageType==='army'){const lost=Math.round(b.army*rand(.03,.08));b.army=Math.max(0,b.army-lost);addChronicle(`Agents of ${a.name} sabotage military stores in ${b.name}; ${fmt(lost)} troops' worth of equipment is lost or rendered unusable.`,'intrigue',[a,b]);}
+        if(damageType==='wealth'){b.wealth=clamp(b.wealth-2,1,30);addChronicle(`Agents of ${a.name} burn ledgers and warehouses in ${b.name}, damaging royal finances.`,'intrigue',[a,b]);}
+        if(damageType==='arcana'){b.arcana=Math.max(0,b.arcana-2);b.mages=Math.max(0,Math.round(b.mages*.94));addChronicle(`Saboteurs from ${a.name} strike magical facilities in ${b.name}, disrupting research and killing several practitioners.`,'intrigue',[a,b]);}
+      } else {
+        a.wealth=clamp(a.wealth+1,1,30);a.prestige=clamp(a.prestige+1,0,30);addChronicle(`${a.name}'s spies penetrate ${b.name}'s court and return with valuable intelligence and stolen correspondence.`,'intrigue',[a,b]);
+      }
+    } else {
+      a.prestige=clamp(a.prestige-1,0,30);b.stability=clamp(b.stability+1,1,10);addChronicle(`${b.name} uncovers ${sabotage?'a sabotage network':'spies'} sent by ${a.name}. The exposed operation causes a diplomatic scandal.`,'intrigue',[a,b]);
+      if(chance(.22)) declareWar(b,a,'retaliation for covert action');
+    }
+  }
+
+  function resolveTributeDemand(a,b) {
+    const pressure=militaryPower(a,true)+a.prestige+rand(-3,4),resistance=militaryPower(b,false)+b.stability+b.prestige+rand(-3,4);
+    if(pressure>resistance){const payment=Math.min(3,Math.max(1,b.wealth-1));b.wealth=clamp(b.wealth-payment,1,30);a.wealth=clamp(a.wealth+payment,1,30);b.stability=clamp(b.stability-1,1,10);addChronicle(`${b.name} yields to ${a.name}'s demand for tribute and sends a humiliating payment of coin and goods.`,'diplomacy',[a,b]);}
+    else {addChronicle(`${b.name} publicly refuses ${a.name}'s demand for tribute.`,'diplomacy',[a,b]);if(chance(.38))declareWar(a,b,'a rejected tribute demand');}
+  }
+
+  function resolveVassalOffer(a,b) {
+    if (a.vassalOf) return showToast(`${a.name} is already a vassal.`);
+    const accepts = militaryPower(b,false) > militaryPower(a,false)*1.25 && rand(-2,4)+diplomacyScore(a,b) >= 0;
+    if (accepts) { a.vassalOf=b.id; a.stability=clamp(a.stability+2,1,10);b.prestige=clamp(b.prestige+2,0,30);addPair(state.treaties.alliances,a.id,b.id);addChronicle(`${a.name} voluntarily accepts the overlordship of ${b.name}, trading independence for protection.`,'diplomacy',[a,b]); }
+    else addChronicle(`${b.name} declines ${a.name}'s offer of vassalage, unwilling to assume the obligation of protection.`,'diplomacy',[a,b]);
+  }
+
+  function resolveCeasefire(a,b) {
+    const war=uniqueWars().find(w=>pairKey(w.a,w.b)===pairKey(a.id,b.id));
+    if(!war)return showToast('Those realms are not currently at war.');
+    const accepted=war.battles>=2||chance(.55)||(a.stability+b.stability<7);
+    if(accepted){war.ended=true;war.endedYear=state.year;addChronicle(`${a.name} and ${b.name} accept a ceasefire. The war ends after ${war.battles} major campaign${war.battles===1?'':'s'}.`,'diplomacy',[a,b]);}
+    else addChronicle(`${b.name} rejects a ceasefire proposed by ${a.name}; the war continues.`,'diplomacy',[a,b]);
+  }
+
+  function declareWar(a,b,cause='a worsening dispute') {
+    if (uniqueWars().some(w=>pairKey(w.a,w.b)===pairKey(a.id,b.id))) return;
+    removePair(state.treaties.alliances,a.id,b.id);removePair(state.treaties.trade,a.id,b.id);removePair(state.treaties.nonAggression,a.id,b.id);removePair(state.treaties.marriages,a.id,b.id);removePair(state.treaties.magicPacts,a.id,b.id);
+    state.wars.push({id:uid(),a:a.id,b:b.id,startedYear:state.year,battles:0,scoreA:0,scoreB:0,ended:false,cause});
+    addChronicle(`${a.name} declares war on ${b.name}, citing ${cause}.`,'war',[a,b]);
+  }
+
+  function militaryPower(r, attacking) {
+    if (!r || !r.alive) return 0;
+    let power = Math.log10(Math.max(1000,r.army))*2.2 + r.arcana*.35 + r.prestige*.18 + r.wealth*.08 + r.stability*.22;
+    const d=r.selections.doctrine?.name||'',f=r.selections.fortification?.name||'',n=r.selections.navy?.name||'';
+    if(!attacking){power += r.fortification*.65;if(d.includes('Deep Defence')||d.includes('Fortress Warfare'))power+=2;if(f.includes('Legendary'))power+=1.5;}
+    if(attacking&&d.includes('Siege Mastery'))power+=1.5;if(d.includes('Arcane Warfare'))power+=r.arcana*.12;if(d.includes('Combined Arms'))power+=.8;if(n.includes('Royal Armada')||n.includes('Arcane Fleet'))power+=.5;
+    return power;
+  }
+
+  function campaignBattle(war) {
+    const a=realmById(war.a),b=realmById(war.b);if(!a?.alive||!b?.alive){war.ended=true;return;}
+    war.battles++;
+    const ap=militaryPower(a,true)+rand(-4,4),bp=militaryPower(b,false)+rand(-4,4);
+    const attackerWins=ap>bp;const winner=attackerWins?a:b,loser=attackerWins?b:a;
+    const winnerLoss=Math.round(winner.army*rand(.025,.10));const loserLoss=Math.round(loser.army*rand(.06,.19));
+    winner.army=Math.max(0,winner.army-winnerLoss);loser.army=Math.max(0,loser.army-loserLoss);
+    winner.population=Math.max(.03,winner.population-winnerLoss/2600000);loser.population=Math.max(.03,loser.population-loserLoss/2100000);
+    if(attackerWins)war.scoreA++;else war.scoreB++;
+    let territorial='';
+    const margin=Math.abs(ap-bp);
+    if(margin>2.5&&chance(.55)&&loser.provinces>1){loser.provinces--;winner.provinces++;loser.stability=clamp(loser.stability-1,1,10);winner.prestige=clamp(winner.prestige+1,0,30);territorial=` ${winner.name} occupies and annexes one province.`;}
+    addChronicle(`${winner.name} wins a major campaign against ${loser.name}. About ${fmt(winnerLoss)} of the victor's troops and ${fmt(loserLoss)} of the defeated host are lost.${territorial}`,'war',[a,b]);
+    if(loser.army<1000&&chance(.35)){loser.stability=clamp(loser.stability-2,1,10);}
+    if(loser.provinces<=0||loser.population<=.03){collapseRealm(loser,winner,'conquest');war.ended=true;return;}
+    if(war.battles>=3&&(war.scoreA>=3||war.scoreB>=3)&&chance(.35)){war.ended=true;addChronicle(`${a.name} and ${b.name} accept an exhausted peace after ${war.battles} major campaigns.`,'diplomacy',[a,b]);}
+    else if(war.battles>=7&&chance(.5)){war.ended=true;addChronicle(`${a.name} and ${b.name} agree to end a prolonged war after years of inconclusive fighting.`,'diplomacy',[a,b]);}
+  }
+
+  function collapseRealm(loser,winner,cause) {
+    const remainingLand = Math.max(1, loser.provinces || 1);
+    loser.alive=false;loser.provinces=0;loser.army=0;winner.provinces+=Math.max(1,Math.floor(remainingLand*.5));winner.prestige=clamp(winner.prestige+3,0,30);
+    addChronicle(`${loser.name} ceases to exist as a sovereign realm through ${cause}; ${winner.name} emerges as the principal beneficiary.`,'collapse',[loser,winner]);
+    cleanupRelations(loser.id);
+  }
+
+  function cleanupRelations(id) {
+    Object.keys(state.treaties).forEach(k=>state.treaties[k]=state.treaties[k].filter(pair=>!pair.split('::').includes(String(id))));
+    state.wars.forEach(w=>{if(w.a===id||w.b===id)w.ended=true;});
+  }
+
+  function annualBaseline(realm) {
+    realm.rulerAge=(realm.rulerAge||30)+1;
+    const tradeLinks=state.treaties.trade.filter(p=>p.split('::').includes(realm.id)).length;
+    const embargoes=state.treaties.embargoes.filter(p=>p.split('::').includes(realm.id)).length;
+    const atWar=uniqueWars().some(w=>w.a===realm.id||w.b===realm.id);
+    const growth=0.004 + realm.food*.0007 + realm.stability*.00035 - (atWar?.004:0);
+    realm.population=Math.max(.03,realm.population*(1+growth));
+    realm.wealth=clamp(realm.wealth + (tradeLinks?1:0) - (embargoes?1:0) - (atWar&&realm.army>50000?1:0),1,30);
+    if(realm.food<=2){realm.stability=clamp(realm.stability-1,1,10);realm.population*=.985;}
+    if(realm.food>=9&&chance(.25))realm.population*=1.004;
+    if(realm.vassalOf){const lord=realmById(realm.vassalOf);if(lord?.alive&&realm.wealth>2){realm.wealth--;lord.wealth=clamp(lord.wealth+1,1,30);}}
+    if(realm.rulerAge>72&&chance(.12)) successionEvent(realm,'natural death');
+    else if(realm.rulerAge>58&&chance(.035)) successionEvent(realm,'illness');
+  }
+
+  function successionEvent(realm,cause) {
+    const old=realm.rulerName;realm.rulerName=generateRulerName();realm.rulerAge=int(16,48);
+    const smooth=realm.stability>=6&&chance(.72);
+    if(smooth){realm.stability=clamp(realm.stability+1,1,10);addChronicle(`${old}, ruler of ${realm.name}, dies from ${cause}. ${realm.rulerName} succeeds peacefully.`,'dynasty',[realm]);}
+    else{realm.stability=clamp(realm.stability-int(1,3),1,10);addChronicle(`${old}, ruler of ${realm.name}, dies from ${cause}. The accession of ${realm.rulerName} triggers a bitter succession struggle.`,'dynasty',[realm]);if(realm.stability<=2&&chance(.3))civilWarScare(realm);}
+  }
+
+  function civilWarScare(realm){const lost=Math.round(realm.army*rand(.08,.22));realm.army=Math.max(500,realm.army-lost);realm.wealth=clamp(realm.wealth-2,1,30);addChronicle(`Rival claimants in ${realm.name} fight openly. The brief civil war costs roughly ${fmt(lost)} soldiers before ${realm.rulerName}'s faction prevails.`,'crisis',[realm]);}
+
+  const domesticEvents = [
+    ['Bumper Harvest','economy',r=>true,r=>{r.food=clamp(r.food+3,0,14);r.wealth=clamp(r.wealth+1,1,30);return `An exceptional harvest fills the granaries of ${r.name}; grain prices fall and reserves swell.`;}],
+    ['Crop Blight','disaster',r=>r.food>1,r=>{r.food=clamp(r.food-3,0,14);r.stability=clamp(r.stability-1,1,10);return `Crop blight spreads across ${r.name}, emptying granaries and forcing emergency rationing.`;}],
+    ['New Mine','economy',r=>true,r=>{r.wealth=clamp(r.wealth+2,1,30);return `Prospectors in ${r.name} discover a productive new mineral seam, enriching the treasury.`;}],
+    ['Great Fair','economy',r=>true,r=>{r.wealth=clamp(r.wealth+1,1,30);r.prestige=clamp(r.prestige+1,0,30);return `${r.name} hosts a great fair drawing merchants, entertainers and envoys from distant lands.`;}],
+    ['Guild Strike','crisis',r=>r.wealth>2,r=>{r.wealth=clamp(r.wealth-2,1,30);r.stability=clamp(r.stability-1,1,10);return `Powerful guilds in ${r.name} halt work over taxes and privileges, damaging urban commerce.`;}],
+    ['Tax Reform','politics',r=>true,r=>{if(chance(.65)){r.wealth=clamp(r.wealth+2,1,30);r.stability=clamp(r.stability+1,1,10);return `${r.name} successfully reforms taxation, raising more revenue while curbing arbitrary levies.`;}r.stability=clamp(r.stability-2,1,10);return `A tax reform in ${r.name} backfires, provoking evasion, unrest and resistance from local elites.`;}],
+    ['Corruption Scandal','politics',r=>true,r=>{r.wealth=clamp(r.wealth-1,1,30);r.stability=clamp(r.stability-1,1,10);return `A corruption scandal implicates senior officials in ${r.name}, weakening trust in the court.`;}],
+    ['Heir Born','dynasty',r=>true,r=>{r.stability=clamp(r.stability+1,1,10);r.prestige=clamp(r.prestige+1,0,30);return `The ruling house of ${r.name} celebrates the birth of a widely welcomed heir.`;}],
+    ['Peasant Revolt','crisis',r=>r.stability<8,r=>{const lost=Math.round(r.army*rand(.02,.08));r.army=Math.max(500,r.army-lost);r.stability=clamp(r.stability-1,1,10);r.food=clamp(r.food-1,0,14);return `A peasant revolt erupts in ${r.name}. The rising is suppressed after costing roughly ${fmt(lost)} soldiers and militia.`;}],
+    ['Noble Revolt','crisis',r=>r.stability<7,r=>{const lost=Math.round(r.army*rand(.05,.13));r.army=Math.max(500,r.army-lost);r.stability=clamp(r.stability-2,1,10);return `Several great houses in ${r.name} raise banners against the crown. The revolt is contained, but ${fmt(lost)} troops are lost.`;}],
+    ['Religious Revival','religion',r=>true,r=>{r.stability=clamp(r.stability+1,1,10);r.prestige=clamp(r.prestige+1,0,30);return `A wave of religious revival sweeps ${r.name}, filling shrines and strengthening communal institutions.`;}],
+    ['Religious Schism','religion',r=>true,r=>{r.stability=clamp(r.stability-2,1,10);return `Clergy in ${r.name} divide over doctrine, and rival congregations appeal to nobles for protection.`;}],
+    ['Plague','disaster',r=>r.population>.1,r=>{const factor=rand(.93,.98);const before=r.population;r.population*=factor;r.stability=clamp(r.stability-1,1,10);return `A severe epidemic strikes ${r.name}, killing roughly ${fmt((before-r.population)*1000000)} people.`;}],
+    ['Urban Fire','disaster',r=>true,r=>{r.wealth=clamp(r.wealth-1,1,30);return `A major fire consumes workshops and homes in one of ${r.name}'s largest towns.`;}],
+    ['Flood','disaster',r=>true,r=>{r.food=clamp(r.food-2,0,14);r.wealth=clamp(r.wealth-1,1,30);return `Floodwaters devastate farms and roads in ${r.name}; reconstruction begins immediately.`;}],
+    ['Earthquake','disaster',r=>true,r=>{r.wealth=clamp(r.wealth-2,1,30);r.stability=clamp(r.stability-1,1,10);r.fortification=Math.max(0,r.fortification-1);return `An earthquake damages towns and fortifications across ${r.name}.`;}],
+    ['Hard Winter','disaster',r=>r.food>0,r=>{r.food=clamp(r.food-2,0,14);r.population*=.995;return `A punishing winter grips ${r.name}, consuming food reserves and killing livestock.`;}],
+    ['Drought','disaster',r=>r.food>0,r=>{r.food=clamp(r.food-2,0,14);return `Rain fails across ${r.name}; wells shrink and harvest forecasts worsen.`;}],
+    ['Monster Hunt','military',r=>true,r=>{r.prestige=clamp(r.prestige+1,0,30);return `A celebrated hunt in ${r.name} kills a dangerous monster that had plagued frontier villages.`;}],
+    ['Monster Incursion','crisis',r=>true,r=>{const lost=Math.round(r.army*rand(.01,.05));r.army=Math.max(500,r.army-lost);r.stability=clamp(r.stability-1,1,10);return `A monster incursion ravages the frontier of ${r.name}; soldiers lose ${fmt(lost)} troops driving it back.`;}],
+    ['Bandits Crushed','military',r=>true,r=>{r.stability=clamp(r.stability+1,1,10);r.wealth=clamp(r.wealth+1,1,30);return `Royal forces in ${r.name} destroy a major bandit league and reopen several roads.`;}],
+    ['Mercenary Contract','military',r=>r.wealth>2,r=>{const gain=int(1500,8000);r.wealth--;r.army+=gain;return `${r.name} hires a veteran mercenary company, adding ${fmt(gain)} experienced troops to the field army.`;}],
+    ['Military Reform','military',r=>true,r=>{r.army=Math.round(r.army*1.08);r.prestige=clamp(r.prestige+1,0,30);return `Officers in ${r.name} reorganise recruitment, drill and supply, modestly increasing military effectiveness.`;}],
+    ['Desertion','military',r=>r.army>3000,r=>{const lost=Math.round(r.army*rand(.03,.09));r.army-=lost;r.stability=clamp(r.stability-1,1,10);return `Poor pay and harsh discipline cause ${fmt(lost)} troops to desert from ${r.name}'s army.`;}],
+    ['Fortress Programme','military',r=>r.wealth>2,r=>{r.wealth--;r.fortification=clamp(r.fortification+1,0,12);return `${r.name} begins an ambitious programme of walls, towers and frontier keeps.`;}],
+    ['Fleet Expansion','military',r=>r.wealth>2&&r.navy>0,r=>{r.wealth--;r.navy=clamp(r.navy+1,0,8);return `${r.name} lays down new warships and expands naval recruitment.`;}],
+    ['Arcane Breakthrough','magic',r=>r.mages>0,r=>{r.arcana+=2;r.mages=Math.round(r.mages*1.06+8);return `Scholars in ${r.name} achieve a major magical breakthrough, expanding both theory and trained practitioners.`;}],
+    ['Arcane Catastrophe','magic',r=>r.arcana>2,r=>{r.arcana=Math.max(0,r.arcana-2);r.mages=Math.max(0,Math.round(r.mages*.92));r.stability=clamp(r.stability-1,1,10);return `A disastrous magical experiment in ${r.name} kills practitioners and forces new restrictions on dangerous research.`;}],
+    ['Mage Purge','magic',r=>r.mages>20,r=>{r.mages=Math.round(r.mages*.82);r.arcana=Math.max(0,r.arcana-1);r.stability=clamp(r.stability+1,1,10);return `Authorities in ${r.name} purge an accused magical faction; public order improves while arcane capacity falls.`;}],
+    ['Artefact Found','magic',r=>true,r=>{r.arcana+=1;r.prestige=clamp(r.prestige+2,0,30);return `Excavators in ${r.name} recover a powerful artefact from a forgotten ruin.`;}],
+    ['Wonder Awakens','magic',r=>r.selections.wonder?.name&&!r.selections.wonder.name.includes('Dormant')?true:chance(.5),r=>{r.arcana+=2;r.prestige=clamp(r.prestige+1,0,30);return `${r.name}'s great wonder displays an unmistakable surge of power, attracting pilgrims, scholars and spies.`;}],
+    ['Cursed Relic','magic',r=>true,r=>{r.stability=clamp(r.stability-1,1,10);r.arcana+=1;return `A newly recovered relic in ${r.name} proves cursed; its dangerous power is contained only with difficulty.`;}],
+    ['Immigration','society',r=>true,r=>{const gain=rand(.01,.08);r.population+=gain;r.wealth=clamp(r.wealth+1,1,30);return `Craftspeople and farmers migrate into ${r.name}, adding roughly ${fmt(gain*1000000)} inhabitants.`;}],
+    ['Emigration','society',r=>r.population>.15,r=>{const loss=Math.min(r.population*.04,rand(.01,.07));r.population-=loss;r.stability=clamp(r.stability-1,1,10);return `Economic hardship drives roughly ${fmt(loss*1000000)} people to leave ${r.name}.`;}],
+    ['Cultural Golden Age','society',r=>r.wealth>5,r=>{r.prestige=clamp(r.prestige+2,0,30);r.stability=clamp(r.stability+1,1,10);return `Poets, architects and scholars make ${r.name} the centre of a celebrated cultural flowering.`;}],
+    ['University Founded','society',r=>r.wealth>4,r=>{r.wealth--;r.arcana++;r.prestige++;return `${r.name} charters a major university, attracting scholars of law, medicine, magic and philosophy.`;}],
+    ['Spy Ring Exposed','intrigue',r=>true,r=>{r.stability=clamp(r.stability+1,1,10);return `Counter-intelligence officials in ${r.name} expose a foreign spy ring before it can complete its mission.`;}],
+    ['Assassination Attempt','intrigue',r=>true,r=>{if(chance(.3)){successionEvent(r,'assassination');return `An assassin reaches the ruler of ${r.name}; the attack succeeds and throws the court into succession.`;}r.stability=clamp(r.stability+1,1,10);return `An assassination attempt against ${r.rulerName} of ${r.name} fails, prompting arrests and a security crackdown.`;}],
+    ['Failed Coup','intrigue',r=>r.stability<8,r=>{r.stability=clamp(r.stability+1,1,10);return `A conspiracy to overthrow ${r.rulerName} in ${r.name} collapses after key officers remain loyal.`;}],
+    ['Successful Coup','intrigue',r=>r.stability<4,r=>{const old=r.rulerName;r.rulerName=generateRulerName();r.rulerAge=int(24,55);r.stability=clamp(r.stability-1,1,10);return `A palace coup in ${r.name} removes ${old}; ${r.rulerName} seizes control of the government.`;}],
+    ['Administrative Census','politics',r=>true,r=>{r.wealth=clamp(r.wealth+1,1,30);return `${r.name} completes a realm-wide census, improving taxation and military levies.`;}],
+    ['Legal Reform','politics',r=>true,r=>{r.stability=clamp(r.stability+1,1,10);return `A new legal code in ${r.name} standardises courts and reduces long-running jurisdictional disputes.`;}],
+    ['Court Extravagance','politics',r=>r.wealth>2,r=>{r.wealth=clamp(r.wealth-2,1,30);r.prestige=clamp(r.prestige+1,0,30);return `${r.name}'s court stages extravagant ceremonies that impress foreign envoys while draining the treasury.`;}],
+    ['Debt Crisis','economy',r=>r.wealth<5,r=>{r.wealth=clamp(r.wealth-1,1,30);r.stability=clamp(r.stability-1,1,10);return `Creditors lose confidence in ${r.name}; emergency loans arrive only at punishing terms.`;}],
+    ['Coinage Reform','economy',r=>true,r=>{if(chance(.65)){r.wealth=clamp(r.wealth+1,1,30);return `${r.name} successfully reforms its coinage, improving confidence in trade.`;}r.wealth=clamp(r.wealth-1,1,30);return `A poorly handled coinage reform in ${r.name} triggers hoarding and price confusion.`;}],
+    ['New Irrigation','economy',r=>r.wealth>2,r=>{r.wealth--;r.food=clamp(r.food+2,0,14);return `${r.name} completes new canals and irrigation works, increasing reliable food production.`;}],
+    ['Veterans Settled','society',r=>r.army>8000,r=>{r.food=clamp(r.food+1,0,14);r.stability=clamp(r.stability+1,1,10);return `${r.name} settles veteran soldiers on frontier land, strengthening agriculture and local defence.`;}]
+  ];
+
+  const interRealmEvents = [
+    ['Border Dispute','diplomacy',(a,b)=>!atWar(a,b), (a,b)=>{a.stability=clamp(a.stability-1,1,10);b.stability=clamp(b.stability-1,1,10);if(chance(.22))declareWar(a,b,'a border dispute that spiralled out of control');return `Surveyors and soldiers from ${a.name} and ${b.name} clash over a disputed frontier district.`;}],
+    ['Diplomatic Insult','diplomacy',(a,b)=>true,(a,b)=>{a.prestige=clamp(a.prestige-1,0,30);removePair(state.treaties.trade,a.id,b.id);return `An envoy from ${a.name} publicly insults the court of ${b.name}, souring relations.`;}],
+    ['Spontaneous Trade Pact','economy',(a,b)=>!atWar(a,b)&&!hasPair(state.treaties.trade,a.id,b.id),(a,b)=>{addPair(state.treaties.trade,a.id,b.id);a.wealth=clamp(a.wealth+1,1,30);b.wealth=clamp(b.wealth+1,1,30);return `Merchants pressure ${a.name} and ${b.name} into a new trade agreement.`;}],
+    ['Royal Marriage','dynasty',(a,b)=>!atWar(a,b)&&!hasPair(state.treaties.marriages,a.id,b.id),(a,b)=>{addPair(state.treaties.marriages,a.id,b.id);a.stability=clamp(a.stability+1,1,10);b.stability=clamp(b.stability+1,1,10);return `A dynastic marriage unexpectedly joins the courts of ${a.name} and ${b.name}.`;}],
+    ['Alliance Formed','diplomacy',(a,b)=>!atWar(a,b)&&!hasPair(state.treaties.alliances,a.id,b.id),(a,b)=>{addPair(state.treaties.alliances,a.id,b.id);return `${a.name} and ${b.name} sign a defensive alliance in response to growing uncertainty.`;}],
+    ['Alliance Fractures','diplomacy',(a,b)=>hasPair(state.treaties.alliances,a.id,b.id),(a,b)=>{removePair(state.treaties.alliances,a.id,b.id);return `The alliance between ${a.name} and ${b.name} collapses after months of accusations and missed obligations.`;}],
+    ['Trade Dispute','economy',(a,b)=>hasPair(state.treaties.trade,a.id,b.id),(a,b)=>{removePair(state.treaties.trade,a.id,b.id);a.wealth=clamp(a.wealth-1,1,30);b.wealth=clamp(b.wealth-1,1,30);return `A tariff dispute ends the trade pact between ${a.name} and ${b.name}.`;}],
+    ['Joint Monster Hunt','military',(a,b)=>!atWar(a,b),(a,b)=>{a.prestige++;b.prestige++;return `Soldiers from ${a.name} and ${b.name} cooperate to destroy a dangerous monster roaming their shared frontier.`;}],
+    ['Refugee Flight','society',(a,b)=>a.stability<=4&&!atWar(a,b),(a,b)=>{const moved=Math.min(a.population*.02,.08);a.population-=moved;b.population+=moved;b.food=clamp(b.food-1,0,14);return `Roughly ${fmt(moved*1000000)} refugees leave unstable ${a.name} for ${b.name}, straining local food supplies.`;}],
+    ['Arcane Congress','magic',(a,b)=>a.mages>0&&b.mages>0&&!atWar(a,b),(a,b)=>{addPair(state.treaties.magicPacts,a.id,b.id);a.arcana++;b.arcana++;return `Mages from ${a.name} and ${b.name} meet in a rare international congress and agree to exchange research.`;}],
+    ['Pilgrimage Route','religion',(a,b)=>!atWar(a,b),(a,b)=>{a.wealth=clamp(a.wealth+1,1,30);b.wealth=clamp(b.wealth+1,1,30);return `A popular pilgrimage route develops between sacred sites in ${a.name} and ${b.name}, enriching towns along the road.`;}],
+    ['Espionage Scandal','intrigue',(a,b)=>!atWar(a,b),(a,b)=>{a.prestige=clamp(a.prestige-1,0,30);b.stability=clamp(b.stability+1,1,10);return `${b.name} captures agents operating on behalf of ${a.name}, causing an international scandal.`;}],
+    ['Raid','war',(a,b)=>!hasPair(state.treaties.alliances,a.id,b.id),(a,b)=>{resolveRaid(a,b);return null;}],
+    ['War Erupts','war',(a,b)=>!atWar(a,b)&&!hasPair(state.treaties.alliances,a.id,b.id),(a,b)=>{declareWar(a,b,'a rapidly escalating diplomatic crisis');return null;}],
+    ['Peace Overture','diplomacy',(a,b)=>atWar(a,b),(a,b)=>{const w=warBetween(a,b);if(w&&(w.battles>=2||chance(.45))){w.ended=true;return `${a.name} and ${b.name} accept a negotiated peace after mounting costs on both sides.`;}return `${a.name} proposes peace to ${b.name}, but negotiations fail and the war continues.`;}],
+    ['Embargo','economy',(a,b)=>!atWar(a,b),(a,b)=>{addPair(state.treaties.embargoes,a.id,b.id);removePair(state.treaties.trade,a.id,b.id);b.wealth=clamp(b.wealth-1,1,30);return `${a.name} imposes an embargo on ${b.name} after a bitter commercial dispute.`;}],
+    ['Border Settlement','diplomacy',(a,b)=>!atWar(a,b),(a,b)=>{addPair(state.treaties.nonAggression,a.id,b.id);a.stability=clamp(a.stability+1,1,10);b.stability=clamp(b.stability+1,1,10);return `${a.name} and ${b.name} settle an old border dispute and mark the frontier with jointly recognised stones.`;}],
+    ['Military Mission','military',(a,b)=>hasPair(state.treaties.alliances,a.id,b.id),(a,b)=>{const gain=int(500,3000);b.army+=gain;return `${a.name} sends officers to train forces in allied ${b.name}, improving recruitment and drill.`;}],
+    ['Secret Subsidy','intrigue',(a,b)=>a.wealth>2&&!atWar(a,b),(a,b)=>{a.wealth--;b.wealth=clamp(b.wealth+1,1,30);return `${a.name} quietly channels coin into factions inside ${b.name}; the money's true purpose remains unclear.`;}],
+    ['Vassal Crisis','diplomacy',(a,b)=>a.vassalOf===b.id,(a,b)=>{if(chance(.45)){a.vassalOf=null;removePair(state.treaties.alliances,a.id,b.id);return `${a.name} renounces vassalage to ${b.name}, daring its former overlord to respond.`;}return `${b.name} forces vassal ${a.name} to reaffirm its oaths and deliver additional tribute.`;}]
+  ];
+
+  function atWar(a,b){return !!warBetween(a,b);} function warBetween(a,b){return uniqueWars().find(w=>pairKey(w.a,w.b)===pairKey(a.id,b.id));}
+
+  function resolveRandomDomesticEvent(realm) {
+    const eligible = domesticEvents.filter(e => e[2](realm));
+    if (!eligible.length) return;
+    const event = pick(eligible); const text = event[3](realm); if (text) addChronicle(text,event[1],[realm]);
+  }
+
+  function resolveRandomInterRealmEvent() {
+    const alive=livingRealms(); if(alive.length<2)return;
+    for(let attempts=0;attempts<20;attempts++){
+      const a=pick(alive), b=pick(alive.filter(x=>x.id!==a.id)); const event=pick(interRealmEvents);
+      if(event[2](a,b)){const text=event[3](a,b);if(text)addChronicle(text,event[1],[a,b]);return;}
+    }
+  }
+
+  function advanceYear() {
+    const alive = livingRealms(); if (!alive.length) return showToast('Forge at least one realm first.');
+    state.year++;
+    alive.forEach(annualBaseline);
+    uniqueWars().slice().forEach(campaignBattle);
+    const updated=livingRealms();
+    const domesticCount=clamp(Math.ceil(updated.length*1.15),1,10);
+    const interCount=updated.length>1?clamp(Math.ceil(updated.length*.55),1,6):0;
+    const seen=new Set();
+    for(let i=0;i<domesticCount;i++){const realm=pick(updated);if(!realm)break;resolveRandomDomesticEvent(realm);seen.add(realm.id);}
+    for(let i=0;i<interCount;i++)resolveRandomInterRealmEvent();
+    if(chance(.18)) globalEvent();
+    saveState(); renderAll(); showToast(`Year ${state.year} resolved: ${domesticCount+interCount+(state.chronicle[0]?.year===state.year?1:0)}+ developments recorded.`);
+  }
+
+  function globalEvent() {
+    const alive=livingRealms(); if(!alive.length)return;
+    const event=pick(['comet','tradeBoom','coldYear','arcaneStorm','pilgrimage','locusts','peaceCongress','mercenaryWave','dragonMigration','eclipse']);
+    if(event==='comet'){alive.forEach(r=>{r.stability=clamp(r.stability+(chance(.5)?1:-1),1,10);});addChronicle('A brilliant comet appears for weeks. Priests, astronomers and common people across the world argue over its meaning.','world',alive);}
+    if(event==='tradeBoom'){alive.forEach(r=>r.wealth=clamp(r.wealth+1,1,30));addChronicle('A broad commercial boom raises demand for grain, metal, textiles and luxury goods across the known world.','world',alive);}
+    if(event==='coldYear'){alive.forEach(r=>r.food=clamp(r.food-1,0,14));addChronicle('Unseasonable cold shortens harvests across many realms, raising grain prices and fear of famine.','world',alive);}
+    if(event==='arcaneStorm'){alive.filter(r=>r.arcana>0).forEach(r=>{r.arcana+=chance(.55)?1:-1;r.arcana=Math.max(0,r.arcana)});addChronicle('A strange aurora and arcane storm passes across the world, disrupting magical institutions in unpredictable ways.','world',alive);}
+    if(event==='pilgrimage'){alive.forEach(r=>r.prestige=clamp(r.prestige+1,0,30));addChronicle('A widely revered holy festival draws pilgrims across borders and briefly softens old rivalries.','world',alive);}
+    if(event==='locusts'){alive.forEach(r=>{if(chance(.55))r.food=clamp(r.food-2,0,14)});addChronicle('Vast locust swarms cross several regions, destroying crops wherever winds carry them.','world',alive);}
+    if(event==='peaceCongress'){uniqueWars().forEach(w=>{if(chance(.25))w.ended=true});addChronicle('Neutral rulers convene a peace congress. Several lesser conflicts cool, though the deepest wars continue.','world',alive);}
+    if(event==='mercenaryWave'){alive.forEach(r=>{if(r.wealth>5&&chance(.4)){r.wealth--;r.army+=int(1000,5000)}});addChronicle('Thousands of unemployed mercenaries flood regional markets after distant campaigns end. Wealthy rulers quickly hire them.','world',alive);}
+    if(event==='dragonMigration'){alive.forEach(r=>{if(chance(.25)){r.stability=clamp(r.stability-1,1,10);r.army=Math.max(500,Math.round(r.army*.98))}});addChronicle('A migration of great dragons causes panic along mountain and frontier routes; several armies are called out to protect settlements.','world',alive);}
+    if(event==='eclipse'){alive.forEach(r=>{if(r.selections.faith?.name.includes('Solar'))r.stability=clamp(r.stability-1,1,10)});addChronicle('A total eclipse darkens the sky. Courts issue competing proclamations while prophets claim the age is turning.','world',alive);}
+  }
+
+  function renderWorld() {
+    const alive=livingRealms();
+    $('#worldYear').textContent=state.year;$('#livingCount').textContent=alive.length;$('#warCount').textContent=uniqueWars().length;$('#allianceCount').textContent=relationCount(state.treaties.alliances);
+    const grid=$('#worldGrid');
+    if(!alive.length){grid.innerHTML='<div class="empty-state">No living realms yet. Use the Forge tab to create as many as you want.</div>';}
+    else grid.innerHTML=alive.map(renderRealmCard).join('');
+    const options=alive.map(r=>`<option value="${r.id}">${escapeHtml(r.name)}</option>`).join('');
+    $('#actorSelect').innerHTML=options;$('#targetSelect').innerHTML=options;
+    if(alive.length>1&&$('#targetSelect').value===$('#actorSelect').value)$('#targetSelect').selectedIndex=1;
+    $('#resolveActionBtn').disabled=alive.length<2;$('#advanceYearBtn').disabled=alive.length<1;
+    updateActionPreview();
+  }
+
+  function renderRealmCard(r) {
+    const wars=uniqueWars().filter(w=>w.a===r.id||w.b===r.id).map(w=>realmById(w.a===r.id?w.b:w.a)?.name).filter(Boolean);
+    const allies=state.treaties.alliances.filter(p=>p.split('::').includes(r.id)).map(p=>realmById(p.split('::').find(x=>x!==r.id))?.name).filter(Boolean);
+    const trade=state.treaties.trade.filter(p=>p.split('::').includes(r.id)).length;
+    const ruler=`${r.rulerName}, ${r.rulerAge}`;
+    const rank=r.provinces>=25?'Great Power':r.provinces>=14?'Major Power':r.provinces>=8?'Kingdom':r.provinces>=4?'Regional Power':'Minor Realm';
+    return `<article class="realm-card ${r.stability<=2?'crisis':''}">
+      <div class="realm-head"><div><div class="realm-name">${escapeHtml(r.name)}</div><div class="realm-meta">${escapeHtml(r.capital)} · ${escapeHtml(ruler)} · ${escapeHtml(r.dynasty)}</div></div><span class="realm-rank">${rank}</span></div>
+      <div class="realm-stats"><div class="realm-stat"><span>Pop</span><strong>${fmtPop(r.population)}</strong></div><div class="realm-stat"><span>Land</span><strong>${r.provinces}</strong></div><div class="realm-stat"><span>Army</span><strong>${Math.round(r.army/1000)}k</strong></div><div class="realm-stat"><span>Wealth</span><strong>${r.wealth}</strong></div><div class="realm-stat"><span>Stab</span><strong>${r.stability}</strong></div></div>
+      <div class="tags"><span class="tag">${escapeHtml(r.selections.doctrine?.name||'No doctrine')}</span><span class="tag">${escapeHtml(r.selections.magicSchool?.name||'No magic')}</span>${wars.map(x=>`<span class="tag war">War: ${escapeHtml(x)}</span>`).join('')}${allies.map(x=>`<span class="tag ally">Ally: ${escapeHtml(x)}</span>`).join('')}${trade?`<span class="tag">Trade pacts: ${trade}</span>`:''}${r.vassalOf?`<span class="tag">Vassal of ${escapeHtml(realmById(r.vassalOf)?.name||'Unknown')}</span>`:''}</div>
+      <div class="realm-details">${escapeHtml(r.selections.government?.name||'Unknown government')} · ${escapeHtml(r.selections.economy?.name||'Unknown economy')} · ${escapeHtml(r.selections.faith?.name||'Unknown faith')} · ${r.mages.toLocaleString()} mages · Arcana ${r.arcana} · Food ${r.food}/14 · Prestige ${r.prestige}</div>
+    </article>`;
+  }
+
+  function renderChronicle() {
+    const list=$('#chronicleList');
+    if(!state.chronicle.length){list.innerHTML='<div class="empty-state">No history has been written yet.</div>';return;}
+    list.innerHTML=state.chronicle.slice(0,160).map(e=>`<div class="chronicle-entry"><div class="chronicle-year">Year ${e.year}</div><div><div class="chronicle-text">${escapeHtml(e.text)}</div><span class="chronicle-type">${escapeHtml(e.type)}</span></div></div>`).join('');
+  }
+
+  function renderGlobalStatus() {
+    $('#statusYear').textContent=state.year;$('#statusRealms').textContent=livingRealms().length;
+  }
+
+  function renderAll() { renderGlobalStatus(); renderDraft(); renderWheel(); renderWorld(); renderChronicle(); }
+
+  function updateActionPreview() {
+    const a=realmById($('#actorSelect')?.value),b=realmById($('#targetSelect')?.value),def=actionDef($('#actionSelect')?.value);
+    if(!$('#actionPreview'))return;
+    if(!a||!b||a.id===b.id){$('#actionPreview').textContent='Select two different living realms and an action.';return;}
+    $('#actionPreview').textContent=`${a.name} → ${b.name}: ${def?.[2]||''}`;
+  }
+
+  function switchView(viewId) {
+    $$('.view').forEach(v=>v.classList.toggle('active',v.id===viewId));
+    $$('.nav-button').forEach(b=>b.classList.toggle('active',b.dataset.view===viewId));
+    state.ui.activeView=viewId;saveState();
+    if(viewId==='worldView')renderWorld();if(viewId==='chronicleView')renderChronicle();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function exportSave() {
+    const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`crownwheel-year-${state.year}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);showToast('World save exported.');
+  }
+
+  async function importSave(file) {
+    try{const text=await file.text();const parsed=JSON.parse(text);if(!parsed||parsed.version!==VERSION||!Array.isArray(parsed.realms))throw new Error('Invalid Crownwheel save');state=parsed;state.ui||={activeView:'forgeView'};state.draft||={name:randomRealmName(),selections:{},categoryIndex:0};saveState();$('#realmName').value=state.draft.name||'';renderAll();switchView(state.ui.activeView||'forgeView');showToast('World save imported.');}
+    catch(e){console.error(e);showToast('That file is not a valid Crownwheel save.');}
+  }
+
+  function eraseWorld() {
+    if(!confirm('Erase the entire Crownwheel world, including every realm and chronicle entry? This cannot be undone unless you exported a backup.'))return;
+    state=defaultState();state.draft.name=randomRealmName();localStorage.removeItem(STORAGE_KEY);$('#realmName').value=state.draft.name;renderAll();saveState();switchView('forgeView');showToast('World erased. A fresh wheel is ready.');
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+  }
+
+  function bindEvents() {
+    $('#spinBtn').addEventListener('click',()=>spinCategory());
+    $('#nextWheelBtn').addEventListener('click',()=>{if(state.draft.categoryIndex<categories.length-1){state.draft.categoryIndex++;renderWheel();$('#spinResult').innerHTML=`<strong>${escapeHtml(currentCategory().name)}</strong><span>${escapeHtml(currentCategory().prompt)}</span>`;saveState();}});
+    $('#spinRemainingBtn').addEventListener('click',randomiseRemaining);
+    $('#randomCompleteBtn').addEventListener('click',quickForge);
+    $('#randomNameBtn').addEventListener('click',()=>{state.draft.name=randomRealmName();$('#realmName').value=state.draft.name;renderDraft();saveState();});
+    $('#realmName').addEventListener('input',e=>{state.draft.name=e.target.value;renderDraft();saveState();});
+    $('#addRealmBtn').addEventListener('click',addRealm);
+    $('#resetDraftBtn').addEventListener('click',()=>resetDraft({newName:true,announce:true}));
+    $('#advanceYearBtn').addEventListener('click',advanceYear);
+    $('#resolveActionBtn').addEventListener('click',resolveDirectAction);
+    $('#actorSelect').addEventListener('change',updateActionPreview);$('#targetSelect').addEventListener('change',updateActionPreview);$('#actionSelect').addEventListener('change',updateActionPreview);
+    $$('.nav-button').forEach(btn=>btn.addEventListener('click',()=>switchView(btn.dataset.view)));
+    $('#exportBtn').addEventListener('click',exportSave);
+    $('#importInput').addEventListener('change',e=>{const f=e.target.files?.[0];if(f)importSave(f);e.target.value='';});
+    $('#clearWorldBtn').addEventListener('click',eraseWorld);
+  }
+
+  function init() {
+    if(!state.draft.name)state.draft.name=randomRealmName();
+    $('#realmName').value=state.draft.name;
+    renderActionOptions();bindEvents();renderAll();switchView(state.ui.activeView||'forgeView');
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(err=>console.warn('Service worker registration failed',err)));}
+  }
+
+  init();
+})();
+
+</script>
 </body>
 </html>
