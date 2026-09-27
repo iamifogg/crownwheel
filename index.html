@@ -24,6 +24,68 @@
 
 
 
+
+/* Rarity language v6: colour the information, not the whole interface */
+:root{
+  --rarity-common:#c7bba8;
+  --rarity-uncommon:#8fbd78;
+  --rarity-rare:#79afe1;
+  --rarity-epic:#b48ad9;
+  --rarity-legendary:#e0b95f;
+  --rarity-mythic:#df7869;
+}
+.rarity-common{--rarity-color:var(--rarity-common)}
+.rarity-uncommon{--rarity-color:var(--rarity-uncommon)}
+.rarity-rare{--rarity-color:var(--rarity-rare)}
+.rarity-epic{--rarity-color:var(--rarity-epic)}
+.rarity-legendary{--rarity-color:var(--rarity-legendary)}
+.rarity-mythic{--rarity-color:var(--rarity-mythic)}
+
+.rarity-legend{
+  display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px;padding:7px 8px;
+  border:1px solid #3f3023;border-radius:10px;background:#15100c;
+}
+.rarity-chip{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:3px 6px;border:1px solid color-mix(in srgb,var(--rarity-color) 70%,#46382a);
+  border-radius:999px;color:var(--rarity-color);
+  background:color-mix(in srgb,var(--rarity-color) 8%,transparent);
+  font:800 .56rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.065em;
+  white-space:nowrap;line-height:1.2;
+}
+.dossier-row.rarity-row{
+  position:relative;margin:2px -4px;padding:5px 6px 5px 9px;border-radius:8px;
+  border-left:3px solid var(--rarity-color);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--rarity-color) 7%,transparent),transparent 55%);
+}
+.dossier-value-wrap{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+.dossier-value{
+  color:var(--rarity-color)!important;
+  text-shadow:0 0 10px color-mix(in srgb,var(--rarity-color) 12%,transparent);
+}
+.dossier-row.rarity-legendary .dossier-value,
+.dossier-row.rarity-mythic .dossier-value{font-weight:900}
+.dossier-row.rarity-legendary{
+  box-shadow:inset 0 0 12px rgba(224,185,95,.035);
+}
+.dossier-row.rarity-mythic{
+  box-shadow:inset 0 0 14px rgba(223,120,105,.045);
+}
+.spin-result-name{color:var(--rarity-color)!important}
+.spin-result .rarity-chip{margin-top:6px;font-size:.59rem;padding:4px 7px}
+.category-pill .rarity-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;margin-left:4px;
+  background:var(--rarity-color);box-shadow:0 0 6px color-mix(in srgb,var(--rarity-color) 45%,transparent);
+}
+.stat.rarity-stat{border-color:color-mix(in srgb,var(--rarity-color) 38%,#433325)}
+.stat.rarity-stat strong{color:var(--rarity-color)}
+@media(max-width:760px){
+  .rarity-legend{gap:4px;margin-top:7px;padding:6px}
+  .rarity-chip{font-size:.52rem;padding:3px 5px}
+  .dossier-row.rarity-row{margin:2px -2px;padding:5px 5px 5px 8px}
+  .dossier-value-wrap{gap:5px}
+}
+
 .rarity-badge{display:inline-flex;align-items:center;justify-content:center;margin-top:6px;padding:3px 7px;border:1px solid #5a4630;border-radius:999px;font:800 .61rem system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#d6c7af}
 .rarity-badge.uncommon{border-color:#506b4b;color:#b9d5b4}.rarity-badge.rare{border-color:#486781;color:#afcce3}.rarity-badge.epic{border-color:#70567f;color:#d1b5df}.rarity-badge.legendary{border-color:#a8833e;color:#ffe09a;box-shadow:0 0 12px rgba(194,155,87,.16)}.rarity-badge.mythic{border-color:#a94f43;color:#ffc1b3;box-shadow:0 0 14px rgba(169,79,67,.2)}
 
@@ -249,6 +311,14 @@
             </div>
 
             <p id="draftOverview" class="overview-copy">Its history has not yet been written.</p>
+            <div class="rarity-legend" aria-label="Rarity colours">
+              <span class="rarity-chip rarity-common">Common</span>
+              <span class="rarity-chip rarity-uncommon">Uncommon</span>
+              <span class="rarity-chip rarity-rare">Rare</span>
+              <span class="rarity-chip rarity-epic">Epic</span>
+              <span class="rarity-chip rarity-legendary">Legendary</span>
+              <span class="rarity-chip rarity-mythic">Mythic</span>
+            </div>
 
             <div class="stat-grid" aria-label="Realm summary statistics">
               <div class="stat"><span>Population</span><strong id="statPopulation">—</strong></div>
@@ -1259,7 +1329,9 @@
   function renderCategoryStrip() {
     $('#categoryStrip').innerHTML = categories.map((c,i) => {
       const cls = [state.draft.selections[c.key] ? 'done' : '', i === state.draft.categoryIndex ? 'current' : ''].filter(Boolean).join(' ');
-      return `<span class="category-pill ${cls}">${i+1}. ${escapeHtml(c.name)} · ${c.options.length}</span>`;
+      const picked=state.draft.selections[c.key], rarity=picked?optionRarity(c,picked):null;
+      const dot=rarity?`<i class="rarity-dot rarity-${rarity}" aria-label="${RARITY_LABELS[rarity]}"></i>`:'';
+      return `<span class="category-pill ${cls}">${i+1}. ${escapeHtml(c.name)} · ${c.options.length}${dot}</span>`;
     }).join('');
   }
 
@@ -1284,7 +1356,7 @@
       setTimeout(() => {
         state.draft.selections[cat.key] = selected;
         const rarity=optionRarity(cat,selected), pct=outcomeChance(cat,selected);
-        $('#spinResult').innerHTML = `<strong>${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)}</span><em class="rarity-badge ${rarity}">${RARITY_LABELS[rarity]} · ${formatOutcomeChance(pct)}</em>`;
+        $('#spinResult').innerHTML = `<strong class="spin-result-name rarity-${rarity}">${escapeHtml(selected.name)}</strong><span>${escapeHtml(selected.desc)}</span><em class="rarity-chip rarity-${rarity}">${RARITY_LABELS[rarity]} · ${formatOutcomeChance(pct)}</em>`;
         spinning = false;
         playWheelLand();
         renderDraft();
@@ -1333,6 +1405,17 @@
     $('#statFood').textContent = `${stats.food}/12`;
     $('#statStability').textContent = `${stats.stability}/10`;
     $('#statArcana').textContent = stats.arcana;
+    [
+      ['#statPopulation','population'],
+      ['#statProvinces','scale'],
+      ['#statArmy','army'],
+      ['#statMages','magicLevel']
+    ].forEach(([selector,key])=>{
+      const el=$(selector), card=el?.closest('.stat'), cat=categories.find(x=>x.key===key), value=s[key];
+      if(!card) return;
+      card.classList.remove('rarity-stat','rarity-common','rarity-uncommon','rarity-rare','rarity-epic','rarity-legendary','rarity-mythic');
+      if(value&&cat){const rarity=optionRarity(cat,value);card.classList.add('rarity-stat',`rarity-${rarity}`);}
+    });
     $('#draftOverview').textContent = s.origin && s.government ? `${name} is a ${s.scale?.name?.toLowerCase() || 'realm'} rooted in ${s.origin.name.toLowerCase()}, governed through ${s.government.name.toLowerCase()}. Its military favours ${s.doctrine?.name?.toLowerCase() || 'an undecided doctrine'}, while ${s.magicSchool?.name?.toLowerCase() || 'no dominant magical school'} shapes its supernatural life.` : 'Its history has not yet been written.';
     const groups = [
       ['Land & Crown',['origin','scale','government','ruler']], ['People & Faith',['population','culture','faith']],
@@ -1341,7 +1424,9 @@
     ];
     $('#dossierSections').innerHTML = groups.map(([title, keys]) => `<div class="dossier-section"><h3>${title}</h3>${keys.map(key => {
       const c = categories.find(x => x.key === key), v = s[key];
-      return `<div class="dossier-row"><span>${escapeHtml(c.name)}</span><strong>${v ? escapeHtml(v.name) : '—'}</strong></div>`;
+      if(!v) return `<div class="dossier-row"><span>${escapeHtml(c.name)}</span><strong>—</strong></div>`;
+      const rarity=optionRarity(c,v);
+      return `<div class="dossier-row rarity-row rarity-${rarity}"><span>${escapeHtml(c.name)}</span><div class="dossier-value-wrap"><strong class="dossier-value">${escapeHtml(v.name)}</strong><em class="rarity-chip rarity-${rarity}">${RARITY_LABELS[rarity]}</em></div></div>`;
     }).join('')}</div>`).join('');
     $('#addRealmBtn').disabled = !completeDraft();
   }
